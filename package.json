@@ -1,13 +1,14 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "ryzen-controller",
+  "productName": "Ryzen Controller",
+  "version": "0.1.0",
+  "description": "A minimal Electron application to use ryzenAdj through a friendly interface.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-packager . RyzenController --platform=win32 --arch=x64"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://gitlab.com/le.storm1er/ryzen-controller",
   "keywords": [
     "Electron",
     "quick",
@@ -15,7 +16,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "le.storm1er",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^4.0.4",
