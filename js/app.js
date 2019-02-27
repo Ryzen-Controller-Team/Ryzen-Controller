@@ -1,36 +1,12 @@
-function ready(fn) {
-  if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
-    fn();
-  } else {
-    document.addEventListener('DOMContentLoaded', fn);
-  }
-}
 ready(function(){
-  var ranges = document.querySelectorAll('[repeat]');
-  for (const range in ranges) {
-    if (ranges.hasOwnProperty(range)) {
-      const element = ranges[range];
-      element.addEventListener('change', function(event) {
-        var repeater = document.getElementById(event.target.attributes.repeat.value);
-        repeater.value = event.target.value;
-      });
-    }
-  }
+  registerRepeaterForAllInput();
+  checkForAdminRights();
 });
 
-function getCurrentWorkingDirectory() {
-  return require('electron').remote.app.getAppPath();
-}
-
-function decimalToHexString(number) {
-  if (number < 0)
-  {
-    number = 0xFFFFFFFF + number + 1;
-  }
-
-  return number.toString(16).toUpperCase();
-}
-
+/**
+ * Will create and handle ryzenadj.exe execution.
+ * @param {Event} e The event triggered.
+ */
 function applyRyzenSettings(e) {
   const settings = {
     "--stapm-limit=": document.getElementById('stapm_limit_w').value,
@@ -39,7 +15,6 @@ function applyRyzenSettings(e) {
     "--tctl-temp=": document.getElementById('temperature_limit_c').value,
     "--vrmmax-current=": document.getElementById('vrm_current_m_a').value,
   };
-  console.log(settings);
 
   const child = require('child_process').execFile;
   const executablePath = getCurrentWorkingDirectory() + "\\bin\\ryzenadj.exe";
@@ -73,8 +48,13 @@ function applyRyzenSettings(e) {
   }
 
   child(executablePath, parameters, function(err, data) {
-       console.log(err)
-       console.log(data.toString());
+    var output = data.toString();
+    if (err) {
+      notification('danger', err + '<br/>' + output);
+    }
+    else if (output) {
+      notification('success', 'Ryzenadj output:<br/>' + output);
+    }
   });
 
 }
