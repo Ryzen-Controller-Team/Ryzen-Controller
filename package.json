@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . RyzenController --platform=win32 --arch=x64"
+    "build": "electron-packager . RyzenController --platform=win32 --arch=x64 --win32metadata.requested-execution-level=requireAdministrator"
   },
   "repository": "https://gitlab.com/le.storm1er/ryzen-controller",
   "keywords": [
