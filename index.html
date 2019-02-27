@@ -1,19 +1,101 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-
-    <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
-    </script>
-  </body>
+<head>
+  <title>Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./node_modules/uikit/dist/css/uikit.min.css" />
+  <script src="./node_modules/uikit/dist/js/uikit.min.js"></script>
+  <script src="./node_modules/uikit/dist/js/uikit-icons.min.js"></script>
+</head>
+<body>
+  <h1>Ryzen Controller</h1>
+  
+  <ul uk-switcher uk-tab>
+    <li><a href="#">Settings</a></li>
+    <li><a href="#">Presets</a></li>
+    <li><a href="#">Logs</a></li>
+  </ul>
+  
+  <ul class="uk-switcher uk-margin">
+    
+    
+    <li class="uk-container">
+      <form>
+        <ul uk-accordion="multiple: true">
+          <li>
+            <a class="uk-accordion-title" href="#">STAPM Limit (W)</a>
+            <div class="uk-accordion-content">
+              <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-1-4@s">
+                  <input class="uk-input" type="number" min="5" max="60" value="15" id="stapm_limit_w" repeat="stapm_limit_w_range">
+                </div>
+                <div class="uk-width-2-3@s">
+                  <input class="uk-range" type="range" min="5" max="60" value="15" repeat="stapm_limit_w" id="stapm_limit_w_range">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a class="uk-accordion-title" href="#">PPT Fast Limit (W)</a>
+            <div class="uk-accordion-content">
+              <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-1-4@s">
+                  <input class="uk-input" type="number" min="5" max="60" value="15" id="ppt_fast_limit_w" repeat="ppt_fast_limit_w_range">
+                </div>
+                <div class="uk-width-2-3@s">
+                  <input class="uk-range" type="range" min="5" max="60" value="15" repeat="ppt_fast_limit_w" id="ppt_fast_limit_w_range">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a class="uk-accordion-title" href="#">PPT Slow Limit (W)</a>
+            <div class="uk-accordion-content">
+              <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-1-4@s">
+                  <input class="uk-input" type="number" min="5" max="60" value="15" id="ppt_slow_limit_w" repeat="ppt_slow_limit_w_range">
+                </div>
+                <div class="uk-width-2-3@s">
+                  <input class="uk-range" type="range" min="5" max="60" value="15" repeat="ppt_slow_limit_w" id="ppt_slow_limit_w_range">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a class="uk-accordion-title" href="#">Temperature Limit (°C)</a>
+            <div class="uk-accordion-content">
+              <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-1-4@s">
+                  <input class="uk-input" type="number" min="5" max="60" value="15" id="temperature_limit_c" repeat="temperature_limit_c_range">
+                </div>
+                <div class="uk-width-2-3@s">
+                  <input class="uk-range" type="range" min="5" max="60" value="15" repeat="temperature_limit_c" id="temperature_limit_c_range">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a class="uk-accordion-title" href="#">VRM Current (mA)</a>
+            <div class="uk-accordion-content">
+              <div class="uk-grid-small" uk-grid>
+                <div class="uk-width-1-4@s">
+                  <input class="uk-input" type="number" min="5" max="60" value="15" id="vrm_current_m_a" repeat="vrm_current_m_a_range">
+                </div>
+                <div class="uk-width-2-3@s">
+                  <input class="uk-range" type="range" min="5" max="60" value="15" repeat="vrm_current_m_a" id="vrm_current_m_a_range">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </form>
+    </li>
+    
+    <li class="uk-container">Will be available soon!</li>
+    <li class="uk-container">Will be available soon!</li>
+    
+  </ul>
+  <script type="text/javascript" src="./js/settings.js"></script>  
+</body>
 </html>
