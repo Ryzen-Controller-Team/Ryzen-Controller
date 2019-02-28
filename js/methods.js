@@ -12,7 +12,9 @@ function parseHTML(str) {
  * Return the current working directory.
  */
 function getCurrentWorkingDirectory() {
-  return require('electron').remote.app.getAppPath();
+  const cwd = require('electron').remote.app.getAppPath()
+  appendLog(`getCurrentWorkingDirectory(): ${cwd}`);
+  return cwd;
 }
 
 /**
@@ -68,9 +70,9 @@ function checkForAdminRights() {
   exec('NET SESSION', function(err,so,se) {
     if (se.length !== 0) {
       notification('warning',
-       `Warning: you should launch this app as administrator,
-        ryzenadj.exe doesn't seems to work correctly without administrator rights.
-      `);
+      `Warning: you should launch this app as administrator,`
+      + `ryzenadj.exe doesn't seems to work correctly without administrator rights.`
+      );
     }
   });
 }
@@ -81,6 +83,7 @@ function checkForAdminRights() {
  * @param {string} message The message to be displayed, new line will be replaced by <br/>.
  */
 function notification(type, message) {
+  appendLog(`notification(): ${type}\n${message}`);
   UIkit.notification({
     message: (''+message).replace(/(?:\r\n|\r|\n)/g, '<br/>'),
     status: type,
@@ -98,6 +101,7 @@ function getRyzenAdjExecutablePath() {
   if (!ryzen_adj_path) {
     ryzen_adj_path = getCurrentWorkingDirectory() + "\\bin\\ryzenadj.exe";
   }
+  appendLog(`getRyzenAdjExecutablePath(): ${ryzen_adj_path}`);
   return ryzen_adj_path;
 }
 
@@ -118,7 +122,7 @@ function askingForRyzenAdjExecutablePath() {
   var dialog = remote.require('electron').dialog;
   
   var path = dialog.showOpenDialog({
-      properties: ['openFile']
+    properties: ['openFile']
   }, function (filePaths) {
     if (typeof filePaths[0] !== 'undefined') {
       const settings = require('electron-settings');
@@ -126,9 +130,15 @@ function askingForRyzenAdjExecutablePath() {
         ryzen_adj_path: filePaths[0]
       });
       notification('primary', 'Path to ryzenAdj.exe has been saved.');
+      appendLog(`askingForRyzenAdjExecutablePath(): ${filePaths[0]}`);
     } else {
       notification('warning', 'No path given, nothing changed.');
     }
     preFillSettings();
   });
+}
+
+function appendLog(message) {
+  var log_area = document.getElementById('logs');
+  log_area.value += message + "\n";
 }
