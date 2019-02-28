@@ -117,6 +117,9 @@ function preFillSettings() {
   }
 }
 
+/**
+ * Will open a dialog to let user choose where is ryzenadj.exe.
+ */
 function askingForRyzenAdjExecutablePath() {
   var remote = require('electron').remote;
   var dialog = remote.require('electron').dialog;
@@ -138,6 +141,10 @@ function askingForRyzenAdjExecutablePath() {
   });
 }
 
+/**
+ * Will append logs to the logs tab.
+ * @param {string} message The message to be logged.
+ */
 function appendLog(message) {
   var log_area = document.getElementById('logs');
   log_area.value += message + "\n";
