@@ -1,7 +1,5 @@
 # Ryzen controller
 
-[![pipeline status](https://gitlab.com/le.storm1er/ryzen-controller/badges/master/pipeline.svg)](https://gitlab.com/le.storm1er/ryzen-controller/commits/master)
-
 ## For users
 
 ### Pre-requisite
