@@ -1,2 +1,4 @@
 node_modules
 bin/*
+release-builds
+installer-builds

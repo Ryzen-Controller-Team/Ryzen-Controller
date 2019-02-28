@@ -1,12 +1,13 @@
 {
-  "name": "ryzen-controller",
-  "productName": "Ryzen Controller",
-  "version": "1.1.0",
+  "name": "ryzencontroller",
+  "productName": "RyzenController",
+  "version": "1.2.0",
   "description": "A minimal Electron application to use ryzenAdj through a friendly interface.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . RyzenController --platform=win32 --arch=x64 --win32metadata.requested-execution-level=requireAdministrator"
+    "package": "electron-packager . --overwrite --asar --platform=win32 --arch=x64 --prune=true --out=release-builds",
+    "build": "node installers/windows/createinstaller.js"
   },
   "repository": "https://gitlab.com/le.storm1er/ryzen-controller",
   "keywords": [
@@ -20,7 +21,8 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^4.0.4",
-    "electron-packager": "^13.1.0"
+    "electron-packager": "^13.1.0",
+    "electron-winstaller": "^2.7.0"
   },
   "dependencies": {
     "electron-settings": "^3.2.0",
