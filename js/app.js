@@ -1,5 +1,6 @@
 ready(function(){
   registerRepeaterForAllInput();
+  registerEventListenerForSettingsInput();
   checkForAdminRights();
   preFillSettings();
   loadLatestUsedSettings();

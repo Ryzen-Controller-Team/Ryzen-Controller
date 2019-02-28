@@ -115,6 +115,8 @@ function preFillSettings() {
   if (!fs.existsSync(ryzen_adj_path.value)) { 
     notification('danger', "Path to ryzenadj.exe is wrong, please fix it in settings tab.");
   }
+  const settings = require('electron-settings');
+  document.getElementById('apply_last_settings_on_launch').checked = settings.get('settings.apply_last_settings_on_launch');
 }
 
 /**
@@ -171,6 +173,8 @@ function saveLatestUsedSettings() {
 
 /**
  * Will load the latest settings and refresh the controller tab's values.
+ * 
+ * Will also apply latest settings if settings.apply_last_settings_on_launch is true.
  */
 function loadLatestUsedSettings() {
   const settings = require('electron-settings');
@@ -185,4 +189,19 @@ function loadLatestUsedSettings() {
       }
     }
   }
+  if (settings.get('settings.apply_last_settings_on_launch')) {
+    applyRyzenSettings();
+  }
+}
+
+function registerEventListenerForSettingsInput() {
+  const settings = require('electron-settings');
+
+  var apply_last_settings_on_launch = document.getElementById('apply_last_settings_on_launch');
+  apply_last_settings_on_launch.addEventListener('change', function() {
+    settings.set('settings', {
+      ...settings.get('settings'),
+      apply_last_settings_on_launch: !!apply_last_settings_on_launch.checked
+    });
+  });
 }
