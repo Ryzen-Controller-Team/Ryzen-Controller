@@ -150,3 +150,38 @@ function appendLog(message) {
   log_area.value += message + "\n";
   console.log(message);
 }
+
+/**
+ * Will save the latest used settings.
+ */
+function saveLatestUsedSettings() {
+  var inputs = document.querySelectorAll('#controller-tab input');
+  var latest_controller_tabs_settings = {};
+  inputs.forEach(element => {
+    let id = element.id;
+    let value = element.value;
+    latest_controller_tabs_settings[id] = value;
+  });
+  const settings = require('electron-settings');
+  let ret = settings.set("latest_controller_tabs_settings", latest_controller_tabs_settings);
+  appendLog(`saveLatestUsedSettings(): ${JSON.stringify(latest_controller_tabs_settings)}`);
+  appendLog(`saveLatestUsedSettings(): ${JSON.stringify(ret)}`);
+}
+
+/**
+ * Will load the latest settings and refresh the controller tab's values.
+ */
+function loadLatestUsedSettings() {
+  const settings = require('electron-settings');
+  var latest_controller_tabs_settings = settings.get("latest_controller_tabs_settings");
+  appendLog(`loadLatestUsedSettings(): ${JSON.stringify(latest_controller_tabs_settings)}`);
+  for (const id in latest_controller_tabs_settings) {
+    if (latest_controller_tabs_settings.hasOwnProperty(id)) {
+      const value = latest_controller_tabs_settings[id];
+      let input = document.getElementById(id);
+      if (input) {
+        input.value = value;
+      }
+    }
+  }
+}

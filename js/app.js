@@ -2,6 +2,7 @@ ready(function(){
   registerRepeaterForAllInput();
   checkForAdminRights();
   preFillSettings();
+  loadLatestUsedSettings();
 });
 
 /**
@@ -55,6 +56,7 @@ function applyRyzenSettings(e) {
     }
     else if (output) {
       notification('success', 'Ryzenadj output:<br/>' + output);
+      saveLatestUsedSettings();
     }
   });
 
