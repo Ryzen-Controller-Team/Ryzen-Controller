@@ -4,18 +4,9 @@
 
 ### Pre-requisite
 
-- Go to https://github.com/FlyGoat/RyzenAdj/releases
-- Download the latest compiled version.
-- Put the content into the bin folder where the "RyzenController.exe" is.
-  - So you have
-    ```
-    RyzenFolder/
-    | RyzenController.exe
-    | | bin/
-    | | | ryzenadj.exe
-    | | | WinRing0x64.dll
-    | | | WinRing0x64.sys
-    ```
+- Go to https://github.com/FlyGoat/RyzenAdj/releases and download the latest compiled version.
+- Execute Ryzen Controller, go select ryzenadj.exe into settings tab.
+- Enjoy!
 
 ## For developpers
 

@@ -12,6 +12,7 @@
   <h1>Ryzen Controller</h1>
   
   <ul uk-switcher uk-tab>
+    <li><a href="#">Controller</a></li>
     <li><a href="#">Settings</a></li>
     <li><a href="#">Presets</a></li>
     <li><a href="#">Logs</a></li>
@@ -20,76 +21,89 @@
     
     
     <li class="uk-container">
-        <ul uk-accordion="multiple: true">
-          <li>
-            <a class="uk-accordion-title" href="#">STAPM Limit (W)</a>
-            <div class="uk-accordion-content">
-              <div class="uk-grid-small" uk-grid>
-                <div class="uk-width-1-4@s">
-                  <input class="uk-input" type="number" min="5" max="60" value="20" id="stapm_limit_w" repeat="stapm_limit_w_range">
-                </div>
-                <div class="uk-width-2-3@s">
-                  <input class="uk-range" type="range" min="5" max="60" value="20" repeat="stapm_limit_w" id="stapm_limit_w_range">
-                </div>
+      <ul uk-accordion="multiple: true">
+        <li>
+          <a class="uk-accordion-title" href="#">STAPM Limit (W)</a>
+          <div class="uk-accordion-content">
+            <div class="uk-grid-small" uk-grid>
+              <div class="uk-width-1-4@s">
+                <input class="uk-input" type="number" min="5" max="60" value="20" id="stapm_limit_w" repeat="stapm_limit_w_range">
+              </div>
+              <div class="uk-width-2-3@s">
+                <input class="uk-range" type="range" min="5" max="60" value="20" repeat="stapm_limit_w" id="stapm_limit_w_range">
               </div>
             </div>
-          </li>
-          <li>
-            <a class="uk-accordion-title" href="#">PPT Fast Limit (W)</a>
-            <div class="uk-accordion-content">
-              <div class="uk-grid-small" uk-grid>
-                <div class="uk-width-1-4@s">
-                  <input class="uk-input" type="number" min="5" max="60" value="25" id="ppt_fast_limit_w" repeat="ppt_fast_limit_w_range">
-                </div>
-                <div class="uk-width-2-3@s">
-                  <input class="uk-range" type="range" min="5" max="60" value="25" repeat="ppt_fast_limit_w" id="ppt_fast_limit_w_range">
-                </div>
+          </div>
+        </li>
+        <li>
+          <a class="uk-accordion-title" href="#">PPT Fast Limit (W)</a>
+          <div class="uk-accordion-content">
+            <div class="uk-grid-small" uk-grid>
+              <div class="uk-width-1-4@s">
+                <input class="uk-input" type="number" min="5" max="60" value="25" id="ppt_fast_limit_w" repeat="ppt_fast_limit_w_range">
+              </div>
+              <div class="uk-width-2-3@s">
+                <input class="uk-range" type="range" min="5" max="60" value="25" repeat="ppt_fast_limit_w" id="ppt_fast_limit_w_range">
               </div>
             </div>
-          </li>
-          <li>
-            <a class="uk-accordion-title" href="#">PPT Slow Limit (W)</a>
-            <div class="uk-accordion-content">
-              <div class="uk-grid-small" uk-grid>
-                <div class="uk-width-1-4@s">
-                  <input class="uk-input" type="number" min="5" max="60" value="10" id="ppt_slow_limit_w" repeat="ppt_slow_limit_w_range">
-                </div>
-                <div class="uk-width-2-3@s">
-                  <input class="uk-range" type="range" min="5" max="60" value="10" repeat="ppt_slow_limit_w" id="ppt_slow_limit_w_range">
-                </div>
+          </div>
+        </li>
+        <li>
+          <a class="uk-accordion-title" href="#">PPT Slow Limit (W)</a>
+          <div class="uk-accordion-content">
+            <div class="uk-grid-small" uk-grid>
+              <div class="uk-width-1-4@s">
+                <input class="uk-input" type="number" min="5" max="60" value="10" id="ppt_slow_limit_w" repeat="ppt_slow_limit_w_range">
+              </div>
+              <div class="uk-width-2-3@s">
+                <input class="uk-range" type="range" min="5" max="60" value="10" repeat="ppt_slow_limit_w" id="ppt_slow_limit_w_range">
               </div>
             </div>
-          </li>
-          <li>
-            <a class="uk-accordion-title" href="#">Temperature Limit (°C)</a>
-            <div class="uk-accordion-content">
-              <div class="uk-grid-small" uk-grid>
-                <div class="uk-width-1-4@s">
-                  <input class="uk-input" type="number" min="50" max="100" value="80" id="temperature_limit_c" repeat="temperature_limit_c_range">
-                </div>
-                <div class="uk-width-2-3@s">
-                  <input class="uk-range" type="range" min="50" max="100" value="80" repeat="temperature_limit_c" id="temperature_limit_c_range">
-                </div>
+          </div>
+        </li>
+        <li>
+          <a class="uk-accordion-title" href="#">Temperature Limit (°C)</a>
+          <div class="uk-accordion-content">
+            <div class="uk-grid-small" uk-grid>
+              <div class="uk-width-1-4@s">
+                <input class="uk-input" type="number" min="50" max="100" value="80" id="temperature_limit_c" repeat="temperature_limit_c_range">
+              </div>
+              <div class="uk-width-2-3@s">
+                <input class="uk-range" type="range" min="50" max="100" value="80" repeat="temperature_limit_c" id="temperature_limit_c_range">
               </div>
             </div>
-          </li>
-          <li>
-            <a class="uk-accordion-title" href="#">VRM Current (A)</a>
-            <div class="uk-accordion-content">
-              <div class="uk-grid-small" uk-grid>
-                <div class="uk-width-1-4@s">
-                  <input class="uk-input" type="number" min="20" max="100" value="30" id="vrm_current_m_a" repeat="vrm_current_m_a_range">
-                </div>
-                <div class="uk-width-2-3@s">
-                  <input class="uk-range" type="range" min="20" max="100" value="30" repeat="vrm_current_m_a" id="vrm_current_m_a_range">
-                </div>
+          </div>
+        </li>
+        <li>
+          <a class="uk-accordion-title" href="#">VRM Current (A)</a>
+          <div class="uk-accordion-content">
+            <div class="uk-grid-small" uk-grid>
+              <div class="uk-width-1-4@s">
+                <input class="uk-input" type="number" min="20" max="100" value="30" id="vrm_current_m_a" repeat="vrm_current_m_a_range">
+              </div>
+              <div class="uk-width-2-3@s">
+                <input class="uk-range" type="range" min="20" max="100" value="30" repeat="vrm_current_m_a" id="vrm_current_m_a_range">
               </div>
             </div>
-          </li>
-        </ul>
-        <button class="uk-button uk-button-default" onClick="applyRyzenSettings()">Apply</button>
+          </div>
+        </li>
+      </ul>
+      <button class="uk-button uk-button-default" onClick="applyRyzenSettings()">Apply</button>
     </li>
     
+    <li class="uk-container">
+      <h2>Ryzenadj path:</h2>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-2-3@s">
+          <input class="uk-input" type="text" id="ryzen_adj_path">
+        </div>
+        <div class="uk-width-1-3@s">
+          <button class="uk-button uk-button-default" type="button" onClick="askingForRyzenAdjExecutablePath()">
+            Select path to ryzenadj.exe
+          </button>
+        </div>
+      </div>
+    </li>
     <li class="uk-container">Will be available soon!</li>
     <li class="uk-container">Will be available soon!</li>
     

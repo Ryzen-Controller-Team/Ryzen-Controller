@@ -89,3 +89,46 @@ function notification(type, message) {
   });
 }
 
+/**
+ * Will return the ryzenadj.exe path registered, or default one if not provided.
+ */
+function getRyzenAdjExecutablePath() {
+  const settings = require('electron-settings');
+  var ryzen_adj_path = settings.get('settings.ryzen_adj_path');
+  if (!ryzen_adj_path) {
+    ryzen_adj_path = getCurrentWorkingDirectory() + "\\bin\\ryzenadj.exe";
+  }
+  return ryzen_adj_path;
+}
+
+/**
+ * Will fill settings page on render with saved data.
+ */
+function preFillSettings() {
+  var ryzen_adj_path = document.getElementById('ryzen_adj_path');
+  var fs = require('fs'); 
+  ryzen_adj_path.value = getRyzenAdjExecutablePath();
+  if (!fs.existsSync(ryzen_adj_path.value)) { 
+    notification('danger', "Path to ryzenadj.exe is wrong, please fix it in settings tab.");
+  }
+}
+
+function askingForRyzenAdjExecutablePath() {
+  var remote = require('electron').remote;
+  var dialog = remote.require('electron').dialog;
+  
+  var path = dialog.showOpenDialog({
+      properties: ['openFile']
+  }, function (filePaths) {
+    if (typeof filePaths[0] !== 'undefined') {
+      const settings = require('electron-settings');
+      settings.set("settings", {
+        ryzen_adj_path: filePaths[0]
+      });
+      notification('primary', 'Path to ryzenAdj.exe has been saved.');
+    } else {
+      notification('warning', 'No path given, nothing changed.');
+    }
+    preFillSettings();
+  });
+}

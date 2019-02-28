@@ -23,6 +23,7 @@
     "electron-packager": "^13.1.0"
   },
   "dependencies": {
+    "electron-settings": "^3.2.0",
     "uikit": "^3.0.3"
   }
 }

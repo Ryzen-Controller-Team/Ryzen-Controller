@@ -1,6 +1,7 @@
 ready(function(){
   registerRepeaterForAllInput();
   checkForAdminRights();
+  preFillSettings();
 });
 
 /**
@@ -17,7 +18,7 @@ function applyRyzenSettings(e) {
   };
 
   const child = require('child_process').execFile;
-  const executablePath = getCurrentWorkingDirectory() + "\\bin\\ryzenadj.exe";
+  const executablePath = getRyzenAdjExecutablePath();
 
   var parameters = [];
   for (const option in settings) {
