@@ -7,9 +7,8 @@ ready(function(){
 
 /**
  * Will create and handle ryzenadj.exe execution.
- * @param {Event} e The event triggered.
  */
-function applyRyzenSettings(e) {
+function applyRyzenSettings() {
   const settings = {
     "--stapm-limit=": document.getElementById('stapm_limit_w').value,
     "--fast-limit=": document.getElementById('ppt_fast_limit_w').value,
