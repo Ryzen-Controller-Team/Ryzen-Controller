@@ -1,0 +1,48 @@
+stages:
+  - install
+  - package
+  - installer
+
+node:
+  only:
+    - tags@le.storm1er/ryzen-controller
+  stage: install
+  tags: [ docker ]
+  image: electronuserland/builder:wine-mono
+  script:
+    - npm install
+  cache:
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - node_modules/
+
+win32:
+  only:
+    - tags@le.storm1er/ryzen-controller
+  stage: package
+  tags: [ docker ]
+  image: electronuserland/builder:wine-mono
+  script:
+    - npm run-script package
+  artifacts:
+    paths:
+      - release-builds/
+  dependencies:
+    - node
+
+win32-installer:
+  only:
+    - tags@le.storm1er/ryzen-controller
+  stage: installer
+  tags: [ docker ]
+  image: electronuserland/builder:wine-mono
+  script:
+    - npm run-script build
+  artifacts:
+    paths:
+      - installer-builds/
+  dependencies:
+    - node
+    - win32

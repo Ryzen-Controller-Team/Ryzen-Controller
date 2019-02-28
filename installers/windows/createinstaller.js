@@ -13,7 +13,7 @@ function getInstallerConfig () {
   const rootPath = path.join('./')
   
   return Promise.resolve({
-    appDirectory: path.join(rootPath, 'release-builds', 'RyzenController-win32-x64/'),
+    appDirectory: path.join(rootPath, 'release-builds', 'RyzenController-win32-ia32/'),
     authors: 'Decaunes Quentin',
     outputDirectory: path.join(rootPath, 'installer-builds'),
     setupExe: 'RyzenControllerInstaller.exe',
