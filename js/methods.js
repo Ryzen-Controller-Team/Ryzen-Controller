@@ -148,4 +148,5 @@ function askingForRyzenAdjExecutablePath() {
 function appendLog(message) {
   var log_area = document.getElementById('logs');
   log_area.value += message + "\n";
+  console.log(message);
 }
