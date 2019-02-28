@@ -22,6 +22,8 @@ function createWindow () {
     }
   })
 
+  mainWindow.setOpacity(0.95);
+
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
