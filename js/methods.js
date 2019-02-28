@@ -130,6 +130,7 @@ function askingForRyzenAdjExecutablePath() {
     if (typeof filePaths[0] !== 'undefined') {
       const settings = require('electron-settings');
       settings.set("settings", {
+        ...settings.get('settings'),
         ryzen_adj_path: filePaths[0]
       });
       notification('primary', 'Path to ryzenAdj.exe has been saved.');
