@@ -81,11 +81,11 @@ function checkForAdminRights() {
  * @param {string} message The message to be displayed, new line will be replaced by <br/>.
  */
 function notification(type, message) {
-  var element = parseHTML(`
-  <div class="uk-alert-${type}" uk-alert>
-    <a class="uk-alert-close" uk-close></a>
-    <p>${(''+message).replace(/(?:\r\n|\r|\n)/g, '<br/>')}</p>
-  </div>`);
-  var notifZone = document.getElementById('notification-zone');
-  notifZone.appendChild(element[0]);
+  UIkit.notification({
+    message: (''+message).replace(/(?:\r\n|\r|\n)/g, '<br/>'),
+    status: type,
+    pos: 'top-right',
+    timeout: 5000
+  });
 }
+
