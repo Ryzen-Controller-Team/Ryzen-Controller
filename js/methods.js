@@ -195,6 +195,9 @@ function loadLatestUsedSettings() {
   }
 }
 
+/**
+ * Listen settings tab inputs to save their values.
+ */
 function registerEventListenerForSettingsInput() {
   const settings = require('electron-settings');
 
@@ -214,6 +217,9 @@ function registerEventListenerForSettingsInput() {
   });
 }
 
+/**
+ * Simply display version in appropriate zone.
+ */
 function displayVersion() {
   const pjson = require('./package.json');
   document.getElementById('version').innerHTML = `v${pjson.version}`;
