@@ -240,6 +240,7 @@ function displayVersion() {
  * @param {number} seconds Interval in seconds between each apply.
  */
 function reApplyPeriodically(seconds) {
+  seconds = parseInt(seconds) >= 0 ? parseInt(seconds) : 0;
   appendLog(`reApplyPeriodically(): seconds = ${seconds}`);
   appendLog(`reApplyPeriodically(): document.reapplyLoop = ${document.reapplyLoop}`);
   clearInterval(document.reapplyLoop);
