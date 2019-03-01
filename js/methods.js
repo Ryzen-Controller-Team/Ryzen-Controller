@@ -26,7 +26,7 @@ function decimalToHexString(number) {
   {
     number = 0xFFFFFFFF + number + 1;
   }
-  
+
   return number.toString(16).toUpperCase();
 }
 
@@ -44,7 +44,7 @@ function ready(fn) {
 
 /**
  * Will make sure inputs are repeated when needed.
- * 
+ *
  * Use the "repeat" html attribute to define where the current value must be repeated.
  */
 function registerRepeaterForAllInput() {
@@ -62,11 +62,11 @@ function registerRepeaterForAllInput() {
 
 /**
  * Check that the app is running with admin right.
- * 
+ *
  * Will display a warning if not.
  */
 function checkForAdminRights() {
-  var exec = require('child_process').exec; 
+  var exec = require('child_process').exec;
   exec('NET SESSION', function(err,so,se) {
     if (se.length !== 0) {
       notification('warning',
@@ -110,9 +110,9 @@ function getRyzenAdjExecutablePath() {
  */
 function preFillSettings() {
   var ryzen_adj_path = document.getElementById('ryzen_adj_path');
-  var fs = require('fs'); 
+  var fs = require('fs');
   ryzen_adj_path.value = getRyzenAdjExecutablePath();
-  if (!fs.existsSync(ryzen_adj_path.value)) { 
+  if (!fs.existsSync(ryzen_adj_path.value)) {
     notification('danger', "Path to ryzenadj.exe is wrong, please fix it in settings tab.");
   }
   const settings = require('electron-settings');
@@ -125,7 +125,7 @@ function preFillSettings() {
 function askingForRyzenAdjExecutablePath() {
   var remote = require('electron').remote;
   var dialog = remote.require('electron').dialog;
-  
+
   var path = dialog.showOpenDialog({
     properties: ['openFile']
   }, function (filePaths) {
@@ -173,7 +173,7 @@ function saveLatestUsedSettings() {
 
 /**
  * Will load the latest settings and refresh the controller tab's values.
- * 
+ *
  * Will also apply latest settings if settings.apply_last_settings_on_launch is true.
  */
 function loadLatestUsedSettings() {
@@ -204,4 +204,9 @@ function registerEventListenerForSettingsInput() {
       apply_last_settings_on_launch: !!apply_last_settings_on_launch.checked
     });
   });
+}
+
+function displayVersion() {
+  const pjson = require('./package.json');
+  document.getElementById('version').innerHTML = `v${pjson.version}`;
 }

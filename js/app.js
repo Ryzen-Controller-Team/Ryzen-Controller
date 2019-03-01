@@ -4,6 +4,7 @@ ready(function(){
   checkForAdminRights();
   preFillSettings();
   loadLatestUsedSettings();
+  displayVersion();
 });
 
 /**
