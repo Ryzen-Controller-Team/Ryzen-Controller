@@ -11,6 +11,7 @@ const {app, BrowserWindow, Menu, Tray} = require('electron')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let tray
 
 function createWindow () {
   // Create the browser window.
@@ -62,8 +63,8 @@ function createWindow () {
     }
   ]);
 
-  var appIcon = new Tray(__dirname + '/assets/icon.ico');
-  appIcon.setContextMenu(contextMenu);
+  tray = new Tray(__dirname + '/assets/icon.ico');
+  tray.setContextMenu(contextMenu);
 }
 
 // This method will be called when Electron has finished
