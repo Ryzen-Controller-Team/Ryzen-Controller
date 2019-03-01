@@ -46,7 +46,7 @@ function createWindow () {
       mainWindow.hide();
     }
   });
-  
+
   var contextMenu = Menu.buildFromTemplate([
     {
       label: 'Show App',
@@ -65,6 +65,10 @@ function createWindow () {
 
   tray = new Tray(__dirname + '/assets/icon.ico');
   tray.setContextMenu(contextMenu);
+  tray.setIgnoreDoubleClickEvents(true);
+  tray.on('click', function() {
+    mainWindow.show();
+  });
 }
 
 // This method will be called when Electron has finished
