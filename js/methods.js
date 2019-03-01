@@ -117,6 +117,7 @@ function preFillSettings() {
   }
   const settings = require('electron-settings');
   document.getElementById('apply_last_settings_on_launch').checked = settings.get('settings.apply_last_settings_on_launch');
+  document.getElementById('minimize_to_tray').checked = settings.get('settings.minimize_to_tray');
 }
 
 /**
@@ -202,6 +203,13 @@ function registerEventListenerForSettingsInput() {
     settings.set('settings', {
       ...settings.get('settings'),
       apply_last_settings_on_launch: !!apply_last_settings_on_launch.checked
+    });
+  });
+  var minimize_to_tray = document.getElementById('minimize_to_tray');
+  minimize_to_tray.addEventListener('change', function() {
+    settings.set('settings', {
+      ...settings.get('settings'),
+      minimize_to_tray: !!minimize_to_tray.checked
     });
   });
 }
