@@ -1,10 +1,13 @@
 ready(function(){
+  document.isStarting = true;
   registerRepeaterForAllInput();
   registerEventListenerForSettingsInput();
   checkForAdminRights();
   preFillSettings();
   loadLatestUsedSettings();
   displayVersion();
+  reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
+  document.isStarting = false;
 });
 
 /**

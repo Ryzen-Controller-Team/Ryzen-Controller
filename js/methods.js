@@ -118,6 +118,8 @@ function preFillSettings() {
   const settings = require('electron-settings');
   document.getElementById('apply_last_settings_on_launch').checked = settings.get('settings.apply_last_settings_on_launch');
   document.getElementById('minimize_to_tray').checked = settings.get('settings.minimize_to_tray');
+  document.getElementById('reapply_periodically').value = settings.get('settings.reapply_periodically');
+  document.getElementById('reapply_periodically_range').value = settings.get('settings.reapply_periodically');
 }
 
 /**
@@ -215,6 +217,14 @@ function registerEventListenerForSettingsInput() {
       minimize_to_tray: !!minimize_to_tray.checked
     });
   });
+  var reapply_periodically = document.getElementById('reapply_periodically');
+  reapply_periodically.addEventListener('change', function() {
+    reApplyPeriodically(reapply_periodically.value);
+    settings.set('settings', {
+      ...settings.get('settings'),
+      reapply_periodically: reapply_periodically.value
+    });
+  });
 }
 
 /**
@@ -223,4 +233,24 @@ function registerEventListenerForSettingsInput() {
 function displayVersion() {
   const pjson = require('./package.json');
   document.getElementById('version').innerHTML = `v${pjson.version}`;
+}
+
+/**
+ * Re-apply flow for "reapply_periodically" settings.
+ * @param {number} seconds Interval in seconds between each apply.
+ */
+function reApplyPeriodically(seconds) {
+  appendLog(`reApplyPeriodically(): seconds = ${seconds}`);
+  appendLog(`reApplyPeriodically(): document.reapplyLoop = ${document.reapplyLoop}`);
+  clearInterval(document.reapplyLoop);
+  document.reapplyLoop = false;
+
+  if (seconds <= 0) {
+    if (!document.isStarting) {
+      notification('primary', "Ryzen Controller no more will re-apply ryzenadj periodically.");
+    }
+    return;
+  }
+
+  document.reapplyLoop = setInterval(applyRyzenSettings, seconds * 1000);
 }

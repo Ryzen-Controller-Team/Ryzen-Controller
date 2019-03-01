@@ -74,6 +74,16 @@
       <label><input class="uk-checkbox" type="checkbox" id="apply_last_settings_on_launch"> When checked, Ryzen Controller will try to apply latest used settings on launch.</label>
       <h3>Minimize to tray:</h3>
       <label><input class="uk-checkbox" type="checkbox" id="minimize_to_tray"> When checked, Ryzen Controller will minimize to tray instead of taskbar.</label>
+      <h3>Re-apply ryzenadj periodically:</h3>
+      <p>Ryzen Controller will re-apply ryzenadj every X seconds. Set to 0 to disable.</p>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-6">
+          <input class="uk-input" type="number" min="0" step="10" max="3600" value="0" id="reapply_periodically" repeat="reapply_periodically_range">
+        </div>
+        <div class="uk-width-expand">
+          <input class="uk-range" type="range" min="0" step="10" max="3600" value="0" repeat="reapply_periodically" id="reapply_periodically_range">
+        </div>
+      </div>
       <h3>Ryzenadj path:</h3>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-2-3@s">
