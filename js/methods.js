@@ -116,10 +116,13 @@ function preFillSettings() {
     notification('danger', "Path to ryzenadj.exe is wrong, please fix it in settings tab.");
   }
   const settings = require('electron-settings');
-  document.getElementById('apply_last_settings_on_launch').checked = settings.get('settings.apply_last_settings_on_launch');
-  document.getElementById('minimize_to_tray').checked = settings.get('settings.minimize_to_tray');
-  document.getElementById('reapply_periodically').value = settings.get('settings.reapply_periodically');
-  document.getElementById('reapply_periodically_range').value = settings.get('settings.reapply_periodically');
+  document.getElementById('apply_last_settings_on_launch').checked = !!settings.get('settings.apply_last_settings_on_launch');
+  document.getElementById('minimize_to_tray').checked = !!settings.get('settings.minimize_to_tray');
+
+  seconds = parseInt(settings.get('settings.reapply_periodically'));
+  seconds = seconds >= 0 ? seconds : 0;
+  document.getElementById('reapply_periodically').value = seconds;
+  document.getElementById('reapply_periodically_range').value = seconds;
 }
 
 /**
