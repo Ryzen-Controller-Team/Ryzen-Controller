@@ -7,6 +7,16 @@ if (setupEvents.handleSquirrelEvent()) {
 
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, Menu, Tray} = require('electron')
+const settings = require('electron-settings');
+
+// Check for latest used version and clear settings if needed.
+if (settings.get('settings.last_used_version') !== require('./package.json').version) {
+  settings.delete('settings.ryzen_adj_path');
+  settings.set('settings', {
+    ...settings.set('settings'),
+    last_used_version: require('./package.json').version
+  });
+}
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -39,7 +49,6 @@ function createWindow () {
     mainWindow = null
   })
   
-  const settings = require('electron-settings');
   mainWindow.on('minimize',function(event){
     if (settings.get('settings.minimize_to_tray')) {
       event.preventDefault();
