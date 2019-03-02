@@ -263,11 +263,9 @@ function reApplyPeriodically(seconds) {
  * Display tooltip on each options.
  */
 function displayOptionDescription() {
-  appendLog("displayOptionDescription():");
   const options_description = require('./js/options_description.json');
   for (const option in options_description) {
     if (options_description.hasOwnProperty(option)) {
-      appendLog(`- option: ${option}`);
       const description = options_description[option];
       const node = document.getElementById(option).parentElement.parentElement;
       node.setAttribute('uk-tooltip', description);
