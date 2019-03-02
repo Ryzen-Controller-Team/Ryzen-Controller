@@ -1,4 +1,5 @@
 ready(function(){
+  const settings = require('electron-settings');
   document.isStarting = true;
   registerRepeaterForAllInput();
   registerEventListenerForSettingsInput();
@@ -9,6 +10,10 @@ ready(function(){
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
   displayOptionDescription();
   document.isStarting = false;
+  settings.set('settings', {
+    ...settings.get('settings'),
+    first_launch: false
+  });
 });
 
 /**

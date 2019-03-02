@@ -18,7 +18,8 @@ if (settings.get('settings.last_used_version') !== require('./package.json').ver
   settings.delete('settings.ryzen_adj_path');
   settings.set('settings', {
     ...settings.set('settings'),
-    last_used_version: require('./package.json').version
+    last_used_version: require('./package.json').version,
+    first_launch: true,
   });
 }
 
