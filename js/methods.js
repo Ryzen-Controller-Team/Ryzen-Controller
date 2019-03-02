@@ -116,6 +116,7 @@ function preFillSettings() {
     notification('danger', "Path to ryzenadj.exe is wrong, please fix it in settings tab.");
   }
   const settings = require('electron-settings');
+  document.getElementById('start_at_boot').checked = !!settings.get('settings.start_at_boot');
   document.getElementById('apply_last_settings_on_launch').checked = !!settings.get('settings.apply_last_settings_on_launch');
   document.getElementById('minimize_to_tray').checked = !!settings.get('settings.minimize_to_tray');
 
@@ -228,6 +229,14 @@ function registerEventListenerForSettingsInput() {
       reapply_periodically: reapply_periodically.value
     });
   });
+  var start_at_boot = document.getElementById('start_at_boot');
+  start_at_boot.addEventListener('change', function() {
+    settings.set('settings', {
+      ...settings.get('settings'),
+      start_at_boot: !!start_at_boot.checked
+    });
+    require('electron').remote.app.setLoginItemSettings({ openAtLogin: !!start_at_boot.checked });
+});
 }
 
 /**

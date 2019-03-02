@@ -9,6 +9,9 @@ if (setupEvents.handleSquirrelEvent()) {
 const {app, BrowserWindow, Menu, Tray} = require('electron')
 const settings = require('electron-settings');
 
+// Check and apply start_on_boot option.
+app.setLoginItemSettings({ openAtLogin: !!settings.get('settings.start_at_boot') });
+
 // Check for latest used version and clear settings if needed.
 if (settings.get('settings.last_used_version') !== require('./package.json').version) {
   settings.delete('settings.ryzen_adj_path');
