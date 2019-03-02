@@ -66,8 +66,8 @@ function createWindow () {
     {
       label: 'Quit',
       click: function () {
-        application.isQuiting = true;
-        application.quit();
+        app.isQuiting = true;
+        app.quit();
       }
     }
   ]);
