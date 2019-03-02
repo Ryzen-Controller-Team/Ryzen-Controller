@@ -23,11 +23,7 @@ module.exports = {
       
       return spawnedProcess;
     };
-    
-    const spawnUpdate = function(args) {
-      return spawn(updateDotExe, args);
-    };
-    
+
     const squirrelEvent = process.argv[1];
     switch (squirrelEvent) {
       case '--squirrel-install':
@@ -36,20 +32,21 @@ module.exports = {
       // - Add your .exe to the PATH
       // - Write to the registry for things like file associations and
       // explorer context menus
-      
-      // Install desktop and start menu shortcuts
-      spawnUpdate(['--createShortcut', exeName]);
-      
+
       setTimeout(app.quit, 1000);
       return true;
       
       case '--squirrel-uninstall':
       // Undo anything you did in the --squirrel-install and
       // --squirrel-updated handlers
-      
-      // Remove desktop and start menu shortcuts
-      spawnUpdate(['--removeShortcut', exeName]);
-      
+
+      // Removing desktop shortcut
+      let fs = require('fs');
+      var shortcut_path = app.getPath('desktop') + "\\Ryzen Controller";
+      if (!fs.existsSync(shortcut_path)) {
+          fs.unlink(shortcut_path, console.log);
+      }
+  
       setTimeout(app.quit, 1000);
       return true;
       

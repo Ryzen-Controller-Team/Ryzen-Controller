@@ -282,3 +282,32 @@ function displayOptionDescription() {
     }
   }
 }
+
+/**
+ * Will recreate shortcut on launch ... no other solution for now :(
+ */
+function recreateShortcut() {
+  const settings = require('electron-settings');
+
+  if (!!settings.get('settings.first_launch')) {
+    let app = require('electron').remote.app;
+    let fs = require('fs');
+    try {
+      var shortcut_path = app.getPath('desktop') + "\\Ryzen Controller";
+      if (!fs.existsSync(shortcut_path)) {
+        fs.unlink(shortcut_path, console.log);
+        fs.symlink(app.getPath('exe'), shortcut_path, function (err) {
+          if (err) {
+            notification("danger", "Shortcut can't be created, please check log tabs for more info.");
+            appendLog(`recreateShortcut(): ${err}`);
+          }
+          else {
+            notification('primary', "A shortcut has been created on desktop.");
+          }
+        });
+      }
+    } catch (error) {
+      appendLog(`recreateShortcut() ${error}`);
+    }
+  }
+}

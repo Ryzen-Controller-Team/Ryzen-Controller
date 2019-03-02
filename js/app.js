@@ -9,6 +9,7 @@ ready(function(){
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
   displayOptionDescription();
+  recreateShortcut();
   document.isStarting = false;
   settings.set('settings', {
     ...settings.get('settings'),
