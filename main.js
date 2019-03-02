@@ -14,6 +14,7 @@ app.setLoginItemSettings({ openAtLogin: !!settings.get('settings.start_at_boot')
 
 // Check for latest used version and clear settings if needed.
 if (settings.get('settings.last_used_version') !== require('./package.json').version) {
+  // Removing ryzenadj path as it can be updated to the included one.
   settings.delete('settings.ryzen_adj_path');
   settings.set('settings', {
     ...settings.set('settings'),
