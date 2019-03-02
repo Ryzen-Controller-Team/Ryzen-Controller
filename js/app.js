@@ -7,6 +7,7 @@ ready(function(){
   loadLatestUsedSettings();
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
+  displayOptionDescription();
   document.isStarting = false;
 });
 
