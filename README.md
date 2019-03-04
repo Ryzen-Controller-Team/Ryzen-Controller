@@ -7,8 +7,8 @@ No more need for multiple download =D
 
 ### Pre-requisite
 
-- None, ryzenadj.exe is directly included in Ryzen Controller.
-- Just use RyzenControllerInstaller.exe, it will install this software and create a shortcut on desktop and in start menu.
+- Go to [release page](https://gitlab.com/le.storm1er/ryzen-controller/releases)
+- Download the latest RyzenControllerInstaller.exe
 - Enjoy!
 
 ## For developpers
