@@ -196,7 +196,7 @@ function loadLatestUsedSettings() {
       }
     }
   }
-  if (settings.get('settings.apply_last_settings_on_launch')) {
+  if (document.isStarting && settings.get('settings.apply_last_settings_on_launch')) {
     applyRyzenSettings();
   }
 }
