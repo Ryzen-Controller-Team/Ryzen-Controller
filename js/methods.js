@@ -311,3 +311,143 @@ function recreateShortcut() {
     }
   }
 }
+
+/**
+ * Will return an object completed with the current settings from inputs.
+ * @param {string} keyType "inputId" or "ryzenadjArgs"
+ */
+function getCurrentSettings(keyType) {
+  if (keyType === "ryzenadjArgs") {
+    return {
+      "--stapm-limit=": document.getElementById('stapm_limit_w').value,
+      "--fast-limit=": document.getElementById('ppt_fast_limit_w').value,
+      "--slow-limit=": document.getElementById('ppt_slow_limit_w').value,
+      "--tctl-temp=": document.getElementById('temperature_limit_c').value,
+      "--vrmmax-current=": document.getElementById('vrm_current_m_a').value,
+    };
+  } else {
+    var inputs = document.querySelectorAll('#controller-tab input');
+    var currentSettings = {};
+    inputs.forEach(element => {
+      let id = element.id;
+      let value = element.value;
+      currentSettings[id] = value;
+    });
+    return currentSettings;
+  }
+}
+
+/**
+ * Will save the current settings to a new preset.
+ */
+function saveToNewPreset() {
+  const settingsToBeSaved = getCurrentSettings("inputId");
+  const currentPresets = require('electron-settings').get('presets') || {};
+  var newPresetName = document.getElementById('new_preset_name').value;
+
+  if (!newPresetName) {
+    notification('danger', 'You must provide a preset name.');
+    return;
+  }
+
+  if (typeof currentPresets[newPresetName] !== "undefined") {
+    newPresetName = findUnusedNewPresetName(newPresetName);
+    notification('warning', `This preset name already exist, your preset has been saved with the name "${newPresetName}".`);
+  }
+
+  const newPresetList = {
+    ...currentPresets,
+    [newPresetName]: settingsToBeSaved,
+  };
+  require('electron-settings').set('presets', newPresetList);
+  appendLog(`saveToNewPreset(): Saved preset ${newPresetName}, ${JSON.stringify(newPresetList)}`);
+  updatePresetList();
+  if (newPresetName === document.getElementById('new_preset_name').value) {
+    notification('success', `The preset ${newPresetName} has been saved.`);
+  }
+}
+
+/**
+ * This recursive function will return an available preset name to be used to save a preset.
+ *
+ * @param {string} newPresetName The preset name to be edited.
+ * @param {number} suffix The preset name suffix
+ */
+function findUnusedNewPresetName(newPresetName, suffix = 1) {
+  const currentPresets = require('electron-settings').get('presets') || {};
+  if (typeof currentPresets[`${newPresetName}${suffix}`] !== "undefined") {
+    suffix++;
+    return findUnusedNewPresetName(newPresetName, suffix);
+  }
+  return `${newPresetName}${suffix}`;
+}
+
+/**
+ * This will update the preset tab based on saved presets.
+ */
+function updatePresetList() {
+  var presetTab = document.getElementById('presetTab');
+  const currentPresets = require('electron-settings').get('presets') || {};
+
+  var content = '';
+  content += '<ul class="uk-list">';
+
+  if (Object.keys(currentPresets).length === 0) {
+    content += `<li>No preset has been created yet, use "Save to preset" button on Controller tab to create one.</li>`;
+  }
+
+  for (const presetName in currentPresets) {
+    if (currentPresets.hasOwnProperty(presetName)) {
+      const preset = currentPresets[presetName];
+
+      let valueSummary = [];
+      for (const key in preset) {
+        if (preset.hasOwnProperty(key) && key.indexOf('_range') !== -1) {
+          const value = preset[key];
+          valueSummary.push(value);
+        }
+      }
+      valueSummary.join(', ');
+
+      content += `
+        <li class="uk-margin">
+          <span class="uk-text-lead">${presetName}</span>
+          <i class="uk-text-small">${valueSummary}</i>
+          <button class="uk-button uk-button-danger uk-align-right" type="button" onClick="presetDeletion('${presetName}')">
+            Delete
+          </button>
+          <button class="uk-button uk-button-primary uk-align-right" type="button" onClick="applyPreset('${presetName}')">
+            Apply
+          </button>
+        </li>
+      `;
+    }
+  }
+  content += '</ul>';
+  presetTab.innerHTML = content;
+}
+
+/**
+ * This will apply the preset you asked for.
+ * @param {string} presetName The preset name to be applied.
+ */
+function applyPreset(presetName) {
+  const presets = require('electron-settings').get(`presets.${presetName}`);
+  appendLog(`applyPreset(): preset ${presetName}: ${JSON.stringify(presets)}`);
+  var ret = require('electron-settings').set("latest_controller_tabs_settings", presets);
+  appendLog(`applyPreset(): saved preset: ${JSON.stringify(ret)}`);
+  loadLatestUsedSettings();
+  applyRyzenSettings();
+}
+
+/**
+ * This will delete the preset you asked for.
+ * @param {string} presetName The preset name to be deleted.
+ */
+function presetDeletion(presetName) {
+  var presets = require('electron-settings').get(`presets`);
+  delete presets[presetName];
+  require('electron-settings').set(`presets`, presets);
+  notification('success', `The preset ${presetName} has been deleted.`);
+  updatePresetList();
+}
