@@ -7,20 +7,25 @@
   <link rel="stylesheet" href="./node_modules/uikit/dist/css/uikit.min.css" />
   <script src="./node_modules/uikit/dist/js/uikit.min.js"></script>
   <script src="./node_modules/uikit/dist/js/uikit-icons.min.js"></script>
+  <style>
+    #release-tab.uk-active {
+      position:absolute;display: inline-block;width: 100%;height: 100%;
+    }
+  </style>
 </head>
-<body class="uk-animation-fade">
+<body class="uk-animation-fade" uk-height-viewport="expand: true">
   <h1>Ryzen Controller <span id="version" class="uk-badge"></span></h1>
 
-  <ul uk-switcher uk-tab uk-sticky class="uk-background-default">
+  <ul uk-switcher="animation: uk-animation-fade" uk-tab uk-sticky class="uk-background-default uk-margin-remove">
     <li><a href="#">Controller</a></li>
     <li><a href="#">Presets</a></li>
     <li><a href="#">Settings</a></li>
+    <li><a href="#">Releases</a></li>
     <li><a href="#">Logs</a></li>
   </ul>
-  <ul class="uk-switcher uk-margin">
+  <ul class="uk-switcher uk-margin-remove" uk-height-viewport="expand: true" style="position:relative;">
 
-
-    <li class="uk-container uk-animation-fade" id="controller-tab">
+    <li class="uk-margin-top uk-margin-bottom uk-container" id="controller-tab">
       <h3>STAPM Limit (W)</h3>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
@@ -72,9 +77,9 @@
       </p>
     </li>
 
-    <li class="uk-container uk-animation-fade" id="presetTab"></li>
+    <li class="uk-margin-top uk-margin-bottom uk-container" id="presetTab"></li>
 
-    <li class="uk-container uk-animation-fade">
+    <li class="uk-margin-top uk-margin-bottom uk-container">
       <h3>Auto start with system:</h3>
       <label><input class="uk-checkbox" type="checkbox" id="start_at_boot"> When checked, Ryzen Controller will start on system login.</label>
       <h3>Auto apply on launch:</h3>
@@ -104,7 +109,15 @@
       </div>
     </li>
 
-    <li class="uk-container uk-animation-fade">
+    <li id="release-tab">
+      <webview
+        style="height:100%;"
+        frameborder="0"
+        src="https://gitlab.com/le.storm1er/ryzen-controller/releases"
+      ></webview>
+    </li>
+
+    <li class="uk-margin-top uk-margin-bottom uk-container">
       <textarea class="uk-textarea" rows="20" id="logs" readonly></textarea>
     </li>
 

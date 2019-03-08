@@ -11,6 +11,7 @@ ready(function(){
   displayOptionDescription();
   recreateShortcut();
   updatePresetList();
+  checkForNewRelease();
   document.isStarting = false;
   settings.set('settings', {
     ...settings.get('settings'),
