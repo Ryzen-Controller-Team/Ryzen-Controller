@@ -41,6 +41,8 @@ function applyRyzenSettings() {
           break;
 
         case "--tctl-temp=":
+        case "--max-fclk-frequency=":
+        case "--min-fclk-frequency=":
           value = value;
           break;
 

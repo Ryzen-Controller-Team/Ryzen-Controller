@@ -71,6 +71,24 @@
           <input class="uk-range" type="range" min="20" max="100" value="30" repeat="vrm_current_m_a" id="vrm_current_m_a_range">
         </div>
       </div>
+      <h3>Minimum transmission frequency (Mhz)</h3>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-6">
+          <input class="uk-input" type="number" min="800" max="1600" value="800" step="10" id="min_fclk_frequency" repeat="min_fclk_frequency_range">
+        </div>
+        <div class="uk-width-expand">
+          <input class="uk-range" type="range" min="800" max="1600" value="800" step="10" repeat="min_fclk_frequency" id="min_fclk_frequency_range">
+        </div>
+      </div>
+      <h3>Maximum transmission frequency (Mhz)</h3>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-6">
+          <input class="uk-input" type="number" min="800" max="1600" value="1200" step="10" id="max_fclk_frequency" repeat="max_fclk_frequency_range">
+        </div>
+        <div class="uk-width-expand">
+          <input class="uk-range" type="range" min="800" max="1600" value="1200" step="10" repeat="max_fclk_frequency" id="max_fclk_frequency_range">
+        </div>
+      </div>
       <p class="uk-margin">
         <button class="uk-button uk-button-primary" onClick="applyRyzenSettings()">Apply</button>
         <button class="uk-button uk-button-secondary" uk-toggle="target: #modal-new-preset">Save to preset</button>

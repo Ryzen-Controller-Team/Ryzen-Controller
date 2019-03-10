@@ -322,6 +322,8 @@ function getCurrentSettings(keyType) {
       "--slow-limit=": document.getElementById('ppt_slow_limit_w').value,
       "--tctl-temp=": document.getElementById('temperature_limit_c').value,
       "--vrmmax-current=": document.getElementById('vrm_current_m_a').value,
+      "--min-fclk-frequency=": document.getElementById('min_fclk_frequency').value,
+      "--max-fclk-frequency=": document.getElementById('max_fclk_frequency').value,
     };
   } else {
     var inputs = document.querySelectorAll('#controller-tab input');
