@@ -29,13 +29,21 @@ let mainWindow
 let tray
 
 function createWindow () {
+  let appIcon = '';
+  if (require('os').platform() === 'win32') {
+    appIcon = __dirname + '/assets/icon.ico';
+  } else {
+    appIcon = __dirname + '/assets/icon.png';
+  }
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
     height: 720,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    icon: appIcon
   })
   
   mainWindow.setOpacity(0.95);
@@ -77,7 +85,7 @@ function createWindow () {
     }
   ]);
 
-  tray = new Tray(__dirname + '/assets/icon.ico');
+  tray = new Tray(appIcon);
   tray.setContextMenu(contextMenu);
   tray.setIgnoreDoubleClickEvents(true);
   tray.on('click', function() {
