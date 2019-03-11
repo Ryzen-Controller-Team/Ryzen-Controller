@@ -1,8 +1,8 @@
 stages:
-  - check
   - install
   - package
   - installer
+  - check
 
 dependency_scanning:
   stage: check
@@ -47,7 +47,21 @@ win32:
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
   script:
-    - npm run-script package
+    - npm run-script package-win32
+  artifacts:
+    paths:
+      - release-builds/
+  dependencies:
+    - node
+
+linux:
+  only:
+    - tags@le.storm1er/ryzen-controller
+  stage: package
+  tags: [ docker ]
+  image: electronuserland/builder:wine-mono
+  script:
+    - npm run-script package-linux
   artifacts:
     paths:
       - release-builds/
@@ -61,10 +75,48 @@ win32-installer:
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
   script:
-    - npm run-script build
+    - npm run-script build-win32
   artifacts:
     paths:
       - installer-builds/
   dependencies:
     - node
     - win32
+
+deb-installer:
+  only:
+    - tags@le.storm1er/ryzen-controller
+  stage: installer
+  tags: [ docker ]
+  image: debian:stretch
+  before_script:
+    - apt update -y
+    - apt install fakeroot curl -y
+    - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+    - export NVM_DIR="$HOME/.nvm"
+    - '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
+    - nvm install 10.15.1
+    - nvm use 10.15.1
+  script:
+    - npm run-script build-deb
+  artifacts:
+    paths:
+      - installer-builds/
+  dependencies:
+    - node
+    - linux
+
+rpm-installer:
+  only:
+    - tags@le.storm1er/ryzen-controller
+  stage: installer
+  tags: [ docker ]
+  image: electronuserland/builder:wine-mono
+  script:
+    - npm run-script build-rpm
+  artifacts:
+    paths:
+      - installer-builds/
+  dependencies:
+    - node
+    - linux
