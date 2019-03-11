@@ -7,9 +7,10 @@
   "scripts": {
     "start": "electron .",
     "package-win32": "electron-packager . --overwrite --platform=win32 --arch=ia32 --prune=true --out=release-builds --ignore=\".*-builds\" --icon=\"assets/icon.ico\" --win32metadata.requested-execution-level=requireAdministrator",
-    "package-debian": "electron-packager . ryzencontroller --overwrite --platform=linux --arch=x64 --out release-builds --ignore=\".*-builds\" --icon=\"assets/icon.ico\"",
+    "package-linux": "electron-packager . ryzencontroller --overwrite --platform=linux --arch=x64 --out release-builds --ignore=\".*-builds\" --icon=\"assets/icon.ico\"",
     "build-win32": "node installers/windows/createinstaller.js",
-    "build-debian": "electron-installer-debian --src=release-builds/ryzencontroller-linux-x64/ --dest=installer-builds/installers/ --arch=amd64 --executableName=RyzenController"
+    "build-deb": "electron-installer-debian --src=release-builds/ryzencontroller-linux-x64/ --dest=installer-builds/installers/ --arch=amd64",
+    "build-rpm": "electron-installer-redhat --src=release-builds/ryzencontroller-linux-x64/ --dest=installer-builds/installers/ --arch=amd64"
   },
   "repository": "https://gitlab.com/le.storm1er/ryzen-controller",
   "keywords": [
@@ -24,6 +25,7 @@
   "devDependencies": {
     "electron": "^4.0.4",
     "electron-installer-debian": "^1.1.1",
+    "electron-installer-redhat": "^1.0.1",
     "electron-packager": "^13.1.0",
     "electron-winstaller": "2.5.2"
   },
