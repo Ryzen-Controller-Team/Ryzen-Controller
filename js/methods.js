@@ -66,15 +66,25 @@ function registerRepeaterForAllInput() {
  * Will display a warning if not.
  */
 function checkForAdminRights() {
+  if (require('os').platform !== 'win32') {
+    const isRoot = process.getuid && process.getuid() === 0;
+    if (!isRoot) {
+      notification('danger',
+      `Warning: you must launch this app as administrator.<br/>`
+      + `Use "sudo ryzencontroller" from terminal to fix this.`
+      );
+    }
+  } else {
   var exec = require('child_process').exec;
   exec('NET SESSION', function(err,so,se) {
     if (se.length !== 0) {
       notification('warning',
-      `Warning: you should launch this app as administrator,`
+        `Warning: you should launch this app as administrator, `
       + `ryzenadj.exe doesn't seems to work correctly without administrator rights.`
       );
     }
   });
+}
 }
 
 /**
