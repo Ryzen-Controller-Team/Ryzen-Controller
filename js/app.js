@@ -9,7 +9,9 @@ ready(function(){
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
   displayOptionDescription();
+  if (require('os').platform === 'win32') {
   recreateShortcut();
+  }
   updatePresetList();
   checkForNewRelease();
   document.isStarting = false;
