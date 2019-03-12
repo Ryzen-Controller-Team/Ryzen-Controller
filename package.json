@@ -22,12 +22,14 @@
   ],
   "author": "le.storm1er",
   "license": "CC0-1.0",
-  "devDependencies": {
-    "electron": "^4.0.4",
+  "optionalDependencies": {
     "electron-installer-debian": "^1.1.1",
     "electron-installer-redhat": "^1.0.1",
-    "electron-packager": "^13.1.0",
     "electron-winstaller": "2.5.2"
+  },
+  "devDependencies": {
+    "electron": "^4.0.4",
+    "electron-packager": "^13.1.0"
   },
   "dependencies": {
     "electron-settings": "^3.2.0",
