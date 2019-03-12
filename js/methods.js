@@ -66,7 +66,7 @@ function registerRepeaterForAllInput() {
  * Will display a warning if not.
  */
 function checkForAdminRights() {
-  if (require('os').platform !== 'win32') {
+  if (require('os').platform() !== 'win32') {
     const isRoot = process.getuid && process.getuid() === 0;
     if (!isRoot) {
       notification('danger',
@@ -108,7 +108,7 @@ function notification(type, message) {
 function getRyzenAdjExecutablePath() {
   const settings = require('electron-settings');
   var ryzen_adj_path = settings.get('settings.ryzen_adj_path');
-  if (!ryzen_adj_path && require('os').platform === 'win32') {
+  if (!ryzen_adj_path && require('os').platform() === 'win32') {
     ryzen_adj_path = getCurrentWorkingDirectory() + "\\bin\\ryzenadj.exe";
   }
   appendLog(`getRyzenAdjExecutablePath(): "${ryzen_adj_path}"`);
