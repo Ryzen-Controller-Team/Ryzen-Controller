@@ -10,12 +10,27 @@
         },
         {
             "type": "npm",
-            "script": "build",
+            "script": "package-win32",
             "problemMatcher": []
         },
         {
             "type": "npm",
-            "script": "package",
+            "script": "package-linux",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "build-win32",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "build-deb",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "build-rpm",
             "problemMatcher": []
         }
     ]
