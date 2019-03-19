@@ -1,4 +1,5 @@
 {
+  "stapm_time_ms": "Skin Temperature Aware Power Management. This will define the boost period to be used.",
   "stapm_limit_w": "Skin Temperature Aware Power Management. This will define the socket power package limit which is used to manage the device boost period.",
   "ppt_fast_limit_w": "The amount of power the CPU can draw while boost levels on.",
   "ppt_slow_limit_w": "The amount of power the CPU can draw while boost levels off.",
