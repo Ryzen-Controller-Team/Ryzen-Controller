@@ -175,7 +175,7 @@ function appendLog(message) {
  * Will save the latest used settings.
  */
 function saveLatestUsedSettings() {
-  var inputs = document.querySelectorAll('#controller-tab input');
+  var inputs = document.querySelectorAll('#controller-tab input, #experimental-tab input');
   var latest_controller_tabs_settings = {};
   inputs.forEach(element => {
     let id = element.id;
@@ -216,6 +216,22 @@ function loadLatestUsedSettings() {
  */
 function registerEventListenerForSettingsInput() {
   const settings = require('electron-settings');
+
+  var checkbox_toggle_options = document.querySelectorAll('#controller-tab input[id^=apply_]');
+  const hideOptionBasedOnInput = function (input) {
+    if (input.checked) {
+      input.parentElement.parentElement.nextElementSibling.removeAttribute('hidden');
+    } else {
+      input.parentElement.parentElement.nextElementSibling.setAttribute('hidden', '');
+    }
+  }
+  Array.from(checkbox_toggle_options).forEach(input => {
+    hideOptionBasedOnInput(input);
+    input.addEventListener('change', function(event) {
+      hideOptionBasedOnInput(input);
+    });
+  });
+
 
   var apply_last_settings_on_launch = document.getElementById('apply_last_settings_on_launch');
   apply_last_settings_on_launch.addEventListener('change', function() {
@@ -326,17 +342,32 @@ function recreateShortcut() {
  */
 function getCurrentSettings(keyType) {
   if (keyType === "ryzenadjArgs") {
-    return {
-      "--stapm-limit=": document.getElementById('stapm_limit_w').value,
-      "--fast-limit=": document.getElementById('ppt_fast_limit_w').value,
-      "--slow-limit=": document.getElementById('ppt_slow_limit_w').value,
-      "--tctl-temp=": document.getElementById('temperature_limit_c').value,
-      "--vrmmax-current=": document.getElementById('vrm_current_m_a').value,
-      "--min-fclk-frequency=": document.getElementById('min_fclk_frequency').value,
-      "--max-fclk-frequency=": document.getElementById('max_fclk_frequency').value,
+    const optionToId = {
+      "--stapm-time=": 'stapm_time_ms',
+      "--stapm-limit=": 'stapm_limit_w',
+      "--fast-limit=": 'ppt_fast_limit_w',
+      "--slow-limit=": 'ppt_slow_limit_w',
+      "--tctl-temp=": 'temperature_limit_c',
+      "--vrmmax-current=": 'vrm_current_m_a',
+      "--min-fclk-frequency=": 'min_fclk_frequency',
+      "--max-fclk-frequency=": 'max_fclk_frequency',
     };
+
+    var settingsToBeUsed = {};
+    for (const option in optionToId) {
+      if (optionToId.hasOwnProperty(option)) {
+        const elementId = optionToId[option];
+        if (document.getElementById('apply_' + elementId).checked) {
+          settingsToBeUsed[option] = document.getElementById(elementId).value;
+        }
+      }
+    }
+
+    appendLog('getCurrentSettings(): ' + JSON.stringify(settingsToBeUsed));
+    return settingsToBeUsed;
+
   } else {
-    var inputs = document.querySelectorAll('#controller-tab input');
+    var inputs = document.querySelectorAll('#controller-tab input, #experimental-tab input');
     var currentSettings = {};
     inputs.forEach(element => {
       let id = element.id;
