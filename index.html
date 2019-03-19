@@ -27,7 +27,7 @@
   <ul class="uk-switcher uk-margin-remove" uk-height-viewport="expand: true" style="position:relative;">
 
     <li class="uk-margin-top uk-margin-bottom uk-container" id="controller-tab">
-      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_stapm_constant_time">STAPM Constant Time (Ms)</h3></label>
+      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_stapm_time_ms">STAPM Constant Time (Ms)</h3></label>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
           <input class="uk-input " type="number" min="1000" max="5000" value="1000" id="stapm_time_ms" repeat="stapm_time_ms_range">
@@ -36,7 +36,7 @@
           <input class="uk-range" type="range" min="1000" max="5000" value="0" repeat="stapm_time_ms" id="stapm_time_ms_range">
         </div>
       </div>
-      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_stapm_limit">STAPM Limit (W)</h3></label>
+      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_stapm_limit_w">STAPM Limit (W)</h3></label>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
           <input class="uk-input" type="number" min="5" max="60" value="20" id="stapm_limit_w" repeat="stapm_limit_w_range">
@@ -45,7 +45,7 @@
           <input class="uk-range" type="range" min="5" max="60" value="20" repeat="stapm_limit_w" id="stapm_limit_w_range">
         </div>
       </div>
-      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_ppt_fast_limit">PPT Fast Limit (W)</h3></label>
+      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_ppt_fast_limit_w">PPT Fast Limit (W)</h3></label>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
           <input class="uk-input" type="number" min="5" max="60" value="25" id="ppt_fast_limit_w" repeat="ppt_fast_limit_w_range">
@@ -54,7 +54,7 @@
           <input class="uk-range" type="range" min="5" max="60" value="25" repeat="ppt_fast_limit_w" id="ppt_fast_limit_w_range">
         </div>
       </div>
-      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_ppt_slow_limit">PPT Slow Limit (W)</h3></label>
+      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_ppt_slow_limit_w">PPT Slow Limit (W)</h3></label>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
           <input class="uk-input" type="number" min="5" max="60" value="10" id="ppt_slow_limit_w" repeat="ppt_slow_limit_w_range">
@@ -63,7 +63,7 @@
           <input class="uk-range" type="range" min="5" max="60" value="10" repeat="ppt_slow_limit_w" id="ppt_slow_limit_w_range">
         </div>
       </div>
-      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_temperature_limit">Temperature Limit (°C)</h3></label>
+      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_temperature_limit_c">Temperature Limit (°C)</h3></label>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
           <input class="uk-input" type="number" min="50" max="100" value="80" id="temperature_limit_c" repeat="temperature_limit_c_range">
@@ -72,7 +72,7 @@
           <input class="uk-range" type="range" min="50" max="100" value="80" repeat="temperature_limit_c" id="temperature_limit_c_range">
         </div>
       </div>
-      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_vrm_current">VRM Current (A)</h3></label>
+      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_vrm_current_m_a">VRM Current (A)</h3></label>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
           <input class="uk-input" type="number" min="20" max="75" value="30" id="vrm_current_m_a" repeat="vrm_current_m_a_range">
@@ -81,7 +81,7 @@
           <input class="uk-range" type="range" min="20" max="75" value="30" repeat="vrm_current_m_a" id="vrm_current_m_a_range">
         </div>
       </div>
-      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_min_trans_frequency">Minimum transmission frequency (Mhz)</h3></label>
+      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_min_fclk_frequency">Minimum transmission frequency (Mhz)</h3></label>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
           <input class="uk-input" type="number" min="800" max="1600" value="800" step="10" id="min_fclk_frequency" repeat="min_fclk_frequency_range">
@@ -90,7 +90,7 @@
           <input class="uk-range" type="range" min="800" max="1600" value="800" step="10" repeat="min_fclk_frequency" id="min_fclk_frequency_range">
         </div>
       </div>
-      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_max_trans_frequency">Maximum transmission frequency (Mhz)</h3></label>
+      <label><h3><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_max_fclk_frequency">Maximum transmission frequency (Mhz)</h3></label>
       <div class="uk-grid-small" uk-grid>
         <div class="uk-width-1-6">
           <input class="uk-input" type="number" min="800" max="1600" value="1200" step="10" id="max_fclk_frequency" repeat="max_fclk_frequency_range">
