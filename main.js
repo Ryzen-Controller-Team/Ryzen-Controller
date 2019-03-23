@@ -13,9 +13,51 @@ const settings = require('electron-settings');
 app.setLoginItemSettings({ openAtLogin: !!settings.get('settings.start_at_boot') });
 
 // Check for latest used version and clear settings if needed.
-if (settings.get('settings.last_used_version') !== require('./package.json').version) {
-  // Removing ryzenadj path as it can be updated to the included one.
-  settings.delete('settings.ryzen_adj_path');
+const old_version = settings.get('settings.last_used_version');
+const new_version = require('./package.json').version;
+if (old_version !== new_version) {
+  var compareVersions = require('compare-versions');
+  /**
+   * Since 1.11.0 we added new settings and apply checkbox,
+   * We need to add new settings to presets.
+   */
+  if (compareVersions(old_version, '1.11.0') <= 0) {
+    var preset_list = settings.get('presets');
+    var updated_preset_list = {};
+    // For each preset.
+    for (const preset_name in preset_list) {
+      if (preset_list.hasOwnProperty(preset_name)) {
+        const preset_settings = preset_list[preset_name];
+        updated_preset_list[preset_name] = {};
+        // For each setting.
+        for (const setting_name in preset_settings) {
+          if (preset_settings.hasOwnProperty(setting_name)) {
+            const setting_value = preset_settings[setting_name];
+            // Register current setting.
+            updated_preset_list[preset_name][setting_name] = setting_value;
+            if (setting_name.indexOf('_range') <= 0) {
+              continue;
+            }
+            // Add apply checkbox.
+            updated_preset_list[preset_name][`apply_${setting_name}`] = true;
+          }
+        }
+        // Adding missing options.
+        updated_preset_list[preset_name]['apply_stapm_time_ms'] = false;
+        updated_preset_list[preset_name]['apply_psi0_current_limit'] = false;
+      }
+    }
+    settings.set('presets', updated_preset_list);
+  }
+
+  /**
+   * Since 1.4.0, ryzenadj is included in the windows package.
+   * So we are removing ryzenadj path as it can be included.
+   */
+  if (compareVersions(old_version, '1.4.0') <= 0) {
+    settings.delete('settings.ryzen_adj_path');
+  }
+
   settings.set('settings', {
     ...settings.set('settings'),
     last_used_version: require('./package.json').version,
