@@ -3,11 +3,11 @@ ready(function(){
   const fixPath = require('fix-path');
   document.isStarting = true;
   fixPath();
+  preFillSettings();
+  loadLatestUsedSettings();
   registerRepeaterForAllInput();
   registerEventListenerForSettingsInput();
   checkForAdminRights();
-  preFillSettings();
-  loadLatestUsedSettings();
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
   displayOptionDescription();
