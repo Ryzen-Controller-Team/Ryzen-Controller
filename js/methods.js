@@ -180,6 +180,9 @@ function saveLatestUsedSettings() {
   inputs.forEach(element => {
     let id = element.id;
     let value = element.value;
+    if (id.indexOf('apply_') === 0) {
+      value = element.checked;
+    }
     latest_controller_tabs_settings[id] = value;
   });
   const settings = require('electron-settings');
@@ -202,9 +205,13 @@ function loadLatestUsedSettings() {
       const value = latest_controller_tabs_settings[id];
       let input = document.getElementById(id);
       if (input) {
+        if (id.indexOf('apply_') === 0) {
+          input.checked = value;
+        } else {
         input.value = value;
       }
     }
+  }
   }
   if (document.isStarting && settings.get('settings.apply_last_settings_on_launch')) {
     applyRyzenSettings();
