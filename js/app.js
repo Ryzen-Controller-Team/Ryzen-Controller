@@ -42,13 +42,13 @@ function applyRyzenSettings() {
         case "--stapm-limit=":
         case "--fast-limit=":
         case "--slow-limit=":
+        case "--stapm-time=":
           value = value * 1000;
           break;
 
         case "--tctl-temp=":
         case "--max-fclk-frequency=":
         case "--min-fclk-frequency=":
-        case "--stapm-time=":
           value = value;
           break;
 
