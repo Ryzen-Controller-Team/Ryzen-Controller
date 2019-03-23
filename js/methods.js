@@ -217,7 +217,7 @@ function loadLatestUsedSettings() {
 function registerEventListenerForSettingsInput() {
   const settings = require('electron-settings');
 
-  var checkbox_toggle_options = document.querySelectorAll('#controller-tab input[id^=apply_]');
+  var checkbox_toggle_options = document.querySelectorAll('#controller-tab input[id^=apply_], #experimental-tab input[id^=apply_]');
   const hideOptionBasedOnInput = function (input) {
     if (input.checked) {
       input.parentElement.parentElement.nextElementSibling.removeAttribute('hidden');
