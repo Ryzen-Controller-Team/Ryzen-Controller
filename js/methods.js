@@ -219,11 +219,9 @@ function loadLatestUsedSettings() {
 }
 
 /**
- * Listen settings tab inputs to save their values.
+ * Will show or display options based on apply checkboxes value.
  */
-function registerEventListenerForSettingsInput() {
-  const settings = require('electron-settings');
-
+function toggleOptionDisplayBasedOnApplyCheckbox() {
   var checkbox_toggle_options = document.querySelectorAll('#controller-tab input[id^=apply_], #experimental-tab input[id^=apply_]');
   const hideOptionBasedOnInput = function (input) {
     if (input.checked) {
@@ -238,7 +236,15 @@ function registerEventListenerForSettingsInput() {
       hideOptionBasedOnInput(input);
     });
   });
+}
 
+/**
+ * Listen settings tab inputs to save their values.
+ */
+function registerEventListenerForSettingsInput() {
+  const settings = require('electron-settings');
+
+  toggleOptionDisplayBasedOnApplyCheckbox();
 
   var apply_last_settings_on_launch = document.getElementById('apply_last_settings_on_launch');
   apply_last_settings_on_launch.addEventListener('change', function() {
@@ -486,6 +492,7 @@ function applyPreset(presetName) {
   appendLog(`applyPreset(): saved preset: ${JSON.stringify(ret)}`);
   loadLatestUsedSettings();
   applyRyzenSettings();
+  toggleOptionDisplayBasedOnApplyCheckbox();
 }
 
 /**
