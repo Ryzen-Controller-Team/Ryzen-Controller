@@ -450,7 +450,7 @@ function updatePresetList() {
 
       let valueSummary = [];
       for (const key in preset) {
-        if (preset.hasOwnProperty(key) && key.indexOf('_range') !== -1) {
+        if (preset.hasOwnProperty(key) && key.indexOf('_range') !== -1 && key.indexOf('apply_') != 0) {
           const value = preset[key];
           valueSummary.push(value);
         }
