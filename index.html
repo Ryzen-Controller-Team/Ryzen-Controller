@@ -104,6 +104,17 @@
       <label><input class="uk-checkbox" type="checkbox" id="apply_last_settings_on_launch"> When checked, Ryzen Controller will try to apply latest used settings on launch.</label>
       <h3>Minimize to tray:</h3>
       <label><input class="uk-checkbox" type="checkbox" id="minimize_to_tray"> When checked, Ryzen Controller will minimize to tray instead of taskbar.</label>
+      <h3 class="windows-only">HPET:</h3>
+      <p class="uk-margin windows-only">
+        High Precision Event Timer: Allow application to get time with precision below microseconds, but is slower than most other other timer facilities.<br/>
+        Try running benchmark with and without to see if you get any difference.<br/>
+        If it doesn't make any difference, it's recommanded to let it enable.<br/>
+        <em>You must reboot to apply changes.</em>
+      </p>
+      <p class="uk-margin windows-only">
+        <button class="uk-button uk-button-primary" onClick="toggleHpet('true')">Enable</button>
+        <button class="uk-button uk-button-secondary" onClick="toggleHpet('false')">Disable</button>
+      </p>
       <h3>Re-apply ryzenadj periodically:</h3>
       <p>Ryzen Controller will re-apply ryzenadj every X seconds. Set to 0 to disable.</p>
       <div class="uk-grid-small" uk-grid>

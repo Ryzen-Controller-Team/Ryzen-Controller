@@ -75,8 +75,8 @@ function checkForAdminRights() {
       );
     }
   } else {
-  var exec = require('child_process').exec;
-  exec('NET SESSION', function(err,so,se) {
+  const child = require('child_process').execFile;
+  child('NET SESSION', function(err,so,se) {
     if (se.length !== 0) {
       notification('warning',
         `Warning: you should launch this app as administrator, `
@@ -481,4 +481,40 @@ function checkForNewRelease() {
   };
 
   request.send();
+}
+
+/**
+ * Will change the BCD entry value for userplatformclock.
+ *
+ * @param {string} value BCD entry value for userplatformclock: "true" or "false".
+ */
+function toggleHpet(value) {
+  value = value === "true" ? "true" : "false";
+  const BcdeditExecutablePath = "C:\\Windows\\system32\\bcdedit.exe";
+  const parameters = [
+    "/set",
+    "useplatformclock",
+    value,
+  ];
+
+  const child = require('child_process').execFile;
+  child(BcdeditExecutablePath, parameters, function(err, data) {
+    var output = data.toString();
+    if (err) {
+      notification('danger', err + '<br/>' + output);
+    }
+    else if (output) {
+      notification('success', 'Bcdedit output:<br/>' + output);
+      saveLatestUsedSettings();
+    }
+  });
+}
+
+function handlePlatformSpecificDisplay() {
+  var windows_only_elements = document.getElementsByClassName('windows-only');
+  if (require('os').platform() !== 'win32') {
+    for (const item of windows_only_elements) {
+      item.setAttribute('hidden', 'true');
+    }
+  }
 }

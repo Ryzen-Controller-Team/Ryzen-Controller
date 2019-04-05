@@ -10,8 +10,9 @@ ready(function(){
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
   displayOptionDescription();
   if (require('os').platform() === 'win32') {
-  recreateShortcut();
+    recreateShortcut();
   }
+  handlePlatformSpecificDisplay();
   updatePresetList();
   checkForNewRelease();
   document.isStarting = false;
