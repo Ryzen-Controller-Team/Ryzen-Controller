@@ -490,7 +490,7 @@ function checkForNewRelease() {
  */
 function toggleHpet(value) {
   value = value === "true" ? "true" : "false";
-  const BcdeditExecutablePath = "C:\\Windows\\system32\\bcdedit.exe";
+  const BcdeditExecutablePath = "C:\\Windows\\System32\\bcdedit.exe";
   const parameters = [
     "/set",
     "useplatformclock",
