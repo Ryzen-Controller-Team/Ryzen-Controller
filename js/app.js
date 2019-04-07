@@ -1,6 +1,8 @@
 ready(function(){
   const settings = require('electron-settings');
+  const fixPath = require('fix-path');
   document.isStarting = true;
+  fixPath();
   registerRepeaterForAllInput();
   registerEventListenerForSettingsInput();
   checkForAdminRights();
