@@ -113,8 +113,12 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true
     },
-    icon: appIcon
+    icon: appIcon,
+    show: false,
   })
+  if (!settings.get('settings.start_minimized')) {
+    mainWindow.show();
+  }
   
   mainWindow.setOpacity(0.95);
   

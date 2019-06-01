@@ -129,6 +129,7 @@ function preFillSettings() {
   // document.getElementById('start_at_boot').checked = !!settings.get('settings.start_at_boot');
   document.getElementById('apply_last_settings_on_launch').checked = !!settings.get('settings.apply_last_settings_on_launch');
   document.getElementById('minimize_to_tray').checked = !!settings.get('settings.minimize_to_tray');
+  document.getElementById('start_minimized').checked = !!settings.get('settings.start_minimized');
 
   seconds = parseInt(settings.get('settings.reapply_periodically'));
   seconds = seconds >= 0 ? seconds : 0;
@@ -258,6 +259,13 @@ function registerEventListenerForSettingsInput() {
     settings.set('settings', {
       ...settings.get('settings'),
       minimize_to_tray: !!minimize_to_tray.checked
+    });
+  });
+  var start_minimized = document.getElementById('start_minimized');
+  start_minimized.addEventListener('change', function() {
+    settings.set('settings', {
+      ...settings.get('settings'),
+      start_minimized: !!start_minimized.checked
     });
   });
   var reapply_periodically = document.getElementById('reapply_periodically');
