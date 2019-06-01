@@ -29,6 +29,7 @@ ready(function(){
  */
 function applyRyzenSettings() {
   const settings = getCurrentSettings("ryzenadjArgs");
+  const appSettings = require('electron-settings');
 
   const child = require('child_process').execFile;
   const executablePath = getRyzenAdjExecutablePath();
@@ -65,9 +66,20 @@ function applyRyzenSettings() {
     }
   }
 
+  if (!appSettings.get('retry')) {
+    appSettings.set('retry', 2);
+    notification('warning', 'Applying settings...');
+  } else {
+    let retry = appSettings.get('retry') - 1;
+    appSettings.set('retry', retry);
+  }
   child(executablePath, parameters, function(err, data) {
     var output = data.toString();
     if (err) {
+      let retry = appSettings.get('retry');
+      if (retry) {
+        return applyRyzenSettings();
+      }
       notification('danger', err + '<br/>' + output);
     }
     else if (output) {
