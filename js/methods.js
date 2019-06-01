@@ -323,7 +323,7 @@ function displayOptionDescription() {
   for (const option in options_description) {
     if (options_description.hasOwnProperty(option)) {
       const description = options_description[option];
-      const node = document.getElementById(option).parentElement.parentElement;
+      const node = document.getElementById(option).parentElement.parentElement.previousElementSibling;
       node.setAttribute('uk-tooltip', description);
       UIkit.tooltip(node);
     }
