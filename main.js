@@ -59,33 +59,33 @@ if (old_version !== new_version) {
       return updated_settings;
     };
     const update_presets_to_1_11_0 = function(preset_list) {
-    var updated_preset_list = {};
-    // For each preset.
-    for (const preset_name in preset_list) {
-      if (preset_list.hasOwnProperty(preset_name)) {
-        const preset_settings = preset_list[preset_name];
-        updated_preset_list[preset_name] = {};
-        // For each setting.
-        for (const setting_name in preset_settings) {
-          if (preset_settings.hasOwnProperty(setting_name)) {
-            const setting_value = preset_settings[setting_name];
-            // Register current setting.
-            updated_preset_list[preset_name][setting_name] = setting_value;
-            if (setting_name.indexOf('_range') <= 0) {
-              continue;
-            }
-              if (setting_name.indexOf('apply_') <= 0) {
-            // Add apply checkbox.
-            updated_preset_list[preset_name][`apply_${setting_name}`] = true;
+      var updated_preset_list = {};
+      // For each preset.
+      for (const preset_name in preset_list) {
+        if (preset_list.hasOwnProperty(preset_name)) {
+          const preset_settings = preset_list[preset_name];
+          updated_preset_list[preset_name] = {};
+          // For each setting.
+          for (const setting_name in preset_settings) {
+            if (preset_settings.hasOwnProperty(setting_name)) {
+              const setting_value = preset_settings[setting_name];
+              // Register current setting.
+              updated_preset_list[preset_name][setting_name] = setting_value;
+              if (setting_name.indexOf('_range') <= 0) {
                 continue;
               }
+              if (setting_name.indexOf('apply_') <= 0) {
+                // Add apply checkbox.
+                updated_preset_list[preset_name][`apply_${setting_name}`] = true;
+                continue;
+              }
+            }
           }
+          // Adding missing options.
+          updated_preset_list[preset_name]['apply_stapm_time_ms'] = false;
+          updated_preset_list[preset_name]['apply_psi0_current_limit'] = false;
         }
-        // Adding missing options.
-        updated_preset_list[preset_name]['apply_stapm_time_ms'] = false;
-        updated_preset_list[preset_name]['apply_psi0_current_limit'] = false;
       }
-    }
       return updated_preset_list;
     };
     settings.set('presets', update_presets_to_1_11_0(settings.get('presets')));
@@ -119,7 +119,7 @@ function createWindow () {
   if (!settings.get('settings.start_minimized')) {
     mainWindow.show();
   }
-  
+
   mainWindow.setOpacity(0.95);
   
   // and load the index.html of the app.
