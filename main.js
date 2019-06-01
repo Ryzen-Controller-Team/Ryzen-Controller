@@ -17,12 +17,48 @@ const old_version = settings.get('settings.last_used_version');
 const new_version = require('./package.json').version;
 if (old_version !== new_version) {
   var compareVersions = require('compare-versions');
+
+  /**
+   * Since 1.4.0, ryzenadj is included in the windows package.
+   * So we are removing ryzenadj path as it can be included.
+   */
+  if (compareVersions(old_version, '1.4.0') <= 0) {
+    settings.delete('settings.ryzen_adj_path');
+  }
+
+  settings.set('settings', {
+    ...settings.set('settings'),
+    last_used_version: require('./package.json').version,
+    first_launch: true,
+  });
+
   /**
    * Since 1.11.0 we added new settings and apply checkbox,
    * We need to add new settings to presets.
    */
   if (compareVersions(old_version, '1.11.0') <= 0) {
-    var preset_list = settings.get('presets');
+    const update_latest_settings_to_1_11_0 = function(settings) {
+      var updated_settings = {};
+      for (const setting_name in settings) {
+        if (settings.hasOwnProperty(setting_name)) {
+          const setting_value = settings[setting_name];
+          // Register current setting.
+          updated_settings[setting_name] = setting_value;
+          // Add apply checkbox to any non-range settings.
+          if (setting_name.indexOf('_range') <= 0) {
+            if (setting_name.indexOf('apply_') <= 0) {
+              updated_settings[`apply_${setting_name}`] = true;
+              continue;
+            }
+          }
+        }
+      }
+      // Adding missing options.
+      updated_settings['apply_stapm_time_ms'] = false;
+      updated_settings['apply_psi0_current_limit'] = false;
+      return updated_settings;
+    };
+    const update_presets_to_1_11_0 = function(preset_list) {
     var updated_preset_list = {};
     // For each preset.
     for (const preset_name in preset_list) {
@@ -38,8 +74,11 @@ if (old_version !== new_version) {
             if (setting_name.indexOf('_range') <= 0) {
               continue;
             }
+              if (setting_name.indexOf('apply_') <= 0) {
             // Add apply checkbox.
             updated_preset_list[preset_name][`apply_${setting_name}`] = true;
+                continue;
+              }
           }
         }
         // Adding missing options.
@@ -47,22 +86,11 @@ if (old_version !== new_version) {
         updated_preset_list[preset_name]['apply_psi0_current_limit'] = false;
       }
     }
-    settings.set('presets', updated_preset_list);
+      return updated_preset_list;
+    };
+    settings.set('presets', update_presets_to_1_11_0(settings.get('presets')));
+    settings.set('latest_controller_tabs_settings', update_latest_settings_to_1_11_0(settings.get('latest_controller_tabs_settings')));
   }
-
-  /**
-   * Since 1.4.0, ryzenadj is included in the windows package.
-   * So we are removing ryzenadj path as it can be included.
-   */
-  if (compareVersions(old_version, '1.4.0') <= 0) {
-    settings.delete('settings.ryzen_adj_path');
-  }
-
-  settings.set('settings', {
-    ...settings.set('settings'),
-    last_used_version: require('./package.json').version,
-    first_launch: true,
-  });
 }
 
 // Keep a global reference of the window object, if you don't, the window will
