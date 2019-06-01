@@ -364,6 +364,7 @@ function recreateShortcut() {
 function getCurrentSettings(keyType) {
   if (keyType === "ryzenadjArgs") {
     const optionToId = {
+      "--psi0-current=": 'psi0_current_limit',
       "--stapm-time=": 'stapm_time_ms',
       "--stapm-limit=": 'stapm_limit_w',
       "--fast-limit=": 'ppt_fast_limit_w',

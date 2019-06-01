@@ -52,6 +52,7 @@ function applyRyzenSettings() {
           value = value;
           break;
 
+        case "--psi0-current=":
         case "--vrmmax-current=":
           value = '0x' + decimalToHexString(value * 1000);
           break;
