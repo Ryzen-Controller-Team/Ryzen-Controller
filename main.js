@@ -86,6 +86,31 @@ if (old_version !== new_version) {
     settings.set('latest_controller_tabs_settings', update_latest_settings_to_1_11_0(settings.get('latest_controller_tabs_settings')));
   }
 
+  /**
+   * Since 1.12.0, new option to ryzenadj.
+   */
+  if (compareVersions(old_version, '1.12.0') <= 0) {
+    const update_preset_to_1_12_0 = function(settings) {
+      // Adding missing options.
+      settings['apply_max_gfxclk_frequency'] = false;
+      settings['apply_min_gfxclk_frequency'] = false;
+      settings['apply_min_socclk_frequency'] = false;
+      settings['apply_max_socclk_frequency'] = false;
+      return settings;
+    };
+    const update_presets_to_1_12_0 = function(preset_list) {
+      // For each preset.
+      for (const preset_name in preset_list) {
+        if (preset_list.hasOwnProperty(preset_name)) {
+          preset_list[preset_name] = update_preset_to_1_12_0(preset_list[preset_name]);
+        }
+      }
+      return preset_list;
+    };
+    settings.set('presets', update_presets_to_1_12_0(settings.get('presets')));
+    settings.set('latest_controller_tabs_settings', update_preset_to_1_12_0(settings.get('latest_controller_tabs_settings')));
+  }
+
   settings.set('settings', {
     ...settings.set('settings'),
     last_used_version: require('./package.json').version,

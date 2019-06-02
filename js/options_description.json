@@ -7,5 +7,9 @@
   "temperature_limit_c": "The temperature the CPU can reach before boost levels off.",
   "vrm_current_m_a": "The limit of current we let the motherboard deliver to the CPU.",
   "max_fclk_frequency": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's max. clock limit.",
-  "min_fclk_frequency": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's min. clock limit."
+  "min_fclk_frequency": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's min. clock limit.",
+  "max_gfxclk_frequency": "The maximum clock speed the integrated GPU is allowed to run at.",
+  "min_gfxclk_frequency": "The minimum clock speed the integrated GPU is allowed to run at.",
+  "max_socclk_frequency": "The maximum clock speed the CPU is allowed to run at.",
+  "min_socclk_frequency": "The minimum clock speed the CPU is allowed to run at."
 }

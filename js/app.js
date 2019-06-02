@@ -53,11 +53,18 @@ function applyRyzenSettings() {
           value = value;
           break;
 
+        case "--max-gfxclk-frequency=":
+        case "--min-gfxclk-frequency=":
+        case "--max-socclk-frequency=":
+        case "--min-socclk-frequency=":
+          value = parseInt(value / 10) * 10;
+          break;
+
         case "--psi0-current=":
         case "--vrmmax-current=":
           value = '0x' + decimalToHexString(value * 1000);
           break;
-      
+
         default:
           break;
       }

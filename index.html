@@ -119,6 +119,46 @@
           <input class="uk-range" type="range" min="20" max="100" value="20" repeat="psi0_current_limit" id="psi0_current_limit_range">
         </div>
       </div>
+      <h3><label><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_min_gfxclk_frequency">Minimum GFX Clock Frequency (Mhz)</label></h3>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-6">
+          <input class="uk-input" type="number" min="150" max="1300" value="150" id="min_gfxclk_frequency" repeat="min_gfxclk_frequency_range">
+        </div>
+        <div class="uk-width-expand">
+          <input class="uk-range" type="range" min="150" max="1300" value="150" repeat="min_gfxclk_frequency" id="min_gfxclk_frequency_range">
+        </div>
+      </div>
+      <h3><label><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_max_gfxclk_frequency">Maximum GFX Clock Frequency (Mhz)</label></h3>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-6">
+          <input class="uk-input" type="number" min="150" max="1300" value="1100" id="max_gfxclk_frequency" repeat="max_gfxclk_frequency_range">
+        </div>
+        <div class="uk-width-expand">
+          <input class="uk-range" type="range" min="150" max="1300" value="1100" repeat="max_gfxclk_frequency" id="max_gfxclk_frequency_range">
+        </div>
+      </div>
+      <h3><label><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_min_socclk_frequency">Minimum SOC Clock Frequency (Mhz)</label></h3>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-6">
+          <input class="uk-input" type="number" min="1000" max="3700" value="1000" step="100" id="min_socclk_frequency" repeat="min_socclk_frequency_range">
+        </div>
+        <div class="uk-width-expand">
+          <input class="uk-range" type="range" min="1000" max="3700" value="1000" step="100" repeat="min_socclk_frequency" id="min_socclk_frequency_range">
+        </div>
+      </div>
+      <h3><label><input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_max_socclk_frequency">Maximum SOC Clock Frequency (Mhz)</label></h3>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-6">
+          <input class="uk-input" type="number" min="1000" max="3700" value="37000" step="100" id="max_socclk_frequency" repeat="max_socclk_frequency_range">
+        </div>
+        <div class="uk-width-expand">
+          <input class="uk-range" type="range" min="1000" max="3700" value="3700" step="100" repeat="max_socclk_frequency" id="max_socclk_frequency_range">
+        </div>
+      </div>
+      <p class="uk-margin">
+        <button class="uk-button uk-button-primary" onClick="applyRyzenSettings()">Apply</button>
+        <button class="uk-button uk-button-secondary" uk-toggle="target: #modal-new-preset">Save to preset</button>
+      </p>
     </li>
 
     <li class="uk-margin-top uk-margin-bottom uk-container" id="presetTab"></li>
