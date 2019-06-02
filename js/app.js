@@ -76,9 +76,8 @@ function applyRyzenSettings() {
   child(executablePath, parameters, function(err, data) {
     var output = data.toString();
     if (err) {
-      let retry = appSettings.get('retry');
-      if (retry) {
-        return applyRyzenSettings();
+      if (appSettings.get('retry')) {
+        return setTimeout(applyRyzenSettings, 500);
       }
       notification('danger', err + '<br/>' + output);
     }
@@ -86,6 +85,7 @@ function applyRyzenSettings() {
       notification('success', 'Ryzenadj output:<br/>' + output);
       saveLatestUsedSettings();
     }
+    appSettings.set('retry', false);
   });
 
 }
