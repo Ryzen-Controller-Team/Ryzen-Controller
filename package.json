@@ -1,7 +1,7 @@
 {
   "name": "ryzencontroller",
   "productName": "RyzenController",
-  "version": "1.11.0",
+  "version": "1.11.1",
   "description": "A minimal Electron application to use ryzenAdj through a friendly interface.",
   "main": "main.js",
   "scripts": {
