@@ -26,12 +26,6 @@ if (old_version !== new_version) {
     settings.delete('settings.ryzen_adj_path');
   }
 
-  settings.set('settings', {
-    ...settings.set('settings'),
-    last_used_version: require('./package.json').version,
-    first_launch: true,
-  });
-
   /**
    * Since 1.11.0 we added new settings and apply checkbox,
    * We need to add new settings to presets.
@@ -91,6 +85,12 @@ if (old_version !== new_version) {
     settings.set('presets', update_presets_to_1_11_0(settings.get('presets')));
     settings.set('latest_controller_tabs_settings', update_latest_settings_to_1_11_0(settings.get('latest_controller_tabs_settings')));
   }
+
+  settings.set('settings', {
+    ...settings.set('settings'),
+    last_used_version: require('./package.json').version,
+    first_launch: true,
+  });
 }
 
 // Keep a global reference of the window object, if you don't, the window will
