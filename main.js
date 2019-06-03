@@ -122,7 +122,18 @@ if (!setupEvents.handleSquirrelEvent()) {
     );
 
   }
-
+  if (!old_version) {
+    settings.set('settings',
+      Object.assign(
+        {},
+        settings.set('settings'),
+        {
+          last_used_version: require('./package.json').version,
+          first_launch: true,
+        }
+      )
+    );
+  }
   // Keep a global reference of the window object, if you don't, the window will
   // be closed automatically when the JavaScript object is garbage collected.
   let mainWindow
