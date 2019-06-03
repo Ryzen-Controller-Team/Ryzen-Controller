@@ -1,5 +1,7 @@
 # Ryzen controller
 
+*_I'm looking for maintainers and reviewers, if you know html/js and have some spare times, please open an issue or ping `@storm1er#0376` on [discord](https://discord.gg/EahayUv)._*
+
 - [Installation](#installation)
   - [Windows](#windows)
   - [Debian like](#debian-like)
