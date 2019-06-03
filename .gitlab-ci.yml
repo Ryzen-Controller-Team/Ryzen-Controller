@@ -1,44 +1,45 @@
+include:
+  - template: Dependency-Scanning.gitlab-ci.yml
+  - template: SAST.gitlab-ci.yml
+
 stages:
+  - test
   - install
   - package
   - installer
-  - check
+
+dependency_scanning:
+  stage: test
+  only:
+    - branches@le.storm1er/ryzen-controller
+  except: []
+
+sast:
+  stage: test
+  only:
+    - branches@le.storm1er/ryzen-controller
+  except: []
 
 js_syntax:
-  retry: 1
-  stage: check
+  stage: test
+  only:
+    - branches@le.storm1er/ryzen-controller
   image: node:carbon
   tags: [ docker ]
+  cache: {}
+  dependencies: []
   before_script:
     - npm install -g acorn
     - rm -rf node_modules
   script:
     - find . -iname "*.js" -print0 | xargs -0 -I % sh -c 'echo "%"; acorn --ecma6 --silent "%"'
 
-dependency_scanning:
-  stage: check
-  only:
-    - branches@le.storm1er/ryzen-controller
-  image: docker:stable
-  variables:
-    DOCKER_DRIVER: overlay2
-  allow_failure: true
-  services:
-    - docker:stable-dind
-  script:
-    - export SP_VERSION=$(echo "$CI_SERVER_VERSION" | sed 's/^\([0-9]*\)\.\([0-9]*\).*/\1-\2-stable/')
-    - docker run
-        --env DEP_SCAN_DISABLE_REMOTE_CHECKS="${DEP_SCAN_DISABLE_REMOTE_CHECKS:-false}"
-        --volume "$PWD:/code"
-        --volume /var/run/docker.sock:/var/run/docker.sock
-        "registry.gitlab.com/gitlab-org/security-products/dependency-scanning:$SP_VERSION" /code
-  artifacts:
-    reports:
-      dependency_scanning: gl-dependency-scanning-report.json
-
 node:
   only:
     - tags@le.storm1er/ryzen-controller
+    - branches@le.storm1er/ryzen-controller
+  except:
+    - master
   stage: install
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
@@ -54,6 +55,9 @@ node:
 win32:
   only:
     - tags@le.storm1er/ryzen-controller
+    - branches@le.storm1er/ryzen-controller
+  except:
+    - master
   stage: package
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
@@ -68,6 +72,9 @@ win32:
 linux:
   only:
     - tags@le.storm1er/ryzen-controller
+    - branches@le.storm1er/ryzen-controller
+  except:
+    - master
   stage: package
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
@@ -83,6 +90,9 @@ linux:
 win32-installer:
   only:
     - tags@le.storm1er/ryzen-controller
+    - branches@le.storm1er/ryzen-controller
+  except:
+    - master
   stage: installer
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
@@ -98,6 +108,9 @@ win32-installer:
 deb-installer:
   only:
     - tags@le.storm1er/ryzen-controller
+    - branches@le.storm1er/ryzen-controller
+  except:
+    - master
   stage: installer
   tags: [ docker ]
   image: debian:stretch
@@ -121,6 +134,9 @@ deb-installer:
 rpm-installer:
   only:
     - tags@le.storm1er/ryzen-controller
+    - branches@le.storm1er/ryzen-controller
+  except:
+    - master
   stage: installer
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
