@@ -18,10 +18,15 @@ ready(function(){
   updatePresetList();
   checkForNewRelease();
   document.isStarting = false;
-  settings.set('settings', {
-    ...settings.get('settings'),
-    first_launch: false
-  });
+
+
+  settings.set('settings',
+    Object.assign(
+      {},
+      settings.get('settings'),
+      { first_launch: false }
+    )
+  );
 });
 
 /**

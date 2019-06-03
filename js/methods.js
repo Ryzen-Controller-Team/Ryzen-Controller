@@ -149,10 +149,15 @@ function askingForRyzenAdjExecutablePath() {
   }, function (filePaths) {
     if (typeof filePaths[0] !== 'undefined') {
       const settings = require('electron-settings');
-      settings.set("settings", {
-        ...settings.get('settings'),
-        ryzen_adj_path: filePaths[0]
-      });
+
+      settings.set("settings",
+        Object.assign(
+          {},
+          settings.get('settings'),
+          { ryzen_adj_path: filePaths[0] }
+        )
+      );
+
       notification('primary', 'Path to ryzenAdj.exe has been saved.');
       appendLog(`askingForRyzenAdjExecutablePath(): ${filePaths[0]}`);
     } else {
@@ -249,39 +254,69 @@ function registerEventListenerForSettingsInput() {
 
   var apply_last_settings_on_launch = document.getElementById('apply_last_settings_on_launch');
   apply_last_settings_on_launch.addEventListener('change', function() {
-    settings.set('settings', {
-      ...settings.get('settings'),
-      apply_last_settings_on_launch: !!apply_last_settings_on_launch.checked
-    });
+
+    settings.set(
+      "settings",
+      Object.assign(
+        {},
+        settings.get('settings'),
+        { apply_last_settings_on_launch: !!apply_last_settings_on_launch.checked }
+      )
+    );
+
   });
   var minimize_to_tray = document.getElementById('minimize_to_tray');
   minimize_to_tray.addEventListener('change', function() {
-    settings.set('settings', {
-      ...settings.get('settings'),
-      minimize_to_tray: !!minimize_to_tray.checked
-    });
+
+    settings.set(
+      "settings",
+      Object.assign(
+        {},
+        settings.get('settings'),
+        { minimize_to_tray: !!minimize_to_tray.checked }
+      )
+    );
+
   });
   var start_minimized = document.getElementById('start_minimized');
   start_minimized.addEventListener('change', function() {
-    settings.set('settings', {
-      ...settings.get('settings'),
-      start_minimized: !!start_minimized.checked
-    });
+
+    settings.set(
+      "settings",
+      Object.assign(
+        {},
+        settings.get('settings'),
+        { start_minimized: !!start_minimized.checked }
+      )
+    );
+
   });
   var reapply_periodically = document.getElementById('reapply_periodically');
   reapply_periodically.addEventListener('change', function() {
     reApplyPeriodically(reapply_periodically.value);
-    settings.set('settings', {
-      ...settings.get('settings'),
-      reapply_periodically: reapply_periodically.value
-    });
+
+    settings.set(
+      "settings",
+      Object.assign(
+        {},
+        settings.get('settings'),
+        { reapply_periodically: reapply_periodically.value }
+      )
+    );
+
   });
   // var start_at_boot = document.getElementById('start_at_boot');
   // start_at_boot.addEventListener('change', function() {
-  //   settings.set('settings', {
-  //     ...settings.get('settings'),
-  //     start_at_boot: !!start_at_boot.checked
-  //   });
+  //
+  // settings.set(
+  //   "settings",
+  //   Object.assign(
+  //     {},
+  //     settings.get('settings'),
+  //     { start_at_boot: !!start_at_boot.checked }
+  //   )
+  // );
+  //
   //   require('electron').remote.app.setLoginItemSettings({ openAtLogin: !!start_at_boot.checked });
   // });
 }
@@ -422,10 +457,12 @@ function saveToNewPreset() {
     notification('warning', `This preset name already exist, your preset has been saved with the name "${newPresetName}".`);
   }
 
-  const newPresetList = {
-    ...currentPresets,
-    [newPresetName]: settingsToBeSaved,
-  };
+  const newPresetList = Object.assign(
+    {},
+    currentPresets,
+    { [newPresetName]: settingsToBeSaved }
+  );
+
   require('electron-settings').set('presets', newPresetList);
   appendLog(`saveToNewPreset(): Saved preset ${newPresetName}, ${JSON.stringify(newPresetList)}`);
   updatePresetList();

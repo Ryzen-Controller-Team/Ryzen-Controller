@@ -4,6 +4,16 @@ stages:
   - installer
   - check
 
+js_syntax:
+  retry: 1
+  stage: check
+  image: node:carbon
+  tags: [ docker ]
+  before_script:
+    - npm install -g acorn
+  script:
+    - find . -iname "*.js" -print0 | xargs -0 -I % sh -c 'echo "%"; acorn --ecma6 --silent "%"'
+
 dependency_scanning:
   stage: check
   only:
