@@ -14,7 +14,7 @@ if (!setupEvents.handleSquirrelEvent()) {
   // Check for latest used version and clear settings if needed.
   const old_version = settings.get('settings.last_used_version');
   const new_version = require('./package.json').version;
-  if (old_version !== new_version) {
+  if (old_version && old_version !== new_version) {
     var compareVersions = require('compare-versions');
 
     /**
