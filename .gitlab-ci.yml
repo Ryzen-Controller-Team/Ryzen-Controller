@@ -71,6 +71,7 @@ linux:
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
   script:
+    - rm -rf bin/*
     - npm run-script package-linux
   artifacts:
     paths:
