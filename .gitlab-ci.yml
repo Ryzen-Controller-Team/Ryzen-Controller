@@ -11,6 +11,7 @@ js_syntax:
   tags: [ docker ]
   before_script:
     - npm install -g acorn
+    - rm -rf node_modules
   script:
     - find . -iname "*.js" -print0 | xargs -0 -I % sh -c 'echo "%"; acorn --ecma6 --silent "%"'
 
