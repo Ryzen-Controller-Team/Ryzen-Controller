@@ -158,7 +158,7 @@ function askingForRyzenAdjExecutablePath() {
         )
       );
 
-      notification('primary', 'Path to ryzenAdj.exe has been saved.');
+      notification('primary', 'Path to ryzenAdj executable has been saved.');
       appendLog(`askingForRyzenAdjExecutablePath(): ${filePaths[0]}`);
     } else {
       notification('warning', 'No path given, nothing changed.');
