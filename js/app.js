@@ -15,7 +15,7 @@ ready(function(){
     recreateShortcut();
   }
   handlePlatformSpecificDisplay();
-  updatePresetList();
+  preset_updateList();
   checkForNewRelease();
   document.isStarting = false;
 
