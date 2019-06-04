@@ -516,13 +516,13 @@ function updatePresetList() {
       content += `
         <li class="uk-margin">
           <span class="uk-text-lead">${presetName}</span>
-          <i class="uk-text-small">${valueSummary}</i>
           <button class="uk-button uk-button-danger uk-align-right" type="button" onClick="presetDeletion('${presetName}')">
             Delete
           </button>
           <button class="uk-button uk-button-primary uk-align-right" type="button" onClick="applyPreset('${presetName}')">
             Apply
           </button>
+          <i class="uk-text-small">${valueSummary}</i>
         </li>
       `;
     }

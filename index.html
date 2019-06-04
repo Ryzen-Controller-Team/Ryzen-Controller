@@ -161,7 +161,17 @@
       </p>
     </li>
 
-    <li class="uk-margin-top uk-margin-bottom uk-container" id="presetTab"></li>
+    <li class="uk-margin-top uk-margin-bottom uk-container">
+      <div id="presetTab"></div>
+      <p class="uk-margin">
+        <button class="uk-button uk-button-secondary" uk-toggle="target: #modal-export-preset" type="button" onClick="preset_export()">
+          Export
+        </button>
+        <button class="uk-button uk-button-secondary" uk-toggle="target: #modal-import-preset" type="button">
+          Import
+        </button>
+      </p>
+    </li>
 
     <li class="uk-margin-top uk-margin-bottom uk-container">
       <!-- <h3>Auto start with system:</h3> -->
@@ -232,6 +242,32 @@
     </div>
   </div>
 
+  <!-- Export preset modal -->
+  <div id="modal-export-preset" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Export presets</h2>
+        <p>This is the data to be used by Ryzen Controller to import presets.</p>
+        <div class="uk-margin">
+          <textarea class="uk-textarea" rows="5" id="modal-export-preset-textarea" readonly></textarea>
+        </div>
+        <button class="uk-button uk-button-secondary uk-modal-close" type="button">Close</button>
+    </div>
+  </div>
+
+  <!-- Import preset modal -->
+  <div id="modal-import-preset" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Import presets</h2>
+        <p>Paste here the presets and valid, your current presets will be merged with this.</p>
+        <div class="uk-margin">
+          <textarea class="uk-textarea" rows="5" id="modal-import-preset-textarea"></textarea>
+        </div>
+        <button class="uk-button uk-button-primary uk-modal-close" type="button" onClick="preset_import()">Import</button>
+        <button class="uk-button uk-button-secondary uk-modal-close" type="button">Close</button>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="./js/preset.js"></script>
   <script type="text/javascript" src="./js/methods.js"></script>
   <script type="text/javascript" src="./js/app.js"></script>
 </body>
