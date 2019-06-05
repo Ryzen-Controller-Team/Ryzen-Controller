@@ -10,7 +10,7 @@ ready(function(){
   checkForAdminRights();
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
-  displayOptionDescription();
+  displayOptionData();
   if (require('os').platform() === 'win32') {
     recreateShortcut();
   }

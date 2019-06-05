@@ -353,14 +353,28 @@ function reApplyPeriodically(seconds) {
 /**
  * Display tooltip on each options.
  */
-function displayOptionDescription() {
-  const options_description = require('./js/options_description.json');
-  for (const option in options_description) {
-    if (options_description.hasOwnProperty(option)) {
-      const description = options_description[option];
-      const node = document.getElementById(option).parentElement.parentElement.previousElementSibling;
-      node.setAttribute('uk-tooltip', description);
-      UIkit.tooltip(node);
+function displayOptionData() {
+  const options_data = require('./js/options_data.json');
+  for (const option in options_data) {
+    if (options_data.hasOwnProperty(option)) {
+      const label = options_data[option].label;
+      const description = options_data[option].description;
+      const min = options_data[option].min;
+      const max = options_data[option].max;
+      const default_value = options_data[option].default;
+
+      const title_container = document.getElementById(option).parentElement.parentElement.previousElementSibling;
+      const title = title_container.getElementsByClassName('option-label');
+      const inputs = title_container.nextElementSibling.getElementsByTagName('input');
+      title_container.setAttribute('uk-tooltip', description);
+      UIkit.tooltip(title_container);
+      title[0].innerHTML = label;
+
+      for (const input of inputs) {
+        input.setAttribute('min', min);
+        input.setAttribute('max', max);
+        input.value = default_value;
+      }
     }
   }
 }

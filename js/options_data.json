@@ -1,0 +1,93 @@
+{
+  "psi0_current_limit": {
+    "description": "The limit of current we let the motherboard deliver to the PSI0.",
+    "label": "PSI0 Current Limit (mA)",
+    "min": "20",
+    "max": "100",
+    "default": "20"
+  },
+  "stapm_time_ms": {
+    "description": "Skin Temperature Aware Power Management. This will define the boost period to be used.",
+    "label": "STAPM Constant Time (Sec.)",
+    "min": "1",
+    "max": "3600",
+    "default": "900"
+  },
+  "stapm_limit_w": {
+    "description": "Skin Temperature Aware Power Management. This will define the socket power package limit which is used to manage the device boost period.",
+    "label": "STAPM Limit (W)",
+    "min": "5",
+    "max": "60",
+    "default": "20"
+  },
+  "ppt_fast_limit_w": {
+    "description": "The amount of power the CPU can draw while boost levels on.",
+    "label": "PPT Fast Limit (W)",
+    "min": "5",
+    "max": "60",
+    "default": "25"
+  },
+  "ppt_slow_limit_w": {
+    "description": "The amount of power the CPU can draw while boost levels off.",
+    "label": "PPT Slow Limit (W)",
+    "min": "5",
+    "max": "60",
+    "default": "10"
+  },
+  "temperature_limit_c": {
+    "description": "The temperature the CPU can reach before boost levels off.",
+    "label": "Temperature Limit (°C)",
+    "min": "50",
+    "max": "100",
+    "default": "75"
+  },
+  "vrm_current_m_a": {
+    "description": "The limit of current we let the motherboard deliver to the CPU.",
+    "label": "VRM Current (A)",
+    "min": "20",
+    "max": "75",
+    "default": "30"
+  },
+  "max_fclk_frequency": {
+    "description": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's max. clock limit.",
+    "label": "Maximum transmission frequency (Mhz)",
+    "min": "800",
+    "max": "1600",
+    "default": "1200"
+  },
+  "min_fclk_frequency": {
+    "description": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's min. clock limit.",
+    "label": "Minimum transmission frequency (Mhz)",
+    "min": "800",
+    "max": "1600",
+    "default": "800"
+  },
+  "max_gfxclk_frequency": {
+    "description": "The maximum clock speed the integrated GPU is allowed to run at.",
+    "label": "Maximum GFX Clock Frequency (Mhz)",
+    "min": "400",
+    "max": "1300",
+    "default": "1100"
+  },
+  "min_gfxclk_frequency": {
+    "description": "The minimum clock speed the integrated GPU is allowed to run at.",
+    "label": "Minimum GFX Clock Frequency (Mhz)",
+    "min": "400",
+    "max": "1300",
+    "default": "400"
+  },
+  "max_socclk_frequency": {
+    "description": "The maximum clock speed the CPU is allowed to run at.",
+    "label": "Maximum SOC Clock Frequency (Mhz)",
+    "min": "200",
+    "max": "750",
+    "default": "600"
+  },
+  "min_socclk_frequency": {
+    "description": "The minimum clock speed the CPU is allowed to run at.",
+    "label": "Minimum SOC Clock Frequency (Mhz)",
+    "min": "200",
+    "max": "750",
+    "default": "200"
+  }
+}
