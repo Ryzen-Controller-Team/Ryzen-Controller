@@ -4,13 +4,13 @@ ready(function(){
   document.isStarting = true;
   fixPath();
   preFillSettings();
+  displayOptionData();
   loadLatestUsedSettings();
   registerRepeaterForAllInput();
   registerEventListenerForSettingsInput();
   checkForAdminRights();
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
-  displayOptionData();
   if (require('os').platform() === 'win32') {
     recreateShortcut();
   }
