@@ -58,8 +58,8 @@ function applyRyzenSettings() {
           value = value;
           break;
 
-        case "--max-gfxclk-frequency=":
-        case "--min-gfxclk-frequency=":
+        case "--max-gfxclk=":
+        case "--min-gfxclk=":
         case "--max-socclk-frequency=":
         case "--min-socclk-frequency=":
           value = parseInt(value / 10) * 10;
