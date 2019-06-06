@@ -422,8 +422,8 @@ function getCurrentSettings(keyType) {
       "--vrmmax-current=": 'vrm_current_m_a',
       "--min-fclk-frequency=": 'min_fclk_frequency',
       "--max-fclk-frequency=": 'max_fclk_frequency',
-      "--min-gfxclk-frequency=": 'min_gfxclk_frequency',
-      "--max-gfxclk-frequency=": 'max_gfxclk_frequency',
+      "--min-gfxclk=": 'min_gfxclk_frequency',
+      "--max-gfxclk=": 'max_gfxclk_frequency',
       "--min-socclk-frequency=": 'min_socclk_frequency',
       "--max-socclk-frequency=": 'max_socclk_frequency',
     };
