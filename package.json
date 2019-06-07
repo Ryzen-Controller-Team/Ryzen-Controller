@@ -14,11 +14,10 @@
   },
   "repository": "https://gitlab.com/le.storm1er/ryzen-controller",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Controller",
+    "Mobile",
+    "Ryzen",
+    "Overclock"
   ],
   "author": "le.storm1er",
   "license": "CC0-1.0",
