@@ -128,7 +128,7 @@ function preset_updateList() {
  * @param {string} presetName The preset name to be applied.
  */
 function preset_apply(presetName) {
-  const presets = require('electron-settings').get(`presets.${presetName}`);
+  const presets = require('electron-settings').get(`presets`)[presetName];
   appendLog(`preset_apply(): preset ${presetName}: ${JSON.stringify(presets)}`);
   var ret = require('electron-settings').set("latest_controller_tabs_settings", presets);
   appendLog(`preset_apply(): saved preset: ${JSON.stringify(ret)}`);
