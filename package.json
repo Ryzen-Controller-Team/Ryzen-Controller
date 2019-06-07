@@ -27,7 +27,7 @@
     "electron-winstaller": "^3.0.4"
   },
   "devDependencies": {
-    "electron": "^4.2.4",
+    "electron": "^5.0.2",
     "electron-packager": "^13.1.0"
   },
   "dependencies": {

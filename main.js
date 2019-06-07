@@ -152,7 +152,8 @@ if (!setupEvents.handleSquirrelEvent()) {
       width: 800,
       height: 720,
       webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
+        webviewTag: true,
       },
       icon: appIcon,
       show: false,
