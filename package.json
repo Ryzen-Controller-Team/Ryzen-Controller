@@ -25,16 +25,16 @@
   "optionalDependencies": {
     "electron-installer-debian": "^1.1.1",
     "electron-installer-redhat": "^1.0.1",
-    "electron-winstaller": "2.5.2"
+    "electron-winstaller": "^3.0.4"
   },
   "devDependencies": {
-    "electron": "^4.0.4",
+    "electron": "^4.2.4",
     "electron-packager": "^13.1.0"
   },
   "dependencies": {
     "compare-versions": "^3.4.0",
     "electron-settings": "^3.2.0",
     "fix-path": "^2.1.0",
-    "uikit": "^3.0.3"
+    "uikit": "^3.1.5"
   }
 }
