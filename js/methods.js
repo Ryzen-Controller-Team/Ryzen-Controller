@@ -447,6 +447,9 @@ function getCurrentSettings(keyType) {
     inputs.forEach(element => {
       let id = element.id;
       let value = element.value;
+      if (id.indexOf('apply_') === 0) {
+        value = element.checked;
+      }
       currentSettings[id] = value;
     });
     return currentSettings;
