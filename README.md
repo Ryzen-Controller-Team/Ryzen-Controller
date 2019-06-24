@@ -51,6 +51,8 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 
 ## Development
 
+**THIS PART IS ONLY FOR DEVELOPMENT PURPOSE, IF YOU JUST WANT TO USE RYZEN CONTROLLER, SEE THE [INSTALLATION](#installation) PART.**
+
 ### Pre-requisite
 
 - NodeJS v10.15.1 or newer.
