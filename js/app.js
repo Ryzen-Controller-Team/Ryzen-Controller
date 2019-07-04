@@ -3,8 +3,8 @@ ready(function(){
   const fixPath = require('fix-path');
   document.isStarting = true;
   fixPath();
+  displayOptions();
   preFillSettings();
-  displayOptionData();
   loadLatestUsedSettings();
   registerRepeaterForAllInput();
   registerEventListenerForSettingsInput();
@@ -39,41 +39,32 @@ function applyRyzenSettings() {
   const child = require('child_process').execFile;
   const executablePath = getRyzenAdjExecutablePath();
 
+  const options_data = require('./js/options_data.json');
+  const ryzenAdjConvert = {
+    "toHex": function (value) { return '0x' + decimalToHexString(value * 1000); },
+    "toThousand": function (value) { return value * 1000; },
+    "roundTen": function (value) { return parseInt(value / 10) * 10; },
+  };
+
+  // Create a string to be used for CLI.
   var parameters = [];
   for (const option in settings) {
     if (settings.hasOwnProperty(option)) {
       let value = settings[option];
-
-      switch (option) {
-        case "--stapm-limit=":
-        case "--fast-limit=":
-        case "--slow-limit=":
-        case "--stapm-time=":
-          value = value * 1000;
-          break;
-
-        case "--tctl-temp=":
-        case "--max-fclk-frequency=":
-        case "--min-fclk-frequency=":
-          value = value;
-          break;
-
-        case "--max-gfxclk=":
-        case "--min-gfxclk=":
-        case "--max-socclk-frequency=":
-        case "--min-socclk-frequency=":
-          value = parseInt(value / 10) * 10;
-          break;
-
-        case "--psi0-current=":
-        case "--vrmmax-current=":
-          value = '0x' + decimalToHexString(value * 1000);
-          break;
-
-        default:
-          break;
+      let option_name = false;
+      try {
+        option_name = Object.keys(options_data).filter(function(cur_option_name){
+          return options_data[cur_option_name].ryzenadj_arg === option;
+        })[0];
+      } catch (error) {
+        notification('danger', `Unknown option "${option}".`);
+        appendLog(`applyRyzenSettings(): ${error}`);
       }
-
+      if (options_data[option_name].ryzenadj_value_convert) {
+        value = ryzenAdjConvert[
+          options_data[option_name].ryzenadj_value_convert
+        ](value);
+      }
       parameters.push('' + option + value);
     }
   }

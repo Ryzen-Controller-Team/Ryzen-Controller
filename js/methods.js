@@ -1,4 +1,75 @@
 /**
+ * Will load options_data.json and display them into index.html.
+ */
+function displayOptions(){
+  const options_data = require('./js/options_data.json');
+  var tabs = {};
+  for (const option_name in options_data) {
+    if (!options_data.hasOwnProperty(option_name)) {
+      appendLog(`Error while loading ${option_name} option.`);
+      continue;
+    }
+    let option_data = options_data[option_name];
+    if (!option_data.hasOwnProperty('tab')) {
+      appendLog(`Error while loading ${option_name} tab property.`);
+      continue;
+    }
+    let option_tab = option_data['tab'];
+    let tab = document.querySelector(`#${option_tab}-tab`);
+    if (!tab) {
+      appendLog(`Error while loading ${option_tab} tab.`);
+      continue;
+    }
+    tabs[option_tab] = true;
+    tab.innerHTML += `
+      <h3 id="${option_name}-label" uk-tooltip="${option_data.description}"><label>
+        <input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_${option_name}"/>
+        <span class="option-label">${option_data.label}</span>
+      </label></h3>
+      <div class="uk-grid-small" uk-grid>
+        <div class="uk-width-1-6">
+          <input
+            class="uk-input"
+            type="number"
+            id="${option_name}"
+            repeat="${option_name}_range"
+            min="${option_data.min}"
+            max="${option_data.max}"
+            step="${option_data.step}"
+            value="${option_data.default}"
+          />
+        </div>
+        <div class="uk-width-expand">
+          <input
+            class="uk-range"
+            type="range"
+            repeat="${option_name}"
+            id="${option_name}_range"
+            min="${option_data.min}"
+            max="${option_data.max}"
+            step="${option_data.step}"
+            value="${option_data.default}"
+          />
+        </div>
+      </div>
+    `;
+    UIkit.tooltip(document.querySelector(`#${option_name}-label`));
+  }
+
+  for (const tab_name in tabs) {
+    if (tabs.hasOwnProperty(tab_name)) {
+      const tab = document.querySelector(`#${tab_name}-tab`);
+      tab.innerHTML += `
+        <p class="uk-margin">
+          <button class="uk-button uk-button-primary" onClick="applyRyzenSettings()">Apply</button>
+          <button class="uk-button uk-button-secondary" uk-toggle="target: #modal-new-preset">Save to preset</button>
+        </p>
+      `;
+    }
+  }
+}
+
+/**
  * Will create a nodes from an html string.
  * @param {string} str An html string
  */
@@ -351,35 +422,6 @@ function reApplyPeriodically(seconds) {
 }
 
 /**
- * Display tooltip on each options.
- */
-function displayOptionData() {
-  const options_data = require('./js/options_data.json');
-  for (const option in options_data) {
-    if (options_data.hasOwnProperty(option)) {
-      const label = options_data[option].label;
-      const description = options_data[option].description;
-      const min = options_data[option].min;
-      const max = options_data[option].max;
-      const default_value = options_data[option].default;
-
-      const title_container = document.getElementById(option).parentElement.parentElement.previousElementSibling;
-      const title = title_container.getElementsByClassName('option-label');
-      const inputs = title_container.nextElementSibling.getElementsByTagName('input');
-      title_container.setAttribute('uk-tooltip', description);
-      UIkit.tooltip(title_container);
-      title[0].innerHTML = label;
-
-      for (const input of inputs) {
-        input.setAttribute('min', min);
-        input.setAttribute('max', max);
-        input.value = default_value;
-      }
-    }
-  }
-}
-
-/**
  * Will recreate shortcut on launch ... no other solution for now :(
  */
 function recreateShortcut() {
@@ -412,28 +454,15 @@ function recreateShortcut() {
  */
 function getCurrentSettings(keyType) {
   if (keyType === "ryzenadjArgs") {
-    const optionToId = {
-      "--psi0-current=": 'psi0_current_limit',
-      "--stapm-time=": 'stapm_time_ms',
-      "--stapm-limit=": 'stapm_limit_w',
-      "--fast-limit=": 'ppt_fast_limit_w',
-      "--slow-limit=": 'ppt_slow_limit_w',
-      "--tctl-temp=": 'temperature_limit_c',
-      "--vrmmax-current=": 'vrm_current_m_a',
-      "--min-fclk-frequency=": 'min_fclk_frequency',
-      "--max-fclk-frequency=": 'max_fclk_frequency',
-      "--min-gfxclk=": 'min_gfxclk_frequency',
-      "--max-gfxclk=": 'max_gfxclk_frequency',
-      "--min-socclk-frequency=": 'min_socclk_frequency',
-      "--max-socclk-frequency=": 'max_socclk_frequency',
-    };
 
+    const options_data = require('./js/options_data.json');
     var settingsToBeUsed = {};
-    for (const option in optionToId) {
-      if (optionToId.hasOwnProperty(option)) {
-        const elementId = optionToId[option];
+    for (const elementId in options_data) {
+      if (options_data.hasOwnProperty(elementId)) {
+        const optionData = options_data[elementId];
+        const ryzenadjArg = optionData.ryzenadj_arg;
         if (document.getElementById('apply_' + elementId).checked) {
-          settingsToBeUsed[option] = document.getElementById(elementId).value;
+          settingsToBeUsed[ryzenadjArg] = document.getElementById(elementId).value;
         }
       }
     }
