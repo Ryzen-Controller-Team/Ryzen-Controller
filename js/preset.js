@@ -1,3 +1,6 @@
+/**
+ * Will fill the export preset modal textarea with the preset data.
+ */
 function preset_export() {
   const modalTextArea = document.getElementById('modal-export-preset-textarea');
   const settings = require('electron-settings');
@@ -7,6 +10,9 @@ function preset_export() {
   modalTextArea.innerHTML = btoa(presets);
 }
 
+/**
+ * Will import the preset from the export preset modal textarea.
+ */
 function preset_import() {
   const modalTextArea = document.getElementById('modal-import-preset-textarea');
   const settings = require('electron-settings');

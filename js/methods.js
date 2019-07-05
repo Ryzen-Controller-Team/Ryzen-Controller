@@ -504,6 +504,9 @@ function toggleHpet(value) {
   });
 }
 
+/**
+ * Any element containing class "windows-only" will be hidden on other platform.
+ */
 function handlePlatformSpecificDisplay() {
   var windows_only_elements = document.getElementsByClassName('windows-only');
   if (require('os').platform() !== 'win32') {
