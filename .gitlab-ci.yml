@@ -123,9 +123,28 @@ win32-installer:
     - master
   stage: installer
   tags: [ docker ]
-  image: electronuserland/builder:wine-mono
+  image: docker:stable
+  services:
+    - docker:stable-dind
+  variables:
+    DOCKER_DRIVER: overlay2
   script:
-    - npm run-script build-win32
+    - |
+      if ! docker info &>/dev/null; then
+        if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
+          export DOCKER_HOST='tcp://localhost:2375'
+        fi
+      fi
+    - mkdir installer-builds
+    - chmod 777 installer-builds
+    - docker run
+        --env ELECTRON_CACHE="/root/.cache/electron"
+        --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder"
+        -v ${PWD}:/project
+        -v ~/.cache/electron:/root/.cache/electron
+        -v ~/.cache/electron-builder:/root/.cache/electron-builder
+        electronuserland/builder:wine-mono /bin/bash -c "npm run-script build-win32"
+    - ls installer-builds/RyzenControllerInstaller.exe
   artifacts:
     paths:
       - installer-builds/
