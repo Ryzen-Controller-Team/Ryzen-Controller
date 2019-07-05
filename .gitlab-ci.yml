@@ -8,6 +8,34 @@ stages:
   - package
   - installer
 
+code_quality:
+  stage: test
+  image: docker:stable
+  allow_failure: true
+  services:
+    - docker:stable-dind
+  variables:
+    DOCKER_DRIVER: overlay2
+  script:
+    - |
+      if ! docker info &>/dev/null; then
+        if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
+          export DOCKER_HOST='tcp://localhost:2375'
+        fi
+      fi
+    - docker run
+        --env CODECLIMATE_CODE="$PWD"
+        --volume "$PWD":/code
+        --volume /var/run/docker.sock:/var/run/docker.sock
+        --volume /tmp/cc:/tmp/cc
+        --entrypoint "/bin/sh" codeclimate/codeclimate -c "/usr/src/app/bin/codeclimate engines:install && /usr/src/app/bin/codeclimate analyze"
+  only:
+    - branches@le.storm1er/ryzen-controller
+    - tags@le.storm1er/ryzen-controller
+  except:
+    variables:
+      - $CODE_QUALITY_DISABLED
+
 dependency_scanning:
   stage: test
   only:
