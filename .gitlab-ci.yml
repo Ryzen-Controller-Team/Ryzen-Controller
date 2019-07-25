@@ -73,6 +73,8 @@ node:
   image: electronuserland/builder:wine-mono
   script:
     - npm install
+    - cp vendor/7z/7z.exe node_modules/electron-winstaller/vendor/7z.exe
+    - cp vendor/7z/7z.dll node_modules/electron-winstaller/vendor/7z.dll
   cache:
     paths:
       - node_modules/
@@ -90,6 +92,7 @@ win32:
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
   script:
+    - rm -rf vendor/*
     - npm run-script package-win32
   artifacts:
     paths:
