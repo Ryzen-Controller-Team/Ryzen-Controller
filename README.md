@@ -92,7 +92,7 @@ $> npm run-script package-linux
 ```bash
 $> cd project
 $> npm run-script package-win32
-$> npm run-script build-win32
+$> npm run-script build-exe
 ```
 
 #### For Debian like

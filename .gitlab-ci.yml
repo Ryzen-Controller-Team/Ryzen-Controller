@@ -146,7 +146,7 @@ win32-installer:
         -v ${PWD}:/project
         -v ~/.cache/electron:/root/.cache/electron
         -v ~/.cache/electron-builder:/root/.cache/electron-builder
-        electronuserland/builder:wine-mono /bin/bash -c "npm run-script build-win32"
+        electronuserland/builder:wine-mono /bin/bash -c "npm run-script build-exe"
     - ls installer-builds/RyzenControllerInstaller.exe
   artifacts:
     paths:

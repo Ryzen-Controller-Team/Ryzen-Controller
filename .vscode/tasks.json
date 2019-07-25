@@ -20,7 +20,7 @@
         },
         {
             "type": "npm",
-            "script": "build-win32",
+            "script": "build-exe",
             "problemMatcher": []
         },
         {
