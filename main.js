@@ -160,6 +160,7 @@ if (!setupEvents.handleSquirrelEvent()) {
     })
     if (!settings.get('settings.start_minimized')) {
       mainWindow.show();
+      mainWindow.setMenuBarVisibility(false);
     }
 
     mainWindow.setOpacity(0.95);
