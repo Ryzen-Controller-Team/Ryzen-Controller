@@ -1,4 +1,5 @@
 ready(function(){
+  Sentry.init({ dsn: 'https://f80fd3ea297141a8bdc04ce812762f39@sentry.io/1513427' });
   const settings = require('electron-settings');
   const fixPath = require('fix-path');
   document.isStarting = true;
