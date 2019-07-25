@@ -444,6 +444,7 @@ function recreateShortcut() {
       });
     } catch (error) {
       appendLog(`recreateShortcut() ${error}`);
+      Sentry.captureException(`recreateShortcut() ${error}`);
     }
   }
 }

@@ -1,5 +1,8 @@
 ready(function(){
-  Sentry.init({ dsn: 'https://f80fd3ea297141a8bdc04ce812762f39@sentry.io/1513427' });
+  Sentry.init({
+    dsn: 'https://f80fd3ea297141a8bdc04ce812762f39@sentry.io/1513427',
+    release: require('./package.json').version,
+  });
   const settings = require('electron-settings');
   const fixPath = require('fix-path');
   document.isStarting = true;
@@ -60,6 +63,7 @@ function applyRyzenSettings() {
       } catch (error) {
         notification('danger', `Unknown option "${option}".`);
         appendLog(`applyRyzenSettings(): ${error}`);
+        Sentry.captureException(new Error(`applyRyzenSettings(): ${error}`));
       }
       if (options_data[option_name].ryzenadj_value_convert) {
         value = ryzenAdjConvert[
@@ -84,6 +88,7 @@ function applyRyzenSettings() {
         return setTimeout(applyRyzenSettings, 500);
       }
       notification('danger', err + '<br/>' + output);
+      Sentry.captureException(new Error(err + ' - ' + output));
     }
     else if (output) {
       notification('success', 'Ryzenadj output:<br/>' + output);

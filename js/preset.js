@@ -23,7 +23,8 @@ function preset_import() {
     presetsToBeImported = JSON.parse(presetsToBeImported);
   } catch (e) {
     notification('danger', 'Unable to import presets, malformed data.');
-    console.error(e);
+    appendLog(`preset_import() ${e}`);
+    Sentry.captureException(`recreateShortcut() ${e}`);
     return;
   }
 
