@@ -118,7 +118,7 @@ linux:
   dependencies:
     - node
 
-win32-installer:
+exe-installer:
   only:
     - tags@le.storm1er/ryzen-controller
     - branches@le.storm1er/ryzen-controller
