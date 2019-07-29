@@ -30,8 +30,8 @@ code_quality:
         --volume /tmp/cc:/tmp/cc
         --entrypoint "/bin/sh" codeclimate/codeclimate -c "/usr/src/app/bin/codeclimate engines:install && /usr/src/app/bin/codeclimate analyze"
   only:
-    - branches@le.storm1er/ryzen-controller
-    - tags@le.storm1er/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
+    - tags@ryzen-controller-team/ryzen-controller
   except:
     variables:
       - $CODE_QUALITY_DISABLED
@@ -39,19 +39,19 @@ code_quality:
 dependency_scanning:
   stage: test
   only:
-    - branches@le.storm1er/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   except: []
 
 sast:
   stage: test
   only:
-    - branches@le.storm1er/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   except: []
 
 js_syntax:
   stage: test
   only:
-    - branches@le.storm1er/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   image: node:carbon
   tags: [ docker ]
   cache: {}
@@ -64,8 +64,8 @@ js_syntax:
 
 node:
   only:
-    - tags@le.storm1er/ryzen-controller
-    - branches@le.storm1er/ryzen-controller
+    - tags@ryzen-controller-team/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   except:
     - master
   stage: install
@@ -84,8 +84,8 @@ node:
 
 win32:
   only:
-    - tags@le.storm1er/ryzen-controller
-    - branches@le.storm1er/ryzen-controller
+    - tags@ryzen-controller-team/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   except:
     - master
   stage: package
@@ -102,8 +102,8 @@ win32:
 
 linux:
   only:
-    - tags@le.storm1er/ryzen-controller
-    - branches@le.storm1er/ryzen-controller
+    - tags@ryzen-controller-team/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   except:
     - master
   stage: package
@@ -120,8 +120,8 @@ linux:
 
 exe-installer:
   only:
-    - tags@le.storm1er/ryzen-controller
-    - branches@le.storm1er/ryzen-controller
+    - tags@ryzen-controller-team/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   except:
     - master
   stage: installer
@@ -157,8 +157,8 @@ exe-installer:
 
 deb-installer:
   only:
-    - tags@le.storm1er/ryzen-controller
-    - branches@le.storm1er/ryzen-controller
+    - tags@ryzen-controller-team/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   except:
     - master
   stage: installer
@@ -183,8 +183,8 @@ deb-installer:
 
 rpm-installer:
   only:
-    - tags@le.storm1er/ryzen-controller
-    - branches@le.storm1er/ryzen-controller
+    - tags@ryzen-controller-team/ryzen-controller
+    - branches@ryzen-controller-team/ryzen-controller
   except:
     - master
   stage: installer
