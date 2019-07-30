@@ -25,7 +25,7 @@ function preset_import() {
   } catch (e) {
     notification('danger', 'Unable to import presets, malformed data.');
     appendLog(`preset_import() ${e}`);
-    Sentry.captureException(`recreateShortcut() ${e}`);
+    Sentry.captureException(`preset_import() ${e}`);
     return;
   }
 
