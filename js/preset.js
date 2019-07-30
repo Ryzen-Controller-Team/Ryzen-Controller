@@ -17,9 +17,10 @@ function preset_import() {
   const modalTextArea = document.getElementById('modal-import-preset-textarea');
   const settings = require('electron-settings');
   var currentPresets = settings.get('presets');
-  var presetsToBeImported = atob(modalTextArea.value);
-
+  var presetsToBeImported;
+  
   try {
+    presetsToBeImported = atob(modalTextArea.value);
     presetsToBeImported = JSON.parse(presetsToBeImported);
   } catch (e) {
     notification('danger', 'Unable to import presets, malformed data.');
