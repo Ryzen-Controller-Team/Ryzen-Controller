@@ -215,25 +215,29 @@ function askingForRyzenAdjExecutablePath() {
   var remote = require('electron').remote;
   var dialog = remote.require('electron').dialog;
 
-  var path = dialog.showOpenDialog({
+  dialog.showOpenDialog({
     properties: ['openFile']
   }, function (filePaths) {
-    if (typeof filePaths[0] !== 'undefined') {
-      const settings = require('electron-settings');
-
-      settings.set("settings",
-        Object.assign(
-          {},
-          settings.get('settings'),
-          { ryzen_adj_path: filePaths[0] }
-        )
-      );
-
-      notification('primary', 'Path to ryzenAdj executable has been saved.');
-      appendLog(`askingForRyzenAdjExecutablePath(): ${filePaths[0]}`);
-    } else {
+    const settings = require('electron-settings');
+    if (typeof filePaths === 'undefined') {
       notification('warning', 'No path given, nothing changed.');
+      return;
     }
+    if (typeof filePaths[0] === 'undefined') {
+      notification('warning', 'No path given, nothing changed.');
+      return;
+    }
+
+    settings.set("settings",
+      Object.assign(
+        {},
+        settings.get('settings'),
+        { ryzen_adj_path: filePaths[0] }
+      )
+    );
+
+    notification('primary', 'Path to ryzenAdj executable has been saved.');
+    appendLog(`askingForRyzenAdjExecutablePath(): ${filePaths[0]}`);
     preFillSettings();
   });
 }
