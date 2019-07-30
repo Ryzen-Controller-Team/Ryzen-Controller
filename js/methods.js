@@ -497,18 +497,22 @@ function checkForNewRelease() {
   var request = new XMLHttpRequest();
   const version = require('./package.json').version;
 
-  request.open('GET', 'https://gitlab.com/api/v4/projects/11046417/releases', true);
+  try {
+    request.open('GET', 'https://gitlab.com/api/v4/projects/11046417/releases', true);
 
-  request.onload = function() {
-    if (this.status >= 200 && this.status < 400) {
-      var resp = JSON.parse(this.response);
-      if (resp[0].tag_name !== version) {
-        notification('primary', "A new vesion is available, please check the release tab.");
+    request.onload = function() {
+      if (this.status >= 200 && this.status < 400) {
+        var resp = JSON.parse(this.response);
+        if (resp[0].tag_name !== version) {
+          notification('primary', "A new vesion is available, please check the release tab.");
+        }
       }
-    }
-  };
-
-  request.send();
+    };
+  
+    request.send();
+  } catch (error) {
+    console.log('Unable to check if new release is available.', error);
+  }
 }
 
 /**
