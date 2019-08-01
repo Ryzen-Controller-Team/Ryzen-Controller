@@ -1,129 +1,8 @@
-{
-  "stapm_time_ms": {
-    "description": "Skin Temperature Aware Power Management. This will define the boost period to be used.",
-    "label": "STAPM Constant Time (Sec.)",
-    "tab": "controller",
-    "min": "1",
-    "max": "3600",
-    "step": "1",
-    "default": "900",
-    "ryzenadj_arg": "--stapm-time=",
-    "ryzenadj_value_convert": "toThousand"
-  },
-  "stapm_limit_w": {
-    "description": "Skin Temperature Aware Power Management. This will define the socket power package limit which is used to manage the device boost period.",
-    "label": "STAPM Limit (W)",
-    "tab": "controller",
-    "min": "5",
-    "max": "60",
-    "step": "1",
-    "default": "20",
-    "ryzenadj_arg": "--stapm-limit=",
-    "ryzenadj_value_convert": "toThousand"
-  },
-  "ppt_fast_limit_w": {
-    "description": "The amount of power the CPU can draw while boost levels on.",
-    "label": "PPT Fast Limit (W)",
-    "tab": "controller",
-    "min": "5",
-    "max": "60",
-    "step": "1",
-    "default": "25",
-    "ryzenadj_arg": "--fast-limit=",
-    "ryzenadj_value_convert": "toThousand"
-  },
-  "ppt_slow_limit_w": {
-    "description": "The amount of power the CPU can draw while boost levels off.",
-    "label": "PPT Slow Limit (W)",
-    "tab": "controller",
-    "min": "5",
-    "max": "60",
-    "step": "1",
-    "default": "10",
-    "ryzenadj_arg": "--slow-limit=",
-    "ryzenadj_value_convert": "toThousand"
-  },
-  "temperature_limit_c": {
-    "description": "The temperature the CPU can reach before boost levels off.",
-    "label": "Temperature Limit (°C)",
-    "tab": "controller",
-    "min": "50",
-    "max": "100",
-    "step": "1",
-    "default": "75",
-    "ryzenadj_arg": "--tctl-temp=",
-    "ryzenadj_value_convert": false
-  },
-  "vrm_current_m_a": {
-    "description": "The limit of current we let the motherboard deliver to the CPU.",
-    "label": "VRM Current (A)",
-    "tab": "controller",
-    "min": "20",
-    "max": "75",
-    "step": "1",
-    "default": "30",
-    "ryzenadj_arg": "--vrmmax-current=",
-    "ryzenadj_value_convert": "toHex"
-  },
-  "min_fclk_frequency": {
-    "description": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's min. clock limit.",
-    "label": "Minimum transmission frequency (Mhz)",
-    "tab": "controller",
-    "min": "800",
-    "max": "1600",
-    "step": "1",
-    "default": "800",
-    "ryzenadj_arg": "--min-fclk-frequency=",
-    "ryzenadj_value_convert": false
-  },
-  "max_fclk_frequency": {
-    "description": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's max. clock limit.",
-    "label": "Maximum transmission frequency (Mhz)",
-    "tab": "controller",
-    "min": "800",
-    "max": "1600",
-    "step": "1",
-    "default": "1200",
-    "ryzenadj_arg": "--max-fclk-frequency=",
-    "ryzenadj_value_convert": false
-  },
-  "psi0_current_limit": {
-    "description": "The limit of current we let the motherboard deliver to the PSI0.",
-    "label": "PSI0 Current Limit (mA)",
-    "tab": "experimental",
-    "min": "20",
-    "max": "100",
-    "step": "1",
-    "default": "20",
-    "ryzenadj_arg": "--psi0-current=",
-    "ryzenadj_value_convert": "toHex"
-  },
-  "min_gfxclk_frequency": {
-    "description": "The minimum clock speed the integrated GPU is allowed to run at.",
-    "label": "Minimum GFX Clock Frequency (Mhz)",
-    "tab": "experimental",
-    "min": "400",
-    "max": "1300",
-    "step": "1",
-    "default": "400",
-    "ryzenadj_arg": "--min-gfxclk=",
-    "ryzenadj_value_convert": "roundTen"
-  },
-  "max_gfxclk_frequency": {
-    "description": "The maximum clock speed the integrated GPU is allowed to run at.",
-    "label": "Maximum GFX Clock Frequency (Mhz)",
-    "tab": "experimental",
-    "min": "400",
-    "max": "1300",
-    "step": "1",
-    "default": "1100",
-    "ryzenadj_arg": "--max-gfxclk=",
-    "ryzenadj_value_convert": "roundTen"
-  },
+{ 
   "min_socclk_frequency": {
     "description": "The minimum clock speed the CPU is allowed to run at.",
     "label": "Minimum SOC Clock Frequency (Mhz)",
-    "tab": "experimental",
+    "tab": "Experimental",
     "min": "200",
     "max": "750",
     "step": "1",
@@ -134,7 +13,7 @@
   "max_socclk_frequency": {
     "description": "The maximum clock speed the CPU is allowed to run at.",
     "label": "Maximum SOC Clock Frequency (Mhz)",
-    "tab": "experimental",
+    "tab": "Experimental",
     "min": "200",
     "max": "750",
     "step": "1",
@@ -145,12 +24,133 @@
   "slow_ppt_constant_time": {
     "description": "This define the period to be used out of boost period to deliver a constant power to be delivered to the socket.",
     "label": "Package Power Tracking (PPT) - Slow period",
-    "tab": "experimental",
+    "tab": "Low Impact",
     "min": "1",
     "max": "3600",
     "step": "1",
     "default": "900",
     "ryzenadj_arg": "--slow-time=",
+    "ryzenadj_value_convert": "toThousand"
+  },
+  "min_fclk_frequency": {
+    "description": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's min. clock limit.",
+    "label": "Minimum transmission frequency (Mhz)",
+    "tab": "Low impact",
+    "min": "800",
+    "max": "1600",
+    "step": "1",
+    "default": "800",
+    "ryzenadj_arg": "--min-fclk-frequency=",
+    "ryzenadj_value_convert": false
+  },
+  "max_fclk_frequency": {
+    "description": "Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's max. clock limit.",
+    "label": "Maximum transmission frequency (Mhz)",
+    "tab": "Low impact",
+    "min": "800",
+    "max": "1600",
+    "step": "1",
+    "default": "1200",
+    "ryzenadj_arg": "--max-fclk-frequency=",
+    "ryzenadj_value_convert": false
+  },
+  "temperature_limit_c": {
+    "description": "The temperature the CPU can reach before boost levels off.",
+    "label": "Temperature Limit (°C)",
+    "tab": "Heavy impact",
+    "min": "50",
+    "max": "100",
+    "step": "1",
+    "default": "75",
+    "ryzenadj_arg": "--tctl-temp=",
+    "ryzenadj_value_convert": false
+  },
+  "stapm_limit_w": {
+    "description": "Skin Temperature Aware Power Management. This will define the socket power package limit which is used to manage the device boost period.",
+    "label": "STAPM Limit (W)",
+    "tab": "Heavy impact",
+    "min": "5",
+    "max": "60",
+    "step": "1",
+    "default": "20",
+    "ryzenadj_arg": "--stapm-limit=",
+    "ryzenadj_value_convert": "toThousand"
+  },
+  "stapm_time_ms": {
+    "description": "Skin Temperature Aware Power Management. This will define the boost period to be used.",
+    "label": "STAPM Constant Time (Sec.)",
+    "tab": "Heavy impact",
+    "min": "1",
+    "max": "3600",
+    "step": "1",
+    "default": "900",
+    "ryzenadj_arg": "--stapm-time=",
+    "ryzenadj_value_convert": "toThousand"
+  },
+  "psi0_current_limit": {
+    "description": "The limit of current we let the motherboard deliver to the PSI0.",
+    "label": "PSI0 Current Limit (mA)",
+    "tab": "Heavy impact",
+    "min": "20",
+    "max": "100",
+    "step": "1",
+    "default": "20",
+    "ryzenadj_arg": "--psi0-current=",
+    "ryzenadj_value_convert": "toHex"
+  },
+  "vrm_current_m_a": {
+    "description": "The limit of current we let the motherboard deliver to the CPU.",
+    "label": "VRM Current (A)",
+    "tab": "Heavy impact",
+    "min": "20",
+    "max": "75",
+    "step": "1",
+    "default": "30",
+    "ryzenadj_arg": "--vrmmax-current=",
+    "ryzenadj_value_convert": "toHex"
+  },
+  "min_gfxclk_frequency": {
+    "description": "The minimum clock speed the integrated (Vega) GPU is allowed to run at.",
+    "label": "Minimum GFX Clock Frequency (Mhz)",
+    "tab": "Heavy impact",
+    "min": "400",
+    "max": "1300",
+    "step": "1",
+    "default": "400",
+    "ryzenadj_arg": "--min-gfxclk=",
+    "ryzenadj_value_convert": "roundTen"
+  },
+  "max_gfxclk_frequency": {
+    "description": "The maximum clock speed the integrated (Vega) GPU is allowed to run at.",
+    "label": "Maximum GFX Clock Frequency (Mhz)",
+    "tab": "Heavy impact",
+    "min": "400",
+    "max": "1300",
+    "step": "1",
+    "default": "1100",
+    "ryzenadj_arg": "--max-gfxclk=",
+    "ryzenadj_value_convert": "roundTen"
+  },
+  "ppt_fast_limit_w": {
+    "description": "The amount of power the CPU can draw while boost levels on.",
+    "label": "PPT Fast Limit (W)",
+    "tab": "Heavy impact",
+    "min": "5",
+    "max": "60",
+    "step": "1",
+    "default": "25",
+    "ryzenadj_arg": "--fast-limit=",
+    "ryzenadj_value_convert": "toThousand"
+  },
+  "ppt_slow_limit_w": {
+    "description": "The amount of power the CPU can draw while boost levels off.",
+    "label": "PPT Slow Limit (W)",
+    "tab": "Heavy impact",
+    "min": "5",
+    "max": "60",
+    "step": "1",
+    "default": "10",
+    "ryzenadj_arg": "--slow-limit=",
     "ryzenadj_value_convert": "toThousand"
   }
 }
