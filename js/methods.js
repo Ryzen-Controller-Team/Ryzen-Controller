@@ -14,14 +14,25 @@ function displayOptions(){
       appendLog(`Error while loading ${option_name} tab property.`);
       continue;
     }
-    let option_tab = option_data['tab'];
-    let tab = document.querySelector(`#${option_tab}-tab`);
+    let tab_name = option_data['tab'];
+    let tab_name_css = tab_name.toLowerCase().replace(/ /g, "-");
+    let tab = document.querySelector(`#${tab_name_css}-tab`);
     if (!tab) {
-      appendLog(`Error while loading ${option_tab} tab.`);
-      continue;
+      let selectorContent = document.querySelector(`#main-container-selector`).innerHTML;
+      let tabContent = document.querySelector(`#main-container`).innerHTML;
+
+      document.querySelector('#main-container-selector').innerHTML = /*html*/`
+        <li><a href="#">${tab_name}</a></li>
+        ${selectorContent}
+      `;
+      document.querySelector(`#main-container`).innerHTML = /*html*/`
+        <li class="uk-margin-top uk-margin-bottom uk-container" id="${tab_name_css}-tab"></li>
+        ${tabContent}
+      `;
+      tab = document.querySelector(`#${tab_name_css}-tab`);
     }
-    tabs[option_tab] = true;
-    tab.innerHTML += `
+    tabs[tab_name_css] = true;
+    tab.innerHTML += /*html*/`
       <h3 id="${option_name}-label" uk-tooltip="${option_data.description}"><label>
         <input class="uk-checkbox uk-margin-small-right" type="checkbox" id="apply_${option_name}"/>
         <span class="option-label">${option_data.label}</span>
@@ -56,10 +67,10 @@ function displayOptions(){
     UIkit.tooltip(document.querySelector(`#${option_name}-label`));
   }
 
-  for (const tab_name in tabs) {
-    if (tabs.hasOwnProperty(tab_name)) {
-      const tab = document.querySelector(`#${tab_name}-tab`);
-      tab.innerHTML += `
+  for (const tab_name_css in tabs) {
+    if (tabs.hasOwnProperty(tab_name_css)) {
+      const tab = document.querySelector(`#${tab_name_css}-tab`);
+      tab.innerHTML += /*html*/`
         <p class="uk-margin">
           <button class="uk-button uk-button-primary" onClick="applyRyzenSettings()">Apply</button>
           <button class="uk-button uk-button-secondary" uk-toggle="target: #modal-new-preset">Save to preset</button>
@@ -256,7 +267,7 @@ function appendLog(message) {
  * Will save the latest used settings.
  */
 function saveLatestUsedSettings() {
-  var inputs = document.querySelectorAll('#controller-tab input, #experimental-tab input');
+  var inputs = document.querySelectorAll('#main-container *[id$="-tab"] input');
   var latest_controller_tabs_settings = {};
   inputs.forEach(element => {
     let id = element.id;
@@ -303,7 +314,7 @@ function loadLatestUsedSettings() {
  * Will show or display options based on apply checkboxes value.
  */
 function toggleOptionDisplayBasedOnApplyCheckbox() {
-  var checkbox_toggle_options = document.querySelectorAll('#controller-tab input[id^=apply_], #experimental-tab input[id^=apply_]');
+  var checkbox_toggle_options = document.querySelectorAll('#main-container *[id$="-tab"] input[id^=apply_]');
   const hideOptionBasedOnInput = function (input) {
     if (input.checked) {
       input.parentElement.parentElement.nextElementSibling.removeAttribute('hidden');
@@ -476,7 +487,7 @@ function getCurrentSettings(keyType) {
     return settingsToBeUsed;
 
   } else {
-    var inputs = document.querySelectorAll('#controller-tab input, #experimental-tab input');
+    var inputs = document.querySelectorAll('#main-container *[id$="-tab"] input');
     var currentSettings = {};
     inputs.forEach(element => {
       let id = element.id;

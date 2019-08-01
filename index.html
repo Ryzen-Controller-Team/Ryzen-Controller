@@ -21,19 +21,13 @@
 <body class="uk-animation-fade" uk-height-viewport="expand: true">
   <h1>Ryzen Controller <span id="version" class="uk-badge"></span></h1>
 
-  <ul uk-switcher="animation: uk-animation-fade" uk-tab uk-sticky class="uk-background-default uk-margin-remove">
-    <li><a href="#">Controller</a></li>
-    <li><a href="#">Experimental</a></li>
+  <ul uk-switcher="animation: uk-animation-fade" uk-tab uk-sticky class="uk-background-default uk-margin-remove" id="main-container-selector">
     <li><a href="#">Presets</a></li>
     <li><a href="#">Settings</a></li>
     <li><a href="#">Releases</a></li>
     <li><a href="#">Logs</a></li>
   </ul>
-  <ul class="uk-switcher uk-margin-remove" uk-height-viewport="expand: true" style="position:relative;">
-
-    <li class="uk-margin-top uk-margin-bottom uk-container" id="controller-tab"></li>
-
-    <li class="uk-margin-top uk-margin-bottom uk-container" id="experimental-tab"></li>
+  <ul class="uk-switcher uk-margin-remove" id="main-container" uk-height-viewport="expand: true" style="position:relative;">
 
     <li class="uk-margin-top uk-margin-bottom uk-container">
       <div id="presetTab"></div>
@@ -93,7 +87,7 @@
       <webview
         style="height:100%;"
         frameborder="0"
-        src="https://gitlab.com/le.storm1er/ryzen-controller/releases"
+        src="https://gitlab.com/ryzen-controller-team/ryzen-controller/releases"
       ></webview>
     </li>
 
