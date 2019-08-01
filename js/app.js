@@ -2,6 +2,17 @@ ready(function(){
   Sentry.init({
     dsn: 'https://f80fd3ea297141a8bdc04ce812762f39@sentry.io/1513427',
     release: require('./package.json').version,
+    beforeSend: (event) => {
+      event.exception.values = event.exception.values.map((value) => {
+        value.stacktrace.frames = value.stacktrace.frames.map((frame) => {
+          frame.filename = frame.filename.replace(/^.*ryzen(|-)controller\//g, "");
+          return frame;
+        })
+        return value;
+      });
+      event.request.url = event.request.url.replace(/^.*ryzen(|-)controller\//g, "")
+      return event;
+    }
   });
   const settings = require('electron-settings');
   const fixPath = require('fix-path');
