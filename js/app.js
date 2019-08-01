@@ -85,6 +85,11 @@ function applyRyzenSettings() {
     }
   }
 
+  if (parameters.length === 0) {
+    notification('primary', 'Please add some options before applying ryzenAdj.');
+    return;
+  }
+
   if (!appSettings.get('retry')) {
     appSettings.set('retry', 2);
     notification('warning', 'Applying settings...');
