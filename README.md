@@ -2,13 +2,16 @@
 
 *_I'm looking for maintainers and reviewers, if you know html/js and have some spare times, please open an issue or ping `@storm1er#0376` on [discord](https://discord.gg/EahayUv)._*
 
+Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is included (windows only for now).
+
+- [What's this?](#whats-this)
 - [Installation](#installation)
   - [Windows](#windows)
   - [Debian like](#debian-like)
   - [Redhat like](#redhat-like)
 - [Development](#development)
   - [Pre-requisite](#pre-requisite)
-  - [Installation](#installation)
+  - [Dev install](#dev-install)
   - [Building binaries](#building-binaries)
     - [Using Windows](#using-windows)
     - [Using Linux](#using-linux)
@@ -17,7 +20,15 @@
     - [For Debian like](#for-debian-like)
     - [For Redhat like](#for-redhat-like)
 
-Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is included (windows only for now).
+## What's this?
+
+![Ryzen Controller ScreenCast](vendor/screencast.webm)
+
+- It's a little Ryzen Master for laptops.
+- Works best on 2xxx Ryzen series (3xxx series is experimental)
+- More videos:
+  - https://www.youtube.com/watch?v=VYWiKQkT-8o
+  - https://www.youtube.com/watch?v=fHnO_4k-Cs4
 
 ## Installation
 
@@ -61,7 +72,7 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
   - See [electron-installer-debian requirements](https://github.com/electron-userland/electron-installer-debian#requirements)
   - See [electron-installer-redhat requirements](https://github.com/electron-userland/electron-installer-redhat#requirements)
 
-### Installation
+### Dev install
 
 ```bash
 $> cd project
