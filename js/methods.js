@@ -208,7 +208,7 @@ function preFillSettings() {
     notification('danger', "Path to ryzenadj.exe is wrong, please fix it in settings tab.");
   }
   const settings = require('electron-settings');
-  // document.getElementById('start_at_boot').checked = !!settings.get('settings.start_at_boot');
+  document.getElementById('start_at_boot').checked = !!settings.get('settings.start_at_boot');
   document.getElementById('apply_last_settings_on_launch').checked = !!settings.get('settings.apply_last_settings_on_launch');
   document.getElementById('minimize_to_tray').checked = !!settings.get('settings.minimize_to_tray');
   document.getElementById('start_minimized').checked = !!settings.get('settings.start_minimized');
@@ -391,20 +391,20 @@ function registerEventListenerForSettingsInput() {
     );
 
   });
-  // var start_at_boot = document.getElementById('start_at_boot');
-  // start_at_boot.addEventListener('change', function() {
-  //
-  // settings.set(
-  //   "settings",
-  //   Object.assign(
-  //     {},
-  //     settings.get('settings'),
-  //     { start_at_boot: !!start_at_boot.checked }
-  //   )
-  // );
-  //
-  //   require('electron').remote.app.setLoginItemSettings({ openAtLogin: !!start_at_boot.checked });
-  // });
+  var start_at_boot = document.getElementById('start_at_boot');
+  start_at_boot.addEventListener('change', function() {
+    
+    settings.set(
+      "settings",
+      Object.assign(
+        {},
+        settings.get('settings'),
+        { start_at_boot: !!start_at_boot.checked }
+      )
+    );
+
+    updateScheduledStartOnBoot(!!start_at_boot.checked);
+  });
 }
 
 /**
@@ -563,4 +563,26 @@ function handlePlatformSpecificDisplay() {
       item.setAttribute('hidden', 'true');
     }
   }
+}
+
+/**
+ * Will delete scheduled task to start ryzen controller on session start then recreate it if isEnable is true.
+ *
+ * @param {bool} toBeEnabled Is auto launch should be enabled?
+ */
+function updateScheduledStartOnBoot(toBeEnabled) {
+  const app = require('electron').remote.app;
+  window.app = app;
+  const AutoLaunch = require('auto-launch');
+  let autoLaunch = new AutoLaunch({
+    name: 'Ryzen Controller'
+  });
+  autoLaunch.isEnabled().then((isEnabled) => {
+    console.log(`toBeEnabled: ${toBeEnabled} isEnabled: ${isEnabled}`);
+    if (toBeEnabled && !isEnabled) {
+      autoLaunch.enable();
+    } else {
+      autoLaunch.disable();
+    }
+  });
 }

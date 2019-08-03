@@ -31,6 +31,7 @@
     "electron-packager": "^13.1.0"
   },
   "dependencies": {
+    "auto-launch": "^5.0.5",
     "compare-versions": "^3.4.0",
     "electron-settings": "^3.2.0",
     "fix-path": "^2.1.0",

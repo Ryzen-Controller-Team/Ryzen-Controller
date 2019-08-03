@@ -8,9 +8,6 @@ if (!setupEvents.handleSquirrelEvent()) {
   const {app, BrowserWindow, Menu, Tray} = require('electron')
   const settings = require('electron-settings');
 
-  // Check and apply start_on_boot option.
-  app.setLoginItemSettings({ openAtLogin: !!settings.get('settings.start_at_boot') });
-
   // Check for latest used version and clear settings if needed.
   const old_version = settings.get('settings.last_used_version');
   const new_version = require('./package.json').version;
@@ -108,6 +105,14 @@ if (!setupEvents.handleSquirrelEvent()) {
       };
       settings.set('presets', update_presets_to_1_12_0(settings.get('presets')));
       settings.set('latest_controller_tabs_settings', update_preset_to_1_12_0(settings.get('latest_controller_tabs_settings')));
+    }
+
+    /**
+     * Since 1.14.0, login managed through s=windows scheduler
+     */
+    if (compareVersions(old_version, '1.14.0') <= 0) {
+      // Ensure login on start false.
+      app.setLoginItemSettings({ openAtLogin: false });
     }
 
     settings.set('settings',
