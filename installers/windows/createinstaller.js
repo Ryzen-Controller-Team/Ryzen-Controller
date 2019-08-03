@@ -1,6 +1,32 @@
 const createWindowsInstaller = require('electron-winstaller').createWindowsInstaller
 const path = require('path')
-
+const lyrics = [
+  "I'm awake",
+  "I'm alive",
+  "now",
+  "I know",
+  "what I",
+  "believe inside",
+  "NOW",
+  "It's my time",
+  "I'll do",
+  "what I want",
+  "'cause this",
+  "is my life",
+  "Here",
+  "right now",
+  "I will",
+  "stand my ground",
+  "and never back down",
+  "I know",
+  "what I",
+  "believe inside",
+  "I'm awake",
+  "and",
+  "I'm alive",
+  "--",
+];
+var lyrics_pos = -1;
 var keepAlive = false;
 
 getInstallerConfig()
@@ -17,7 +43,8 @@ getInstallerConfig()
 function getInstallerConfig () {
   console.log('creating windows installer')
   keepAlive = setInterval(function(){
-    console.log(`I'm alive ...`);
+    lyrics_pos++;
+    console.log(`${lyrics[ lyrics_pos % lyrics.length ]}`);
   }, 10000);
   const rootPath = path.join('./')
   
