@@ -1,4 +1,8 @@
 ready(function(){
+  const uuidv4 = require('uuid/v4');
+  const settings = require('electron-settings');
+  const fixPath = require('fix-path');
+  document.isStarting = true;
   Sentry.init({
     dsn: 'https://f80fd3ea297141a8bdc04ce812762f39@sentry.io/1513427',
     release: require('./package.json').version,
@@ -14,9 +18,15 @@ ready(function(){
       return event;
     }
   });
-  const settings = require('electron-settings');
-  const fixPath = require('fix-path');
-  document.isStarting = true;
+  Sentry.configureScope((scope) => {
+    if (!settings.get('userid')) {
+      settings.set('userid', uuidv4());
+    }
+    const userid = settings.get('userid');
+    scope.setUser({
+      id: userid
+    });
+  });
   fixPath();
   displayOptions();
   preFillSettings();
@@ -33,7 +43,7 @@ ready(function(){
   preset_updateList();
   checkForNewRelease();
   document.isStarting = false;
-
+  appendLog(`################## UserId: ${settings.get('userid')}`);
 
   settings.set('settings',
     Object.assign(
