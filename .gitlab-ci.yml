@@ -7,7 +7,6 @@ stages:
   - install
   - package
   - installer
-  - release-check
   - release-note
   - release
 
@@ -72,6 +71,20 @@ js_syntax:
   script:
     - find . -iname "*.js" -print0 | xargs -0 -I % sh -c 'echo "%"; acorn --ecma6 --silent "%"'
 
+release-check:
+  tags: [ docker ]
+  image: registry.gitlab.com/juhani/go-semrel-gitlab:v0.20.4
+  only:
+    - branches
+    - schedules@ryzen-controller-team/ryzen-controller
+  stage: test
+  dependencies: []
+  script:
+    - release next-version > .next_version
+  artifacts:
+    paths:
+      - .next_version
+
 ###############################################################################
 ##              INSTALL
 ###############################################################################
@@ -83,7 +96,11 @@ node:
   stage: install
   tags: [ docker ]
   image: electronuserland/builder:wine-mono
+  dependencies:
+    - release-check
   script:
+    - VERSION=`cat .next_version`
+    - npm version --no-git-tag-version ${VERSION}
     - npm install
     - cp vendor/7z/7z.exe node_modules/electron-winstaller/vendor/7z.exe
     - cp vendor/7z/7z.dll node_modules/electron-winstaller/vendor/7z.dll
@@ -93,6 +110,8 @@ node:
   artifacts:
     paths:
       - node_modules/
+      - package.json
+      - package-lock.json
 
 ###############################################################################
 ##              PACKAGE
@@ -216,23 +235,6 @@ rpm-installer:
     - linux
 
 ###############################################################################
-##              RELEASE-CHECK
-###############################################################################
-
-release-check:
-  tags: [ docker ]
-  image: registry.gitlab.com/juhani/go-semrel-gitlab:v0.20.4
-  only:
-    - schedules@ryzen-controller-team/ryzen-controller
-  stage: release-check
-  dependencies: []
-  script:
-    - release next-version > .next_version
-  artifacts:
-    paths:
-      - .next_version
-
-###############################################################################
 ##              RELEASE-NOTE
 ###############################################################################
 
@@ -326,22 +328,6 @@ update-changelog:
     paths:
       - CHANGELOG.md
 
-update-package-version:
-  tags: [ docker ]
-  image: electronuserland/builder:wine-mono
-  only:
-    - schedules@ryzen-controller-team/ryzen-controller
-  stage: release-note
-  dependencies:
-    - release-check
-  script:
-    - VERSION=`cat .next_version`
-    - npm version --no-git-tag-version ${VERSION}
-  artifacts:
-    paths:
-      - package.json
-      - package-lock.json
-
 ###############################################################################
 ##              RELEASE
 ###############################################################################
@@ -354,11 +340,11 @@ publish:
   stage: release
   dependencies:
     - release-check
+    - node
     - create-rpm-link
     - create-deb-link
     - create-exe-link
     - update-changelog
-    - update-package-version
   script:
     - VERSION=`cat .next_version`
     - release changelog
