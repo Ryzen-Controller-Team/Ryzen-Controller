@@ -8,13 +8,17 @@ ready(function(){
     release: require('./package.json').version,
     beforeSend: (event) => {
       event.exception.values = event.exception.values.map((value) => {
-        value.stacktrace.frames = value.stacktrace.frames.map((frame) => {
-          frame.filename = frame.filename.replace(/^.*ryzen(|-)controller\//g, "");
-          return frame;
-        })
+        if (value.stacktrace) {
+          value.stacktrace.frames = value.stacktrace.frames.map((frame) => {
+            frame.filename = frame.filename.replace(/^.*ryzen(|-)controller\//g, "");
+            return frame;
+          });
+        }
         return value;
       });
-      event.request.url = event.request.url.replace(/^.*ryzen(|-)controller\//g, "")
+      if (event.request.url) {
+        event.request.url = event.request.url.replace(/^.*ryzen(|-)controller\//g, "");
+      }
       return event;
     }
   });
