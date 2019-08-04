@@ -2,6 +2,22 @@
 
 <!--- next entry here -->
 
+## 1.14.1
+2019-08-04
+
+### Fixes
+
+- Old version was displayed. (ebfdb864effdc8064eef247ae6906a97cbe3407b)
+- **developers:** Sentry unable to retrieve stacktrace frames in some cases. (f52edce8fc380167af6489ae0c7ca42f77232ba8)
+
+## 1.14.1
+2019-08-04
+
+### Fixes
+
+- Old version was displayed. (ebfdb864effdc8064eef247ae6906a97cbe3407b)
+- **developers:** Sentry unable to retrieve stacktrace frames in some cases. (f52edce8fc380167af6489ae0c7ca42f77232ba8)
+
 ## 1.14.0
 2019-08-04
 
