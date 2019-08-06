@@ -558,7 +558,13 @@ function checkForNewRelease() {
 
     request.onload = function() {
       if (this.status >= 200 && this.status < 400) {
-        var resp = JSON.parse(this.response);
+        var resp = {};
+        try {
+          resp = JSON.parse(this.response);
+        } catch (error) {
+          console.log('WARNING: unable to check if a new version is available.', error);
+          return;
+        }
         if (resp[0].tag_name !== version) {
           notification('primary', "A new vesion is available, please check the release tab.");
         }
