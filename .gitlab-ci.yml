@@ -347,7 +347,6 @@ publish:
     - update-changelog
   script:
     - VERSION=`cat .next_version`
-    - release changelog
     - release --ci-commit-tag ${VERSION} commit-and-tag CHANGELOG.md package.json package-lock.json
     - release --ci-commit-tag ${VERSION} add-download-link -d "Debian installer (and variant)" -n "ryzencontroller_${VERSION}_amd64.deb" -u "`cat .deb_short_link`"
     - release --ci-commit-tag ${VERSION} add-download-link -d "Redhat installer (and variant)" -n "ryzencontroller_${VERSION}.amd64.rpm" -u "`cat .rpm_short_link`"
