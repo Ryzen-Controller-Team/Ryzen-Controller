@@ -627,7 +627,11 @@ function updateScheduledStartOnBoot(toBeEnabled) {
     if (toBeEnabled && !isEnabled) {
       autoLaunch.enable();
     } else {
-      autoLaunch.disable();
+      try {
+        autoLaunch.disable();
+      } catch (error) {
+        console.log("WARNING: Unable to disable start on boot. Is autoLaunch already disabled?", error);
+      }
     }
   });
 }
