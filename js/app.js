@@ -1,36 +1,8 @@
 ready(function(){
-  const uuidv4 = require('uuid/v4');
   const settings = require('electron-settings');
   const fixPath = require('fix-path');
   document.isStarting = true;
-  Sentry.init({
-    dsn: 'https://f80fd3ea297141a8bdc04ce812762f39@sentry.io/1513427',
-    release: require('./package.json').version,
-    beforeSend: (event) => {
-      event.exception.values = event.exception.values.map((value) => {
-        if (value.stacktrace) {
-          value.stacktrace.frames = value.stacktrace.frames.map((frame) => {
-            frame.filename = frame.filename.replace(/^.*ryzen(|-)controller\//g, "");
-            return frame;
-          });
-        }
-        return value;
-      });
-      if (event.request.url) {
-        event.request.url = event.request.url.replace(/^.*ryzen(|-)controller\//g, "");
-      }
-      return event;
-    }
-  });
-  Sentry.configureScope((scope) => {
-    if (!settings.get('userid')) {
-      settings.set('userid', uuidv4());
-    }
-    const userid = settings.get('userid');
-    scope.setUser({
-      id: userid
-    });
-  });
+  addSentry();
   fixPath();
   displayOptions();
   preFillSettings();
