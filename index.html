@@ -16,10 +16,17 @@
     #experimental-tab h3 label {
       cursor: pointer;
     }
+    #donation {
+      background: rgb(232, 91, 70);
+    }
   </style>
 </head>
 <body class="uk-animation-fade" uk-height-viewport="expand: true">
-  <h1>Ryzen Controller <span id="version" class="uk-badge"></span></h1>
+  <h1>
+    Ryzen Controller
+    <span id="version" class="uk-badge"></span>
+    <a class="uk-badge" id="donation" title="By us some beers ❤️" href="#" onClick="require('electron').shell.openExternal('https://www.patreon.com/ryzencontrollerteam')">Patreon</a>
+  </h1>
 
   <ul uk-switcher="animation: uk-animation-fade" uk-tab uk-sticky class="uk-background-default uk-margin-remove" id="main-container-selector">
     <li><a href="#">Presets</a></li>
