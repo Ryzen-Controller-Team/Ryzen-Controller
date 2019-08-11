@@ -2,6 +2,19 @@
 
 <!--- next entry here -->
 
+## 1.14.2
+2019-08-11
+
+### Fixes
+
+- Linux was unable to start properly in some cases. (417ae7e927086bff1d53274a6cba5d4418efd0f9)
+- Added a donation link. (39fc10a6d2799d33d7d45a749f2122f5b2059cb1)
+- **developers:** #40 Removing sentry noise on preset import caused by malformed data. (dbf670287377d4948ee1fe3dc2f89e42239cea5f)
+- #41 Disabling auto start was causing error in some cases. (7d2578d9f65ac960dfcf0e171aec2bc821a794ff)
+- **developers:** Removed and avoid duplicate entry in CHANGELOG.md. (7c5485b37bdf39af921614aed7eff373e1aaf687)
+- Avoid error when gitlab release api won't return a good response. (10954f3fece309eb492741e2e6aaaefa682ef0ed)
+- Typo in donation link title. (105bedac2923f29d436e54b3e84a3191d9af93ea)
+
 ## 1.14.1
 2019-08-04
 
