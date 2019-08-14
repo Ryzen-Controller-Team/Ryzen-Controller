@@ -6,6 +6,7 @@ ready(function(){
   fixPath();
   displayOptions();
   preFillSettings();
+  isRyzenAdjPathValid();
   loadLatestUsedSettings();
   registerRepeaterForAllInput();
   registerEventListenerForSettingsInput();
@@ -39,6 +40,10 @@ function applyRyzenSettings() {
 
   const child = require('child_process').execFile;
   const executablePath = getRyzenAdjExecutablePath();
+
+  if (!isRyzenAdjPathValid()) {
+    return;
+  }
 
   const options_data = require('./js/options_data.json');
   const ryzenAdjConvert = {

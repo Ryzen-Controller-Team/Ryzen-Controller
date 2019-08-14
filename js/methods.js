@@ -246,13 +246,10 @@ function getRyzenAdjExecutablePath() {
  * Will fill settings page on render with saved data.
  */
 function preFillSettings() {
-  var ryzen_adj_path = document.getElementById('ryzen_adj_path');
-  var fs = require('fs');
-  ryzen_adj_path.value = getRyzenAdjExecutablePath();
-  if (!fs.existsSync(ryzen_adj_path.value)) {
-    notification('danger', "Path to ryzenadj.exe is wrong, please fix it in settings tab.");
-  }
+  const ryzen_adj_path = document.getElementById('ryzen_adj_path');
   const settings = require('electron-settings');
+
+  ryzen_adj_path.value = getRyzenAdjExecutablePath();
   document.getElementById('start_at_boot').checked = !!settings.get('settings.start_at_boot');
   document.getElementById('apply_last_settings_on_launch').checked = !!settings.get('settings.apply_last_settings_on_launch');
   document.getElementById('minimize_to_tray').checked = !!settings.get('settings.minimize_to_tray');
@@ -262,6 +259,22 @@ function preFillSettings() {
   seconds = seconds >= 0 ? seconds : 0;
   document.getElementById('reapply_periodically').value = seconds;
   document.getElementById('reapply_periodically_range').value = seconds;
+}
+
+/**
+ * Check if ryzenadj executable has been registered and is valid.
+ * Will display a notification if not.
+ *
+ * @return {Boolean} True if ryzenadj executable exists.
+ */
+function isRyzenAdjPathValid() {
+  var fs = require('fs');
+
+  if (!fs.existsSync(getRyzenAdjExecutablePath())) {
+    notification('danger', "Path to ryzenadj.exe is wrong, please fix it in settings tab.");
+    return false;
+  }
+  return true;
 }
 
 /**
@@ -438,7 +451,7 @@ function registerEventListenerForSettingsInput() {
   });
   var start_at_boot = document.getElementById('start_at_boot');
   start_at_boot.addEventListener('change', function() {
-    
+
     settings.set(
       "settings",
       Object.assign(
@@ -570,7 +583,7 @@ function checkForNewRelease() {
         }
       }
     };
-  
+
     request.send();
   } catch (error) {
     console.log('Unable to check if new release is available.', error);
