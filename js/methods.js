@@ -630,14 +630,16 @@ function updateScheduledStartOnBoot(toBeEnabled) {
   });
   autoLaunch.isEnabled().then((isEnabled) => {
     console.log(`toBeEnabled: ${toBeEnabled} isEnabled: ${isEnabled}`);
-    if (toBeEnabled && !isEnabled) {
-      autoLaunch.enable();
-    } else {
-      try {
+
+    try {
+      if (isEnabled) {
         autoLaunch.disable();
-      } catch (error) {
-        console.log("WARNING: Unable to disable start on boot. Is autoLaunch already disabled?", error);
       }
+      if (toBeEnabled) {
+        autoLaunch.enable();
+      }
+    } catch (error) {
+      console.log("WARNING: Unable to manage start on boot.", error);
     }
   });
 }
