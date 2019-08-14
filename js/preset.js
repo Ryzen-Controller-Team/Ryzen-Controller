@@ -7,7 +7,7 @@ function preset_export() {
   var presets = settings.get('presets');
 
   presets = JSON.stringify(presets);
-  modalTextArea.innerHTML = btoa(presets);
+  modalTextArea.innerHTML = btoa(unescape(encodeURIComponent(presets)));
 }
 
 /**
@@ -18,9 +18,9 @@ function preset_import() {
   const settings = require('electron-settings');
   var currentPresets = settings.get('presets');
   var presetsToBeImported;
-  
+
   try {
-    presetsToBeImported = atob(modalTextArea.value);
+    presetsToBeImported = decodeURIComponent(escape(atob(modalTextArea.value)));
     presetsToBeImported = JSON.parse(presetsToBeImported);
   } catch (e) {
     notification('danger', 'Unable to import presets, malformed data.');
