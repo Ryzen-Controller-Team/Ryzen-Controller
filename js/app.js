@@ -2,7 +2,9 @@ ready(function(){
   const settings = require('electron-settings');
   const fixPath = require('fix-path');
   document.isStarting = true;
-  addSentry();
+  if (isDevMode()) {
+    addSentry();
+  }
   fixPath();
   displayOptions();
   preFillSettings();
@@ -13,7 +15,7 @@ ready(function(){
   checkForAdminRights();
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
-  if (require('os').platform() === 'win32') {
+  if (require('os').platform() === 'win32' && isDevMode()) {
     recreateShortcut();
   }
   handlePlatformSpecificDisplay();
