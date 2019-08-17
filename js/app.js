@@ -100,7 +100,8 @@ function applyRyzenSettings() {
       Sentry.captureException(new Error(err + ' - ' + output));
     }
     else if (output) {
-      notification('success', 'Ryzenadj output:<br/>' + output);
+      notification('success', `RyzenAdj has been applied successfully.`);
+      appendLog('Ryzenadj output:<br/>' + output);
       saveLatestUsedSettings();
     }
     appSettings.set('retry', false);
