@@ -131,14 +131,31 @@ function preset_updateList() {
 }
 
 /**
+ * Will check if the preset exists.
+ *
+ * @param {String} name The preset name to look for.
+ */
+function preset_isExist(name) {
+  const preset = require('electron-settings').get(`presets`)[name];
+  return !!preset;
+}
+
+/**
  * This will apply the preset you asked for.
  * @param {string} presetName The preset name to be applied.
  */
 function preset_apply(presetName) {
-  const presets = require('electron-settings').get(`presets`)[presetName];
-  appendLog(`preset_apply(): preset ${presetName}: ${JSON.stringify(presets)}`);
-  var ret = require('electron-settings').set("latest_controller_tabs_settings", presets);
+  if (!preset_isExist(presetName)) {
+    notification('danger', `Unable to apply unexisting preset "${presetName}".`);
+    return;
+  }
+
+  const preset = require('electron-settings').get(`presets`)[presetName];
+  appendLog(`preset_apply(): preset ${presetName}: ${JSON.stringify(preset)}`);
+
+  var ret = require('electron-settings').set("latest_controller_tabs_settings", preset);
   appendLog(`preset_apply(): saved preset: ${JSON.stringify(ret)}`);
+
   loadLatestUsedSettings();
   applyRyzenSettings();
   toggleOptionDisplayBasedOnApplyCheckbox();
