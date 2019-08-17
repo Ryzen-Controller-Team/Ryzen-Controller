@@ -668,5 +668,5 @@ function updateScheduledStartOnBoot(toBeEnabled) {
  * Return true if dev mode.
  */
 function isDevMode() {
-  return require('electron').remote.app.isPackaged;
+  return !require('electron').remote.app.isPackaged;
 }
