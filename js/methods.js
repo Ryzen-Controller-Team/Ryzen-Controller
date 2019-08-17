@@ -477,7 +477,7 @@ function registerEventListenerForSettingsInput() {
  */
 function displayVersion() {
   const pjson = require('./package.json');
-  document.getElementById('version').innerHTML = `v${pjson.version}`;
+  document.getElementById('version').innerHTML = `v${pjson.version}${isDevMode() ? '-dev' : ''}`;
 }
 
 /**
