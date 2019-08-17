@@ -86,6 +86,33 @@ function preset_findUnusedPresetName(newPresetName, suffix = 1) {
 }
 
 /**
+ * Will save the preset to be enabled on AC plugged out.
+ */
+function preset_enableAutoApplyOnAcStatusChange(statusName, presetName) {
+  const settings = require('electron-settings');
+  const status = {
+    "update-ac-plugged-in": `will be applied on AC plugged in.`,
+    "update-ac-plugged-out": `will be applied on AC plugged out.`,
+  };
+
+  if (typeof status[statusName] === "undefined") {
+    let message = `Error while updating auto apply on AC status change.`;
+    notification('danger', message);
+    console.log(`preset_enableAutoApplyOnAcStatusChange(statusName:"${statusName}", presetName:"${presetName}")`);
+    Sentry.captureException(new Error(message));
+    return;
+  }
+
+  settings.set(`auto-apply.${statusName}`, presetName);
+
+  if (presetName) {
+    notification('primary', `Preset "${presetName}" ${status[statusName]}`);
+  } else {
+    notification('primary', `No preset ${status[statusName]}`);
+  }
+}
+
+/**
  * This will update the preset tab based on saved presets.
  */
 function preset_updateList() {
@@ -93,10 +120,20 @@ function preset_updateList() {
   const currentPresets = require('electron-settings').get('presets') || {};
 
   var content = '';
-  content += '<ul class="uk-list">';
+  content += /*html*/`
+    <table class="uk-table uk-table-striped uk-table-hover uk-table-middle">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th colspan="2">Apply on</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
 
   if (Object.keys(currentPresets).length === 0) {
-    content += `<li>No preset has been created yet, import them or use the "Save to preset" button on Controller tab to create one.</li>`;
+    content += /*html*/`<li>No preset has been created yet, import them or use the "Save to preset" button on Controller tab to create one.</li>`;
   }
 
   for (const presetName in currentPresets) {
@@ -112,22 +149,89 @@ function preset_updateList() {
       }
       valueSummary.join(', ');
 
-      content += `
-        <li class="uk-margin">
-          <span class="uk-text-lead">${presetName}</span>
-          <button class="uk-button uk-button-danger uk-align-right" type="button" onClick="preset_deletion('${presetName}')">
-            Delete
-          </button>
-          <button class="uk-button uk-button-primary uk-align-right" type="button" onClick="preset_apply('${presetName}')">
-            Apply
-          </button>
-          <i class="uk-text-small">${valueSummary}</i>
-        </li>
+      content += /*html*/`
+        <tr class="uk-margin">
+          <td>
+            <span class="uk-text-lead">${presetName}</span>
+            <i class="uk-text-small">${valueSummary}</i>
+          </td>
+          <td class="uk-table-expand">
+            <label style="cursor: pointer;">
+              <input
+                value="${presetName}"
+                class="uk-radio onAcStatusChange"
+                type="radio"
+                name="update-ac-plugged-in"
+                ${presetName === require('electron-settings').get('auto-apply.update-ac-plugged-in') ? 'checked' : ''}
+              />
+              AC&nbsp;plugged&nbsp;in
+            </label>
+          </td>
+          <td class="uk-table-expand">
+            <label style="cursor: pointer;">
+              <input
+                value="${presetName}"
+                class="uk-radio onAcStatusChange"
+                type="radio"
+                name="update-ac-plugged-out"
+                ${presetName === require('electron-settings').get('auto-apply.update-ac-plugged-out') ? 'checked' : ''}
+              />
+              AC&nbsp;plugged&nbsp;out
+            </label>
+          </td>
+          <td>
+            <button class="uk-button uk-margin uk-button-danger" type="button" onClick="preset_deletion('${presetName}')">
+              Delete
+            </button>
+            <button class="uk-button uk-button-primary" type="button" onClick="preset_apply('${presetName}')">
+              Apply
+            </button>
+          </td>
+        </tr>
       `;
     }
   }
-  content += '</ul>';
+  content += /*html*/`
+        <tr>
+          <td><span class="uk-align-right">Disable auto apply</span></td>
+          <td>
+            <label style="cursor: pointer;">
+              <input
+                value=""
+                class="uk-radio onAcStatusChange"
+                type="radio"
+                name="update-ac-plugged-in"
+                ${!require('electron-settings').get('auto-apply.update-ac-plugged-in') ? 'checked' : ''}
+              />
+              On&nbsp;charging
+            </label>
+          </td>
+          <td>
+            <label style="cursor: pointer;">
+              <input
+                value=""
+                class="uk-radio onAcStatusChange"
+                type="radio"
+                name="update-ac-plugged-out"
+                ${!require('electron-settings').get('auto-apply.update-ac-plugged-out') ? 'checked' : ''}
+              />
+              On&nbsp;discharging
+            </label>
+          </td>
+          <td></td>
+        </tr>
+      <tbody>
+    </table>
+  `;
   presetTab.innerHTML = content;
+  var acStatusChangeRadios = document.querySelectorAll('.onAcStatusChange');
+
+  Array.from(acStatusChangeRadios).forEach(radio => {
+    radio.addEventListener('click', function(event) {
+      preset_enableAutoApplyOnAcStatusChange(this.name, this.value);
+    });
+  });
+
 }
 
 /**

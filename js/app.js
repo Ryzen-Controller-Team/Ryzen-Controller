@@ -15,6 +15,7 @@ ready(function(){
   checkForAdminRights();
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
+  handleAcStatusChanges();
   if (isWindows() && isDevMode()) {
     recreateShortcut();
   }

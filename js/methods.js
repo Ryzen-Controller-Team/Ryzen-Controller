@@ -202,16 +202,16 @@ function checkForAdminRights() {
       );
     }
   } else {
-  const child = require('child_process').execFile;
-  child('NET SESSION', function(err,so,se) {
-    if (se.length !== 0) {
-      notification('warning',
-        `Warning: you should launch this app as administrator, `
-      + `ryzenadj.exe doesn't seems to work correctly without administrator rights.`
-      );
-    }
-  });
-}
+    const child = require('child_process').execFile;
+    child('NET SESSION', function(err,so,se) {
+      if (se.length !== 0) {
+        notification('warning',
+          `Warning: you should launch this app as administrator, `
+        + `ryzenadj.exe doesn't seems to work correctly without administrator rights.`
+        );
+      }
+    });
+  }
 }
 
 /**
@@ -669,4 +669,27 @@ function updateScheduledStartOnBoot(toBeEnabled) {
  */
 function isDevMode() {
   return !require('electron').remote.app.isPackaged;
+}
+
+/**
+ * Will listen for system events and handle status for it.
+ */
+function handleAcStatusChanges() {
+  const powerMonitor = require('electron').remote.powerMonitor;
+  const settings = require('electron-settings');
+
+  let applyPresetOnAcStatusChange = function(presetName) {
+    appendLog(`applyPresetOnAcStatusChange(${presetName})`);
+    if (!presetName) {
+      return;
+    }
+    preset_apply(presetName);
+  };
+
+  powerMonitor.on('on-ac', () => {
+    applyPresetOnAcStatusChange(settings.get(`auto-apply.update-ac-plugged-in`));
+  });
+  powerMonitor.on('on-battery', () => {
+    applyPresetOnAcStatusChange(settings.get(`auto-apply.update-ac-plugged-out`));
+  });
 }
