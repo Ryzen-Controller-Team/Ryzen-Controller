@@ -15,7 +15,7 @@ ready(function(){
   checkForAdminRights();
   displayVersion();
   reApplyPeriodically(require('electron-settings').get('settings.reapply_periodically'));
-  if (require('os').platform() === 'win32' && isDevMode()) {
+  if (isWindows() && isDevMode()) {
     recreateShortcut();
   }
   handlePlatformSpecificDisplay();

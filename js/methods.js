@@ -193,7 +193,7 @@ function registerRepeaterForAllInput() {
  * Will display a warning if not.
  */
 function checkForAdminRights() {
-  if (require('os').platform() !== 'win32') {
+  if (!isWindows()) {
     const isRoot = process.getuid && process.getuid() === 0;
     if (!isRoot) {
       notification('danger',
@@ -212,6 +212,13 @@ function checkForAdminRights() {
     }
   });
 }
+}
+
+/**
+ * Check that the app is running on Windows.
+ */
+function isWindows() {
+  return require('os').platform() === 'win32';
 }
 
 /**
@@ -235,7 +242,7 @@ function notification(type, message) {
 function getRyzenAdjExecutablePath() {
   const settings = require('electron-settings');
   var ryzen_adj_path = settings.get('settings.ryzen_adj_path');
-  if (!ryzen_adj_path && require('os').platform() === 'win32') {
+  if (!ryzen_adj_path && isWindows()) {
     ryzen_adj_path = getCurrentWorkingDirectory() + "\\bin\\ryzenadj.exe";
   }
   appendLog(`getRyzenAdjExecutablePath(): "${ryzen_adj_path}"`);
@@ -622,7 +629,7 @@ function toggleHpet(value) {
  */
 function handlePlatformSpecificDisplay() {
   var windows_only_elements = document.getElementsByClassName('windows-only');
-  if (require('os').platform() !== 'win32') {
+  if (!isWindows()) {
     for (const item of windows_only_elements) {
       item.setAttribute('hidden', 'true');
     }
