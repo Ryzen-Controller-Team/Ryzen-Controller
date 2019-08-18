@@ -118,7 +118,7 @@ if (!setupEvents.handleSquirrelEvent()) {
     settings.set('settings',
       Object.assign(
         {},
-        settings.set('settings'),
+        settings.get('settings'),
         {
           last_used_version: require('./package.json').version,
           first_launch: true,
@@ -131,7 +131,7 @@ if (!setupEvents.handleSquirrelEvent()) {
     settings.set('settings',
       Object.assign(
         {},
-        settings.set('settings'),
+        settings.get('settings'),
         {
           last_used_version: require('./package.json').version,
           first_launch: true,
