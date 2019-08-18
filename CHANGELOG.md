@@ -2,6 +2,27 @@
 
 <!--- next entry here -->
 
+## 1.15.0
+2019-08-18
+
+### Features
+
+- #39 You can now define preset to be applied on AC status change. (55d13e2c5a65abc99d1be5130d7df87368f7923c)
+
+### Fixes
+
+- Updated Sentry to 5.6.1. (27b835c2c22b754d1ea8b080690b26485d288f87)
+- #42 revamped start on boot as it was still causing error for some users. (9d01b070d388881bacbfb7e58a0082d53c0a7e40)
+- #43 Stop trying to apply settings when ryzenadj has not been set. (ef35ffe128827ebce7c008719e1a5e7643ce1b76)
+- #44 Fixed an issue where exporting presets with non latin 1 character was impossible. (22554b41dc0d863bbea53da51b2e97a7cbc318d8)
+- **developers:** Avoid recreate shortcut and enabling Sentry in development mode. (32e94d7fc26bd1d9f0741b92780027144c5c7579)
+- Added discord link. (029ffc2be972b316373a2f87e57fef1e91257f90)
+- **developers:** Refactor windows detection. (89f9950b5973a2cfbdc30ab91e36709def7106ac)
+- Tiny notification when applying ryzenAdj. (2442514c1659eea6dce329666364b40e288bfdff)
+- **developers:** Display dev version while using development environment. (d87abc47361c574790a13a0b08a63378091c3759)
+- Unable to detect dev mode properly. (1a7fd0098aef4c229be5e5ec55a1106a60b620b2)
+- Ensure preset exist when applying. (2152f32b8f20b41336990598d77f42548566de8d)
+
 ## 1.14.2
 2019-08-11
 
