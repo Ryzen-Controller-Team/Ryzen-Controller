@@ -228,12 +228,26 @@ function isWindows() {
  */
 function notification(type, message) {
   appendLog(`notification(): ${type}\n${message}`);
-  UIkit.notification({
-    message: (''+message).replace(/(?:\r\n|\r|\n)/g, '<br/>'),
-    status: type,
-    pos: 'top-right',
-    timeout: 5000
+
+  if (window.last_notification) {
+    window.last_notification.close();
+    window.last_notification = false;
+  }
+  window.last_notification = new Notification('Ryzen Controller', {
+    body: message,
+    requireInteraction: false,
+    silent: true,
   });
+
+  if (!window.last_notification) {
+    window.last_notification = false;
+    UIkit.notification({
+      message: (''+message).replace(/(?:\r\n|\r|\n)/g, '<br/>'),
+      status: type,
+      pos: 'top-right',
+      timeout: 5000,
+    });
+  }
 }
 
 /**
