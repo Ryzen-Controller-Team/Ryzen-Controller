@@ -2,6 +2,14 @@
 
 <!--- next entry here -->
 
+## 1.15.1
+2019-08-25
+
+### Fixes
+
+- Keep settings on upgrade. (b967b36a62022dd9d7f6cf5247e56677d5587612)
+- Notification will now be displayed using system if available. (ebec1d047ad599601574aa2b7f64b1a217a7ac57)
+
 ## 1.15.0
 2019-08-18
 
