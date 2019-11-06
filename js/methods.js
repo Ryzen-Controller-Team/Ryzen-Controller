@@ -507,7 +507,7 @@ function reApplyPeriodically(seconds) {
 
   if (seconds <= 0) {
     if (!document.isStarting) {
-      notification('primary', "Ryzen Controller no more will re-apply ryzenadj periodically.");
+      notification('primary', "Ryzen Controller will stop applying RyzenAdj periodically.");
     }
     return;
   }
