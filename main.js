@@ -168,7 +168,7 @@ if (!setupEvents.handleSquirrelEvent()) {
       mainWindow.setMenuBarVisibility(false);
     }
 
-    mainWindow.setOpacity(0.95);
+    mainWindow.setOpacity(0.98);
     
     // and load the index.html of the app.
     mainWindow.loadFile('index.html')

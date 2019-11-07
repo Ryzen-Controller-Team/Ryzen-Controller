@@ -13,7 +13,16 @@
   <style>
     html,
     body {
+      background-color: black;
+      color: white;
       min-width: 800px;
+    }
+
+
+    h1,
+    h2,
+    h3 {
+      color: white;
     }
 
     #release-tab.uk-active {
@@ -21,6 +30,28 @@
       display: inline-block;
       width: 100%;
       height: calc(100vh - 110px);
+    }
+
+    #main-container-selector {
+      background-color: #222;
+      color: white;
+    }
+
+    .uk-tab>.uk-active>a {
+      color: white;
+      border-color: #1e87f0;
+    }
+
+    .uk-input,
+    .uk-select,
+    #logs {
+      background-color: #333;
+      color: white;
+    }
+
+    .uk-textarea {
+      background-color: #555;
+      color: white;
     }
 
     #controller-tab h3 label,
@@ -37,26 +68,15 @@
     }
 
     #dark {
-      background-color: #333;
-    }
-
-    #rcon {
-      height: 64px;
-      width: auto;
-    }
-
-    #dark {
       border-top-left-radius: 0px;
       border-bottom-left-radius: 0px;
       margin-left: 35px;
       margin-top: 21px;
       float: left;
-      background-color: white;
       position: absolute;
       border: 2px solid;
       border-left: none;
       border-color: #333;
-      color: black;
     }
 
     #light {
@@ -67,6 +87,7 @@
       position: absolute;
       margin-left: 10px;
       margin-top: 21px;
+      background-color: black;
       border: 2px solid;
       border-right: none;
       border-color: #333;
@@ -78,6 +99,43 @@
 
     #light:hover {
       color: #bbb;
+    }
+
+    #rcon {
+      height: 64px;
+      width: auto;
+    }
+
+    tr {
+      background-color: #333;
+      color: white;
+    }
+
+    tr span.uk-text-lead {
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #333;
+      color: white;
+    }
+
+    .preset {
+      background-color: #555;
+    }
+
+    .autoapply {
+      color: white;
+    }
+
+    .autoapply:hover {
+      color: #555;
+      background-color: #333;
+    }
+
+    #modal-import-preset div,
+    #modal-export-preset div {
+      background-color: #333;
     }
   </style>
 </head>
@@ -163,6 +221,7 @@
     <li class="uk-margin-top uk-margin-bottom uk-container">
       <textarea class="uk-textarea" rows="20" id="logs" readonly></textarea>
     </li>
+
     <li class="uk-margin-top uk-margin-bottom uk-container">
       <div>
         <h2>1. How to set CPU TDP</h2>
@@ -187,7 +246,7 @@
   </ul>
 
   <!-- Add a preset modal -->
-  <div id=" modal-new-preset" uk-modal>
+  <div id="modal-new-preset" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
       <h2 class="uk-modal-title">Save current settings to preset</h2>
       <p>The current settings will be saved to a new preset. Give it a name then you'll be able to reapply it fastly from the preset tab.</p>

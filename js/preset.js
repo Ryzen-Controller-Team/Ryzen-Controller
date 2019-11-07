@@ -151,11 +151,11 @@ function preset_updateList() {
 
       content += /*html*/`
         <tr class="uk-margin">
-          <td>
+          <td class="preset">
             <span class="uk-text-lead">${presetName}</span>
             <i class="uk-text-small">${valueSummary}</i>
           </td>
-          <td class="uk-table-expand">
+          <td class="uk-table-expand preset">
             <label style="cursor: pointer;">
               <input
                 value="${presetName}"
@@ -167,7 +167,7 @@ function preset_updateList() {
               AC&nbsp;plugged&nbsp;in
             </label>
           </td>
-          <td class="uk-table-expand">
+          <td class="uk-table-expand preset">
             <label style="cursor: pointer;">
               <input
                 value="${presetName}"
@@ -179,7 +179,7 @@ function preset_updateList() {
               AC&nbsp;plugged&nbsp;out
             </label>
           </td>
-          <td>
+          <td class="preset">
             <button class="uk-button uk-margin uk-button-danger" type="button" onClick="preset_deletion('${presetName}')">
               Delete
             </button>
@@ -192,7 +192,7 @@ function preset_updateList() {
     }
   }
   content += /*html*/`
-        <tr>
+        <tr class="autoapply">
           <td><span class="uk-align-right">Disable auto apply</span></td>
           <td>
             <label style="cursor: pointer;">
