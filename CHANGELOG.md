@@ -2,6 +2,18 @@
 
 <!--- next entry here -->
 
+## 1.16.0
+2019-11-10
+
+### Features
+
+- Added Dark mode option and tutorial section. (ca1bb86e76c593e8bc7ba642f3f2e0064f56b700)
+
+### Fixes
+
+- :pencil2: Better notification sentence. (3e15ca9a68f3dcc2817b955afe5f1d6bb1f8296c)
+- fixed save preset bug (1002880af72421253f83b59ad25105752c1a81ac)
+
 ## 1.15.1
 2019-08-25
 
