@@ -1,6 +1,7 @@
 // Handle setupevents as quickly as possible
 const setupEvents = require('./installers/setupEvents')
 
+
 // squirrel event handled and app will exit in 1000ms, so don't do anything else
 if (!setupEvents.handleSquirrelEvent()) {
 
@@ -155,14 +156,20 @@ if (!setupEvents.handleSquirrelEvent()) {
     // Create the browser window.
     mainWindow = new BrowserWindow({
       width: 1000,
-      height: 800,
+      height: 600,
+      minWidth: 950,
+      minHeight: 400,
+      frame: false,
       webPreferences: {
         nodeIntegration: true,
         webviewTag: true,
       },
       icon: appIcon,
       show: false,
-    })
+    });
+      mainWindow.setMenuBarVisibility(false);
+      mainWindow.setResizable(true);
+      
     if (!settings.get('settings.start_minimized')) {
       mainWindow.show();
       mainWindow.setMenuBarVisibility(false);

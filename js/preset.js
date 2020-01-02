@@ -180,7 +180,7 @@ function preset_updateList() {
             </label>
           </td>
           <td class="preset">
-            <button class="uk-button uk-margin uk-button-danger" type="button" onClick="preset_deletion('${presetName}')">
+            <button class="uk-button uk-button-danger delete" type="button" onClick="preset_deletion('${presetName}')">
               Delete
             </button>
             <button class="uk-button uk-button-primary" type="button" onClick="preset_apply('${presetName}')">
