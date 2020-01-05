@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 1.17.0
+2020-01-05
+
+### Features
+
+- UI updated by @JamesCJ. (7040a31f1c06d2bf1a443184b966654cadce70e3)
+
 ## 1.16.0
 2019-11-10
 
