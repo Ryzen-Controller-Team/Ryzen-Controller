@@ -1,11 +1,12 @@
 include:
   - template: Dependency-Scanning.gitlab-ci.yml
   - template: SAST.gitlab-ci.yml
+  - template: Code-Quality.gitlab-ci.yml
 
 stages:
   - test
   - install
-  - package
+  - build
   - installer
   - release-note
   - release
@@ -16,31 +17,10 @@ stages:
 
 code_quality:
   stage: test
-  image: docker:stable
-  allow_failure: true
-  services:
-    - docker:stable-dind
-  variables:
-    DOCKER_DRIVER: overlay2
-  script:
-    - |
-      if ! docker info &>/dev/null; then
-        if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
-          export DOCKER_HOST='tcp://localhost:2375'
-        fi
-      fi
-    - docker run
-        --env CODECLIMATE_CODE="$PWD"
-        --volume "$PWD":/code
-        --volume /var/run/docker.sock:/var/run/docker.sock
-        --volume /tmp/cc:/tmp/cc
-        --entrypoint "/bin/sh" codeclimate/codeclimate -c "/usr/src/app/bin/codeclimate engines:install && /usr/src/app/bin/codeclimate analyze"
   only:
     - branches
     - schedules@ryzen-controller-team/ryzen-controller
-  except:
-    variables:
-      - $CODE_QUALITY_DISABLED
+  except: []
 
 dependency_scanning:
   stage: test
@@ -56,21 +36,6 @@ sast:
     - schedules@ryzen-controller-team/ryzen-controller
   except: []
 
-js_syntax:
-  stage: test
-  only:
-    - branches
-    - schedules@ryzen-controller-team/ryzen-controller
-  image: node:carbon
-  tags: [ docker ]
-  cache: {}
-  dependencies: []
-  before_script:
-    - npm install -g acorn
-    - rm -rf node_modules
-  script:
-    - find . -iname "*.js" -print0 | xargs -0 -I % sh -c 'echo "%"; acorn --ecma6 --silent "%"'
-
 release-check:
   tags: [ docker ]
   image: registry.gitlab.com/juhani/go-semrel-gitlab:v0.20.4
@@ -78,9 +43,9 @@ release-check:
     - branches
     - schedules@ryzen-controller-team/ryzen-controller
   stage: test
-  dependencies: []
   script:
     - release next-version > .next_version
+    - cat .next_version
   artifacts:
     paths:
       - .next_version
@@ -95,15 +60,14 @@ node:
     - schedules@ryzen-controller-team/ryzen-controller
   stage: install
   tags: [ docker ]
-  image: electronuserland/builder:wine-mono
-  dependencies:
+  image: storm1er/electron-builder-wine-dubnium:1.0.2
+  needs:
     - release-check
   script:
     - VERSION=`cat .next_version`
-    - npm version --no-git-tag-version ${VERSION}
-    - npm install
-    - cp vendor/7z/7z.exe node_modules/electron-winstaller/vendor/7z.exe
-    - cp vendor/7z/7z.dll node_modules/electron-winstaller/vendor/7z.dll
+    - yarn config set version-git-tag false
+    - yarn version --new-version "${VERSION}"
+    - yarn install --frozen-lockfile
   cache:
     paths:
       - node_modules/
@@ -111,128 +75,57 @@ node:
     paths:
       - node_modules/
       - package.json
-      - package-lock.json
 
 ###############################################################################
-##              PACKAGE
+##              BUILD
 ###############################################################################
 
-win32:
+build:
   only:
     - branches
     - schedules@ryzen-controller-team/ryzen-controller
-  stage: package
+  stage: build
   tags: [ docker ]
-  image: electronuserland/builder:wine-mono
+  image: storm1er/electron-builder-wine-dubnium:1.0.2
   script:
-    - rm -rf vendor/*
-    - npm run-script package-win32
+    - yarn build
   artifacts:
     paths:
-      - release-builds/
-  dependencies:
-    - node
-
-linux:
-  only:
-    - branches
-    - schedules@ryzen-controller-team/ryzen-controller
-  stage: package
-  tags: [ docker ]
-  image: electronuserland/builder:wine-mono
-  script:
-    - rm -rf bin/*
-    - npm run-script package-linux
-  artifacts:
-    paths:
-      - release-builds/
-  dependencies:
+      - build/
+  needs:
     - node
 
 ###############################################################################
 ##              INSTALLER
 ###############################################################################
 
-exe-installer:
+installers:
   only:
     - branches
     - schedules@ryzen-controller-team/ryzen-controller
   stage: installer
   tags: [ docker ]
-  image: docker:stable
-  services:
-    - docker:stable-dind
-  variables:
-    DOCKER_DRIVER: overlay2
+  image: storm1er/electron-builder-wine-dubnium:1.0.2
   script:
-    - |
-      if ! docker info &>/dev/null; then
-        if [ -z "$DOCKER_HOST" -a "$KUBERNETES_PORT" ]; then
-          export DOCKER_HOST='tcp://localhost:2375'
-        fi
-      fi
-    - mkdir installer-builds
-    - chmod 777 installer-builds
-    - docker run
-        --env ELECTRON_CACHE="/root/.cache/electron"
-        --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder"
-        -v ${PWD}:/project
-        -v ~/.cache/electron:/root/.cache/electron
-        -v ~/.cache/electron-builder:/root/.cache/electron-builder
-        electronuserland/builder:wine-mono /bin/bash -c "npm run-script build-exe"
-    - ls installer-builds/RyzenControllerInstaller.exe
-    - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/installer-builds/" > .exe_link
+    - yarn dist-pack:all
+    - mkdir dist/win
+    - mkdir dist/rpm
+    - mkdir dist/deb
+    - mv dist/*.exe dist/win/
+    - mv dist/*.rpm dist/rpm/
+    - mv dist/*.deb dist/deb/
+    - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/dist/win/" > .exe_link
+    - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/dist/rpm/" > .rpm_link
+    - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/dist/deb/" > .deb_link
   artifacts:
     paths:
-      - installer-builds/
+      - dist/
       - .exe_link
-  dependencies:
-    - node
-    - win32
-
-deb-installer:
-  only:
-    - branches
-    - schedules@ryzen-controller-team/ryzen-controller
-  stage: installer
-  tags: [ docker ]
-  image: debian:stretch
-  before_script:
-    - apt update -y
-    - apt install fakeroot curl -y
-    - curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
-    - export NVM_DIR="$HOME/.nvm"
-    - '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"'
-    - nvm install 10.15.1
-    - nvm use 10.15.1
-    - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/installer-builds/installers/" > .deb_link
-  script:
-    - npm run-script build-deb
-  artifacts:
-    paths:
-      - installer-builds/
-      - .deb_link
-  dependencies:
-    - node
-    - linux
-
-rpm-installer:
-  only:
-    - branches
-    - schedules@ryzen-controller-team/ryzen-controller
-  stage: installer
-  tags: [ docker ]
-  image: electronuserland/builder:wine-mono
-  script:
-    - npm run-script build-rpm
-    - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/installer-builds/installers/" > .rpm_link
-  artifacts:
-    paths:
-      - installer-builds/
       - .rpm_link
-  dependencies:
+      - .deb_link
+  needs:
     - node
-    - linux
+    - build
 
 ###############################################################################
 ##              RELEASE-NOTE
@@ -242,8 +135,8 @@ create-rpm-link:
   tags: [ docker ]
   image: alpine
   stage: release-note
-  dependencies:
-    - rpm-installer
+  needs:
+    - installers
     - release-check
   only:
     - schedules@ryzen-controller-team/ryzen-controller
@@ -256,10 +149,12 @@ create-rpm-link:
     - curl -H "Content-Type:application/json"
       -X POST
       -H "Authorization:Bearer ${BL_TOKEN}"
-      -d "{\"title\":\"${VERSION} rpm\",\"tags\":[\"RC_rpm\",\"RC_${VERSION_ESCAPED}\",\"RC\"],\"long_url\":\"${URL}\",\"group_guid\":\"Bj4p9bnMV93\"}"
+      -d "{\"title\":\"${VERSION} rpm\",\"tags\":[\"RC_rpm\",\"RC_${VERSION_ESCAPED}\",\"RC\",\"tmp\"],\"long_url\":\"${URL}\",\"group_guid\":\"Bj4p9bnMV93\"}"
       "https://api-ssl.bitly.com/v4/bitlinks" > .rpm_res.json
     - cat .rpm_res.json | jq -e -r .link > .rpm_short_link
+    - cat .rpm_short_link
   artifacts:
+    when: always
     paths:
       - .rpm_short_link
       - .rpm_res.json
@@ -268,8 +163,8 @@ create-deb-link:
   tags: [ docker ]
   image: alpine
   stage: release-note
-  dependencies:
-    - deb-installer
+  needs:
+    - installers
     - release-check
   only:
     - schedules@ryzen-controller-team/ryzen-controller
@@ -282,10 +177,12 @@ create-deb-link:
     - curl -H "Content-Type:application/json"
       -X POST
       -H "Authorization:Bearer ${BL_TOKEN}"
-      -d "{\"title\":\"${VERSION} deb\",\"tags\":[\"RC_deb\",\"RC_${VERSION_ESCAPED}\",\"RC\"],\"long_url\":\"${URL}\",\"group_guid\":\"Bj4p9bnMV93\"}"
+      -d "{\"title\":\"${VERSION} deb\",\"tags\":[\"RC_deb\",\"RC_${VERSION_ESCAPED}\",\"RC\",\"tmp\"],\"long_url\":\"${URL}\",\"group_guid\":\"Bj4p9bnMV93\"}"
       "https://api-ssl.bitly.com/v4/bitlinks" > .deb_res.json
     - cat .deb_res.json | jq -e -r .link > .deb_short_link
+    - cat .deb_short_link
   artifacts:
+    when: always
     paths:
       - .deb_short_link
       - .deb_res.json
@@ -294,8 +191,8 @@ create-exe-link:
   tags: [ docker ]
   image: alpine
   stage: release-note
-  dependencies:
-    - exe-installer
+  needs:
+    - installers
     - release-check
   only:
     - schedules@ryzen-controller-team/ryzen-controller
@@ -308,10 +205,12 @@ create-exe-link:
     - curl -H "Content-Type:application/json"
       -X POST
       -H "Authorization:Bearer ${BL_TOKEN}"
-      -d "{\"title\":\"${VERSION} exe\",\"tags\":[\"RC_exe\",\"RC_${VERSION_ESCAPED}\",\"RC\"],\"long_url\":\"${URL}\",\"group_guid\":\"Bj4p9bnMV93\"}"
+      -d "{\"title\":\"${VERSION} exe\",\"tags\":[\"RC_exe\",\"RC_${VERSION_ESCAPED}\",\"RC\",\"tmp\"],\"long_url\":\"${URL}\",\"group_guid\":\"Bj4p9bnMV93\"}"
       "https://api-ssl.bitly.com/v4/bitlinks" > .exe_res.json
     - cat .exe_res.json | jq -e -r .link > .exe_short_link
+    - cat .exe_short_link
   artifacts:
+    when: always
     paths:
       - .exe_short_link
       - .exe_res.json
@@ -338,7 +237,7 @@ publish:
   only:
     - schedules@ryzen-controller-team/ryzen-controller
   stage: release
-  dependencies:
+  needs:
     - release-check
     - node
     - create-rpm-link
@@ -347,7 +246,18 @@ publish:
     - update-changelog
   script:
     - VERSION=`cat .next_version`
-    - release --ci-commit-tag ${VERSION} commit-and-tag CHANGELOG.md package.json package-lock.json
+    - release --ci-commit-tag ${VERSION} commit-and-tag CHANGELOG.md package.json
     - release --ci-commit-tag ${VERSION} add-download-link -d "Debian installer (and variant)" -n "ryzencontroller_${VERSION}_amd64.deb" -u "`cat .deb_short_link`"
     - release --ci-commit-tag ${VERSION} add-download-link -d "Redhat installer (and variant)" -n "ryzencontroller_${VERSION}.amd64.rpm" -u "`cat .rpm_short_link`"
     - release --ci-commit-tag ${VERSION} add-download-link -d "Windows installer" -n "RyzenControllerInstaller.exe" -u "`cat .exe_short_link`"
+
+no-publish:
+  tags: [ docker ]
+  image: registry.gitlab.com/juhani/go-semrel-gitlab:v0.20.4
+  only:
+    - schedules@ryzen-controller-team/ryzen-controller
+  stage: release
+  when: on_failure
+  dependencies: []
+  script:
+    - echo "Publish step not needed."
