@@ -259,6 +259,20 @@ const defaultRyzenControllerAppContext: RyzenControllerAppContextType = {
   addPreset(name, preset) {},
   removePreset(name) {},
   updateSettings(settings) {},
+  isPresetValid(preset) {
+    try {
+      for (const key in preset) {
+        if (!defaultPreset.hasOwnProperty(key)) {
+          console.error(`ERROR: key "${key}" in preset does not exist in defaultPreset.`);
+          return false;
+        }
+      }
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+    return true;
+  },
 };
 
 let loadedContext = window.require("electron-settings").get(app_version_as_string);

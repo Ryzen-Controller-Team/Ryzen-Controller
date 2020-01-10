@@ -99,4 +99,23 @@ type RyzenControllerAppContextType = {
   addPreset(name: string, preset: PartialRyzenAdjOptionListType): void;
   removePreset(name: keyof RyzenAdjOptionListNamedType): void;
   updateSettings(settings: Partial<RyzenControllerSettings>): void;
+  isPresetValid(preset: PartialRyzenAdjOptionListType): boolean;
+};
+
+type ApiPreset = {
+  id: number;
+  systemHash: string;
+  upvote: number;
+  downvote: number;
+  name: string;
+  ryzenAdjArguments: RyzenAdjOptionListType;
+};
+
+type PresetsOnlineContextType = {
+  loading: boolean;
+  list: Array<ApiPreset>;
+  update(): void;
+  uploadPreset(preset: Partial<ApiPreset>): Promise<ApiPreset>;
+  upvote(presetId: number): Promise<ApiPreset>;
+  downvote(presetId: number): Promise<ApiPreset>;
 };
