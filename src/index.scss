@@ -1,13 +1,19 @@
 @import "~uikit/dist/css/uikit";
 
-.uk-light {
-  .uk-modal {
-    background-color: rgba(50, 50, 50, 0.6);
+#root {
+  padding-bottom: 50px;
+  .uk-light {
+    .uk-modal {
+      background-color: rgba(50, 50, 50, 0.6);
 
-    .uk-modal-dialog {
-      background-color: #1e87f0;
+      .uk-modal-dialog {
+        background-color: #1e87f0;
 
-      .uk-form-stacked {
+        .uk-form-stacked {
+          .uk-modal-footer {
+            background-color: #1e87f0;
+          }
+        }
         .uk-modal-footer {
           background-color: #1e87f0;
         }
