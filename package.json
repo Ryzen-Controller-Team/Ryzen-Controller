@@ -103,6 +103,9 @@
   "build": {
     "appId": "ryzen-team.app.ryzen-controller",
     "productName": "Ryzen Controller",
+    "asarUnpack": [
+      "**/build/bin/*"
+    ],
     "linux": {
       "category": "Utility",
       "target": [
