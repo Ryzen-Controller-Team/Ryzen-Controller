@@ -185,25 +185,49 @@ const createRyzenAdjCommandLine = function(preset: RyzenAdjOptionListType): Arra
   return commandLine;
 };
 
-const executeRyzenAdj = function(parameters: Array<string>, notification: boolean = true) {
-  const child = window.require("child_process").execFile;
-  const executablePath = getRyzenAdjExecutablePath();
+const ryzenAdjProcess = function(parameters: Array<string>): Promise<string> {
+  return new Promise((res, rej) => {
+    const child = window.require("child_process").execFile;
+    const executablePath = getRyzenAdjExecutablePath();
+  
+    if (parameters.length === 0) {
+      NotificationContext.warning("Please add some options before applying ryzenAdj.");
+      return;
+    }
+
+    console.log(`${executablePath} ${parameters.join(' ')}`);
+  
+    child(executablePath, parameters, function(err: string, data: Buffer) {
+      var output = data?.toString();
+      if (err) {
+        rej(err);
+      } else if (output) {
+        res(output);
+      }
+      res("no output");
+    });
+  });
+};
+
+const executeRyzenAdj = function(parameters: Array<string>, notification: boolean = true, retry = 3) {
+  if (retry === 0) {
+    NotificationContext.error("Unable to apply ryzenadj", "ryzenadj_applied");
+    return;
+  }
 
   if (parameters.length === 0) {
     NotificationContext.warning("Please add some options before applying ryzenAdj.");
     return;
   }
 
-  child(executablePath, parameters, function(err: string, data: Buffer) {
-    var output = data.toString();
-    if (err) {
-      NotificationContext.error(err + "<br/>" + output, "ryzenadj_applied");
-    } else if (output) {
-      if (notification) {
-        NotificationContext.success("RyzenAdj has been executed successfully.", "ryzenadj_applied");
-      }
+  ryzenAdjProcess(parameters).then((output: string) => {
+    if (notification) {
+      NotificationContext.success("RyzenAdj has been executed successfully.", "ryzenadj_applied");
       console.log(output);
     }
+  }).catch((err) => {
+    executeRyzenAdj(parameters, notification, retry - 1)
+    console.error(err);
   });
 };
 
