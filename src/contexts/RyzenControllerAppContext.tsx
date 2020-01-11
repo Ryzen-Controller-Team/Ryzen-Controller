@@ -158,6 +158,9 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
     },
     apply(path) {
       return new Promise((resolve, reject) => {
+        if (!path) {
+          path = getRyzenAdjExecutablePath();
+        }
         if (!fileSystem.existsSync(path)) {
           reject("Path to ryzenadj.exe is wrong, please fix it in settings tab.");
         }
