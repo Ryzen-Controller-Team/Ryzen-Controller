@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { getOptionDefinition, executeRyzenAdj, createRyzenAdjCommandLine } from "./RyzenAdjContext";
 import { isNumber } from "util";
+const isDev = window.require('electron-is-dev');
 const electronSettings = window.require("electron-settings");
 const fileSystem = window.require("fs");
 const app_version_as_string = process.env?.REACT_APP_VERSION?.replace(/\./g, "_") || "dev";
@@ -27,7 +28,7 @@ const getRyzenAdjExecutablePath = function(): string {
   if (path) {
     return path;
   }
-  path = cwd + "\\bin\\ryzenadj.exe";
+  path = `${cwd}\\${isDev ? "public\\" : "build\\"}bin\\ryzenadj.exe`
   return path;
 };
 
