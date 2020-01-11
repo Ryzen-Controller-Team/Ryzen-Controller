@@ -56,7 +56,7 @@ class Scene extends React.Component<{}, RyzenControllerAppContextType> {
       });
     }
 
-    powerMonitor.on("resume", () => {
+    powerMonitor.on("unlock-screen", () => {
       const presetName = electronSettings.get(app_version_as_string)?.settings?.onSessionResume;
       if (presetName) {
         executeRyzenAdjUsingPreset(presetName);
