@@ -32,7 +32,7 @@ class RyzenAdjOptionLabel extends React.PureComponent<RyzenAdjOptionLabelProps, 
           <div className="uk-grid-small" uk-grid="">
             <div className="uk-width-expend">
               <h2>
-                <label>
+                <label className="uk-pointer">
                   <input
                     className="uk-margin-right uk-checkbox"
                     type="checkbox"

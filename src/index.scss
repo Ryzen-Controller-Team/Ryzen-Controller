@@ -4,6 +4,11 @@
   #root {
     padding-bottom: 50px;
   }
+
+  .uk-pointer, .uk-range {
+    cursor: pointer;
+  }
+
   .uk-modal {
     background-color: rgba(50, 50, 50, 0.6);
 
