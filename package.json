@@ -11,7 +11,7 @@
     "2______________________________________________________________": "echo Cleaning scripts",
     "clean": "yarn clean:dist && yarn clean:node && yarn clean:build && yarn clean:yarn",
     "clean:dist": "rm -rf dist",
-    "clean:node": "rm -rf node_modules/*",
+    "clean:node": "rm -rf node_modules/* node_modules/.bin node_modules/.cache node_modules/.yarn-integrity",
     "clean:build": "rm -rf build",
     "clean:yarn": "yarn install --frozen-lockfile",
     "3______________________________________________________________": "echo Start dev env",
@@ -29,7 +29,7 @@
     "dist-pack-win": "electron-builder -w",
     "dist-pack-linux": "electron-builder -l",
     "6______________________________________________________________": "echo Yarn scripts into docker (for linux)",
-    "docker": "bash -c \"docker run --rm -ti --env ELECTRON_CACHE='/root/.cache/electron' --env ELECTRON_BUILDER_CACHE='/root/.cache/electron-builder' -v /${HOME}/.cache/electron:/root/.cache/electron -v /${HOME}/.cache/electron-builder:/root/.cache/electron-builder -v /${PWD}:/project -v node_modules:/project/node_modules storm1er/electron-builder-wine-dubnium:1.0.2 bash\"",
+    "docker": "bash -c \"docker run --rm -ti -v node_modules:/project/node_modules -v /${PWD}:/project storm1er/electron-builder-wine-dubnium:1.0.2 bash\"",
     "docker-permission-fix": "docker run --rm -ti -v ${PWD}:/project storm1er/electron-builder-wine-dubnium:1.0.2 bash -c \"chown `id -u`:`id -g` -R .\""
   },
   "main": "public/electron.js",
@@ -103,11 +103,13 @@
   "build": {
     "appId": "ryzen-team.app.ryzen-controller",
     "productName": "Ryzen Controller",
+    "icon": "./build/icon.ico",
     "asarUnpack": [
       "**/build/bin/*"
     ],
     "linux": {
       "category": "Utility",
+      "icon": "./build/icon.png",
       "target": [
         {
           "target": "deb"
