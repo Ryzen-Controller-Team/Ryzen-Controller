@@ -6,7 +6,7 @@ const style: React.CSSProperties = {
 };
 
 type BadgeProps = {
-  value: string;
+  value: string | React.ReactNode;
   onClick?(e: React.MouseEvent<HTMLElement>): void;
   className?: string;
   background?: string | number;

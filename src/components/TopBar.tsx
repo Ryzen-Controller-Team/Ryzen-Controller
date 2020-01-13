@@ -37,9 +37,9 @@ function TopBar() {
         {mode => (
           <Badge
             className="uk-margin-left"
-            value={mode.mode === "light" ? "L" : "D"}
+            value={<span style={{ color: mode.mode === "light" ? "#FFF" : "#000" }} uk-icon="bolt"></span>}
             onClick={mode.switch}
-            background="#7289da"
+            background={mode.mode === "light" ? "#000" : "#FFF"}
           />
         )}
       </LightModeContext.Consumer>
