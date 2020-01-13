@@ -34,7 +34,7 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     step: 1,
     default: 30,
     ryzenadj_arg: "--vrmmax-current=",
-    ryzenadj_value_convert: "toHex",
+    ryzenadj_value_convert: "toThousand",
   },
   {
     description: "The minimum clock speed the integrated (Vega) GPU is allowed to run at.",
