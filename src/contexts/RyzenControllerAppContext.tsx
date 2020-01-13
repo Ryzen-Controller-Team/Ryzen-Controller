@@ -1,7 +1,9 @@
 import { createContext } from "react";
 import { getOptionDefinition, executeRyzenAdj, createRyzenAdjCommandLine } from "./RyzenAdjContext";
 import { isNumber } from "util";
-const isDev = window.require('electron-is-dev');
+import compareVersions from "compare-versions";
+import NotificationContext from "./NotificationContext";
+const isDev = window.require("electron-is-dev");
 const electronSettings = window.require("electron-settings");
 const fileSystem = window.require("fs");
 const app_version_as_string = process.env?.REACT_APP_VERSION?.replace(/\./g, "_") || "dev";
@@ -28,7 +30,7 @@ const getRyzenAdjExecutablePath = function(): string {
   if (path) {
     return path;
   }
-  path = `${cwd}\\${isDev ? "public\\" : "build\\"}bin\\ryzenadj.exe`
+  path = `${cwd}\\${isDev ? "public\\" : "build\\"}bin\\ryzenadj.exe`;
   return path;
 };
 
@@ -308,6 +310,34 @@ const executeRyzenAdjUsingPreset = function(presetName: string): boolean {
   return true;
 };
 
+const checkIfNewerReleaseExist = function(): void {
+  const currentVersion = process.env?.REACT_APP_VERSION;
+  if (!currentVersion) {
+    return;
+  }
+
+  fetch("https://gitlab.com/api/v4/projects/11046417/releases")
+    .then(response => response.json())
+    .then(data => {
+      const last_released_version = data[0]?.tag_name;
+      if (!last_released_version) {
+        throw new Error("Unable to check for new release");
+      }
+      if (compareVersions.compare(currentVersion, last_released_version, "<")) {
+        return true;
+      }
+      return false;
+    })
+    .then((isNewReleaseExist: boolean) => {
+      if (isNewReleaseExist) {
+        NotificationContext.talk("A new release is available, please check the release tab.");
+      }
+    })
+    .catch(err => {
+      console.warn(err);
+    });
+};
+
 export default RyzenControllerAppContext;
 export {
   context as defaultRyzenControllerAppContext,
@@ -318,4 +348,5 @@ export {
   getRyzenAdjExecutablePath,
   app_version_as_string,
   executeRyzenAdjUsingPreset,
+  checkIfNewerReleaseExist as checkNewVersion,
 };

@@ -34,6 +34,15 @@ function SceneSelector() {
                       <Tabs tabName="Power" tabLocation="/power" currentLocation={currentLocation} />
                       <Tabs tabName="Presets" tabLocation="/presets" currentLocation={currentLocation} />
                       <Tabs tabName="Settings" tabLocation="/settings" currentLocation={currentLocation} />
+                      <li>
+                        <a
+                          href="https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases"
+                          onClick={openExternal("https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases")}
+                        >
+                          <span uk-icon="link"></span>
+                          Releases
+                        </a>
+                      </li>
                     </ul>
                   );
                 }}
@@ -44,6 +53,19 @@ function SceneSelector() {
       }}
     </LightModeContext.Consumer>
   );
+}
+
+/**
+ * This method open the given URL using external browser.
+ * @param url The URL to be opened.
+ * @return function
+ */
+function openExternal(url: string) {
+  return function openExternalNow(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault();
+    window.require("electron").remote.shell.openExternal(url);
+    return false;
+  };
 }
 
 export default SceneSelector;

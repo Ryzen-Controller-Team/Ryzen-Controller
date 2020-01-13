@@ -77,7 +77,7 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
         NotificationContext.warning("You must wait for laptop signature to be generated");
         return;
       }
-      let presetsWithSameName = presetsOnlineContext.list.filter((preset) => {
+      let presetsWithSameName = presetsOnlineContext.list.filter(preset => {
         return preset.name === this.props.presetName && preset.systemHash === signature;
       });
       if (presetsWithSameName.length > 0) {

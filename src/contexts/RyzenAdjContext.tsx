@@ -189,14 +189,14 @@ const ryzenAdjProcess = function(parameters: Array<string>): Promise<string> {
   return new Promise((res, rej) => {
     const child = window.require("child_process").execFile;
     const executablePath = getRyzenAdjExecutablePath();
-  
+
     if (parameters.length === 0) {
       NotificationContext.warning("Please add some options before applying ryzenAdj.");
       return;
     }
 
-    console.log(`${executablePath} ${parameters.join(' ')}`);
-  
+    console.log(`${executablePath} ${parameters.join(" ")}`);
+
     child(executablePath, parameters, function(err: string, data: Buffer) {
       var output = data?.toString();
       if (err) {
@@ -220,15 +220,17 @@ const executeRyzenAdj = function(parameters: Array<string>, notification: boolea
     return;
   }
 
-  ryzenAdjProcess(parameters).then((output: string) => {
-    if (notification) {
-      NotificationContext.success("RyzenAdj has been executed successfully.", "ryzenadj_applied");
-      console.log(output);
-    }
-  }).catch((err) => {
-    executeRyzenAdj(parameters, notification, retry - 1)
-    console.error(err);
-  });
+  ryzenAdjProcess(parameters)
+    .then((output: string) => {
+      if (notification) {
+        NotificationContext.success("RyzenAdj has been executed successfully.", "ryzenadj_applied");
+        console.log(output);
+      }
+    })
+    .catch(err => {
+      executeRyzenAdj(parameters, notification, retry - 1);
+      console.error(err);
+    });
 };
 
 export { RyzenAdjOptionDefinitions, getOptionDefinition, executeRyzenAdj, createRyzenAdjCommandLine };

@@ -5,6 +5,7 @@ import Scene from "./scenes/Scene";
 import { HashRouter as Router } from "react-router-dom";
 import SysInfoContext, { createMachineSignature, SysInfoState } from "./contexts/SysInfoContext";
 import LightModeContext from "./contexts/LightModeContext";
+import { checkNewVersion } from "./contexts/RyzenControllerAppContext";
 const si = window.require("systeminformation");
 
 type AppState = {
@@ -68,6 +69,8 @@ class App extends React.Component<{}, AppState> {
             },
           });
       });
+
+    checkNewVersion();
   }
 
   componentWillUnmount() {
