@@ -1,10 +1,11 @@
+const Splashscreen = require("@trodi/electron-splashscreen");
+
 const electron = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 const electronSettings = require('electron-settings');
 
 const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
 const Tray = electron.Tray;
 const Menu = electron.Menu;
 const app_version_as_string = app.getVersion().replace(/\./g, '_') + (isDev ? '-dev' : '');
@@ -28,7 +29,7 @@ const createWindow = () => {
     appIcon = __dirname + '/icon.png';
   }
 
-  mainWindow = new BrowserWindow({
+  const mainWindowOpt = {
     width: 900,
     height: 680,
     webPreferences: {
@@ -37,7 +38,22 @@ const createWindow = () => {
     },
     icon: appIcon,
     show: false,
+    transparent: true,
+  };
+
+  const splashTimeOut = 2500;
+  mainWindow = Splashscreen.initSplashScreen({
+    windowOpts: mainWindowOpt,
+    templateUrl: path.join(__dirname, "..", isDev ? "public" : "build", "splash.html"),
+    delay: 0,
+    minVisible: splashTimeOut,
+    splashScreenOpts: {
+      height: 900,
+      width: 900,
+      transparent: true,
+    },
   });
+
   mainWindow.setMenuBarVisibility(false);
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
   let showOnStart = true;
@@ -48,7 +64,9 @@ const createWindow = () => {
   }
 
   if (showOnStart) {
-    mainWindow.show();
+    setTimeout(()=>{
+      mainWindow.show();
+    }, splashTimeOut);
   }
 
   var contextMenu = Menu.buildFromTemplate([
@@ -93,7 +111,7 @@ const createWindow = () => {
   }
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => setTimeout(createWindow, 400));
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
