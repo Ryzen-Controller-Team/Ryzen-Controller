@@ -3,6 +3,7 @@ import PresetsOnlineContext from "../contexts/PresetsOnline";
 import Card from "./Card";
 import SysInfoContext, { SysInfoState } from "../contexts/SysInfoContext";
 import PresetOnlineLine from "../components/PresetOnlineLine";
+import { isPresetValid } from "../contexts/RyzenControllerAppContext";
 
 function PresetOnline() {
   return (
@@ -10,10 +11,12 @@ function PresetOnline() {
       {(sysInfoContext: SysInfoState) => (
         <PresetsOnlineContext.Consumer>
           {(presetsOnlineContext: PresetsOnlineContextType) => {
-            return presetsOnlineContext.list.filter(preset => preset.systemHash === sysInfoContext.signature).length &&
-              sysInfoContext?.signature ? (
+            return presetsOnlineContext.list
+              .filter(preset => isPresetValid(preset.ryzenAdjArguments))
+              .filter(preset => preset.systemHash === sysInfoContext.signature).length && sysInfoContext?.signature ? (
               <ul className="uk-margin uk-list uk-list-large uk-list-striped">
                 {presetsOnlineContext.list
+                  .filter(preset => isPresetValid(preset.ryzenAdjArguments))
                   .filter(preset => preset.systemHash === sysInfoContext.signature)
                   .map((preset: ApiPreset, index) => {
                     const presetName = preset.name;

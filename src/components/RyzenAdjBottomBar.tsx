@@ -1,8 +1,9 @@
 import * as React from "react";
-import RyzenControllerAppContext, { defaultPreset } from "../contexts/RyzenControllerAppContext";
+import RyzenControllerAppContext, { defaultPreset, isPresetValid } from "../contexts/RyzenControllerAppContext";
 import Notification from "../contexts/NotificationContext";
 import { createRyzenAdjCommandLine, executeRyzenAdj } from "../contexts/RyzenAdjContext";
 import LightModeContext from "../contexts/LightModeContext";
+import NotificationContext from "../contexts/NotificationContext";
 
 const UIkit = require("uikit");
 
@@ -66,6 +67,10 @@ class RyzenAdjBottomBar extends React.PureComponent {
 
   apply(ryzenControllerAppContext: RyzenControllerAppContextType) {
     return function() {
+      if (!isPresetValid(ryzenControllerAppContext.currentSettings)) {
+        NotificationContext.warning("Unable to apply invalid preset");
+        return;
+      }
       ryzenControllerAppContext.updateLatestSettings();
       executeRyzenAdj(createRyzenAdjCommandLine(ryzenControllerAppContext.currentSettings));
     };

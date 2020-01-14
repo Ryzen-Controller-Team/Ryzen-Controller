@@ -135,10 +135,11 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
           electronSettings.set(
             "reApplyPeriodically",
             setInterval(() => {
-              executeRyzenAdj(
-                createRyzenAdjCommandLine(electronSettings.get(app_version_as_string).currentSettings),
-                false
-              );
+              let preset = electronSettings.get(app_version_as_string).currentSettings;
+              if (!isPresetValid(preset)) {
+                return;
+              }
+              executeRyzenAdj(createRyzenAdjCommandLine(preset), false);
             }, parsedSeconds)
           );
           resolve(true);
@@ -265,20 +266,29 @@ const defaultRyzenControllerAppContext: RyzenControllerAppContextType = {
   addPreset(name, preset) {},
   removePreset(name) {},
   updateSettings(settings) {},
-  isPresetValid(preset) {
-    try {
-      for (const key in preset) {
-        if (!defaultPreset.hasOwnProperty(key)) {
-          console.error(`ERROR: key "${key}" in preset does not exist in defaultPreset.`);
-          return false;
+};
+
+const isPresetValid = function(preset: PartialRyzenAdjOptionListType): boolean {
+  try {
+    for (const key in preset) {
+      // @ts-ignore
+      const arg: RyzenAdjArguments = key;
+      if (!defaultPreset.hasOwnProperty(arg)) {
+        throw new Error(`ERROR: key "${arg}" in preset does not exist in defaultPreset.`);
+      } else {
+        const value = preset[arg]?.value || -1;
+        const min = getOptionDefinition(arg).min;
+        const max = getOptionDefinition(arg).max;
+        if (min > value || value > max) {
+          throw new Error(`ERROR: "${arg}" with value ${value} is out of bound (${min} - ${max}) in preset.`);
         }
       }
-    } catch (error) {
-      console.error(error);
-      return false;
     }
-    return true;
-  },
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+  return true;
 };
 
 let loadedContext = window.require("electron-settings").get(app_version_as_string);
@@ -304,6 +314,10 @@ const persistentSave = function(context: RyzenControllerAppContextType) {
 const executeRyzenAdjUsingPreset = function(presetName: string): boolean {
   const presets = electronSettings.get(app_version_as_string)?.presets;
   if (!presets.hasOwnProperty(presetName)) {
+    return false;
+  }
+  if (!isPresetValid(presets[presetName])) {
+    NotificationContext.warning("Unable to apply invalid preset");
     return false;
   }
   executeRyzenAdj(createRyzenAdjCommandLine(presets[presetName]));
@@ -349,4 +363,5 @@ export {
   app_version_as_string,
   executeRyzenAdjUsingPreset,
   checkIfNewerReleaseExist as checkNewVersion,
+  isPresetValid,
 };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import RyzenControllerAppContext from "../contexts/RyzenControllerAppContext";
+import RyzenControllerAppContext, { isPresetValid } from "../contexts/RyzenControllerAppContext";
 import NotificationContext from "../contexts/NotificationContext";
 import PresetsOnlineContext from "../contexts/PresetsOnline";
 
@@ -25,7 +25,7 @@ function PresetOnlineButtons(props: PresetOnlineButtonsProps) {
                   NotificationContext.warning("You already have a preset with the same name");
                   return;
                 }
-                if (!ryzenControllerAppContext.isPresetValid(props.preset)) {
+                if (!isPresetValid(props.preset)) {
                   NotificationContext.error(`Preset "${props.presetName}" is invalid or obsolete`);
                   return;
                 }

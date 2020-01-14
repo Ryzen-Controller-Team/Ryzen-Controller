@@ -62,11 +62,19 @@ class RyzenAdjOptionForm extends React.PureComponent<RyzenAdjOptionFormProps, Ry
 
   onChange(ryzenControllerAppContext: RyzenControllerAppContextType) {
     const name: RyzenAdjArguments = this.props.option.ryzenadj_arg;
+    const _this = this;
     return function(event: React.ChangeEvent<HTMLInputElement>): void {
+      let value = parseInt(event.target.value);
+      if (value < _this.props.option.min) {
+        value = _this.props.option.min;
+      }
+      if (value > _this.props.option.max) {
+        value = _this.props.option.max;
+      }
       ryzenControllerAppContext.updateCurrentSettings({
         [name]: {
           enabled: true,
-          value: parseInt(event.target.value),
+          value: value,
         },
       });
     };

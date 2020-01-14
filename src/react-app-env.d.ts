@@ -99,7 +99,6 @@ type RyzenControllerAppContextType = {
   addPreset(name: string, preset: PartialRyzenAdjOptionListType): void;
   removePreset(name: keyof RyzenAdjOptionListNamedType): void;
   updateSettings(settings: Partial<RyzenControllerSettings>): void;
-  isPresetValid(preset: PartialRyzenAdjOptionListType): boolean;
 };
 
 type ApiPreset = {
