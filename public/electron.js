@@ -111,6 +111,16 @@ const createWindow = () => {
   }
 }
 
+let isPrimaryInstance = app.requestSingleInstanceLock()
+if (!isPrimaryInstance) {
+  app.quit();
+}
+
+app.on('second-instance', ()=>{
+  mainWindow.show();
+  mainWindow.focus();
+});
+
 app.on('ready', () => setTimeout(createWindow, 400));
 
 app.on('window-all-closed', () => {
