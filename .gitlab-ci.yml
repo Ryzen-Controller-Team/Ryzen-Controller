@@ -107,6 +107,10 @@ installers:
   tags: [ docker ]
   image: storm1er/electron-builder-wine-dubnium:1.0.2
   script:
+    - export ELECTRON_CACHE=`pwd`/.cache/electron
+    - export ELECTRON_BUILDER_CACHE=`pwd`/.cache/builder
+    - mkdir -p `pwd`/.cache/electron
+    - mkdir -p `pwd`/.cache/builder
     - yarn dist-pack:all
     - mkdir dist/win
     - mkdir dist/rpm
@@ -117,6 +121,9 @@ installers:
     - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/dist/win/" > .exe_link
     - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/dist/rpm/" > .rpm_link
     - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/dist/deb/" > .deb_link
+  cache:
+    paths:
+      - .cache
   artifacts:
     paths:
       - dist/win
