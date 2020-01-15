@@ -46,25 +46,53 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
       win32: true,
     },
     apply(toBeEnabled) {
+      const platform: "win32" | "linux" = window.require("os").platform();
       const AutoLaunch = window.require("auto-launch");
       let autoLaunch = new AutoLaunch({
         name: "Ryzen Controller",
       });
 
-      return new Promise((resolve, reject) => {
-        autoLaunch.isEnabled().then((isEnabled: boolean) => {
+      return new Promise((res, rej) => {
+        if (platform === "linux") {
+          return autoLaunch.isEnabled().then((isEnabled: boolean) => {
+            try {
+              if (isEnabled) {
+                autoLaunch.disable();
+              }
+              if (toBeEnabled) {
+                autoLaunch.enable();
+              }
+              return true;
+            } catch (error) {
+              return error;
+            }
+          });
+        } else if (platform === "win32") {
+          // Ensure the old autolaunch has been deleted.
+          autoLaunch.isEnabled().then((isEnabled: boolean) => {
+            try {
+              if (isEnabled) {
+                autoLaunch.disable();
+              }
+            } catch (error) {
+              console.log(error);
+            }
+          });
+
+          // Handle new auto launch system.
+          const path = `${window
+            .require("electron")
+            .remote.app.getAppPath()}.unpacked\\build\\bin\\auto-start-ryzen-controller.bat`;
           try {
-            if (isEnabled) {
-              autoLaunch.disable();
-            }
-            if (toBeEnabled) {
-              autoLaunch.enable();
-            }
-            resolve(true);
+            window.require("electron").remote.app.setLoginItemSettings({
+              openAtLogin: toBeEnabled,
+              path: path,
+            });
           } catch (error) {
-            reject(error);
+            rej(error);
           }
-        });
+          res(true);
+        }
       });
     },
   },

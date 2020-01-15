@@ -79,7 +79,8 @@
     "systeminformation": "^4.16.1",
     "typescript": "^3.7.4",
     "uikit": "^3.2.6",
-    "uuidv4": "^6.0.0"
+    "uuidv4": "^6.0.0",
+    "windows-scheduler": "https://github.com/Ryzen-Controller-Team/windows-scheduler.git#1e2cc67db8efb1474ba0fe780967f86ed68f36a3"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -127,7 +128,7 @@
       "allowToChangeInstallationDirectory": true
     },
     "win": {
-      "requestedExecutionLevel": "highestAvailable"
+      "requestedExecutionLevel": "requireAdministrator"
     }
   },
   "husky": {
