@@ -119,7 +119,9 @@ installers:
     - echo "https://gitlab.com/ryzen-controller-team/ryzen-controller/-/jobs/${CI_JOB_ID}/artifacts/browse/dist/deb/" > .deb_link
   artifacts:
     paths:
-      - dist/
+      - dist/win
+      - dist/rpm
+      - dist/deb
       - .exe_link
       - .rpm_link
       - .deb_link
