@@ -40,7 +40,7 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
       body: JSON.stringify(preset),
     };
 
-    return fetch("http://api.ryzencontroller.com/presets", requestOption)
+    return fetch(process.env.REACT_APP_SERVER_ENDPOINT + "/presets", requestOption)
       .then(response => response.json())
       .then((data: ApiPreset | any) => {
         if (data?.violations?.length) {
@@ -68,7 +68,7 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
         "Content-Type": "application/json",
       },
     };
-    fetch("http://api.ryzencontroller.com/presets", requestOption)
+    fetch(process.env.REACT_APP_SERVER_ENDPOINT + "/presets", requestOption)
       .then(response => response.json())
       .then((data: Array<ApiPreset>) => {
         if (this._isMounted) this.setState({ list: data, loading: false });
@@ -100,7 +100,7 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   }
 
   vote(presetId: number, action: "up" | "down"): Promise<ApiPreset> {
-    const url = `http://api.ryzencontroller.com/presets/${presetId}`;
+    const url = `${process.env.REACT_APP_SERVER_ENDPOINT}/presets/${presetId}`;
     const requestOptionGet: RequestInit = {
       method: "GET",
       headers: {
