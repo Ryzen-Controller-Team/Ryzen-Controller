@@ -4,6 +4,7 @@ import Card from "./Card";
 import SysInfoContext, { SysInfoState } from "../contexts/SysInfoContext";
 import PresetOnlineLine from "../components/PresetOnlineLine";
 import { isPresetValid } from "../contexts/RyzenControllerAppContext";
+import { getTranslation } from "../contexts/LocaleContext";
 
 function PresetOnline() {
   return (
@@ -28,22 +29,27 @@ function PresetOnline() {
                 <div uk-spinner="ratio: 2"></div>
               </div>
             ) : (
-              <Card title="List hasn't been loaded or there is no online preset yet.">
+              <Card
+                title={getTranslation(
+                  "PresetOnline.listNotLoadedYet",
+                  "List hasn't been loaded or there is no online preset yet."
+                )}
+              >
                 <button
                   className="uk-margin-small-bottom uk-button uk-button-small uk-button-default"
                   onClick={() => presetsOnlineContext.update()}
                 >
-                  Load preset list
+                  {getTranslation("PresetOnline.loadPresetListBtn", "Load preset list")}
                 </button>
                 <br />
-                You can share your own preset by clicking on the
+                {getTranslation("PresetOnline.sentencePart1", "You can share your own preset by clicking on the")}
                 <button
                   className="uk-margin-small-right uk-margin-small-left uk-button uk-button-small uk-button-default"
                   onClick={() => false}
                 >
-                  Upload
+                  {getTranslation("PresetOnline.uploadBtn", "Upload")}
                 </button>
-                button available on your presets.
+                {getTranslation("PresetOnline.sentencePart2", "button available on your presets.")}
               </Card>
             );
           }}

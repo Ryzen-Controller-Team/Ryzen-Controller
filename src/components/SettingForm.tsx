@@ -1,4 +1,5 @@
 import * as React from "react";
+import { getTranslation } from "../contexts/LocaleContext";
 
 type ElectronFileDialogType = {
   filePaths?: Array<string>;
@@ -46,10 +47,10 @@ class SettingForm extends React.PureComponent<SettingFormProps> {
         return (
           <React.Fragment>
             <p className="uk-margin-small-bottom">
-              Current path: <code>{path || "default"}</code>
+              {getTranslation("settingForm.currentPath", "Current path:")} <code>{path || "default"}</code>
             </p>
             <button onClick={this.findFile.bind(this)} className="uk-button uk-button-default">
-              Browse
+              {getTranslation("settingForm.browseBtn", "Browse")}
             </button>
           </React.Fragment>
         );
@@ -66,7 +67,7 @@ class SettingForm extends React.PureComponent<SettingFormProps> {
         ? []
         : [
             {
-              name: "Windows Binary",
+              name: getTranslation("settingForm.windowsBinFileType", "Windows Binary"),
               extensions: ["exe"],
             },
           ];

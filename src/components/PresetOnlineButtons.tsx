@@ -2,6 +2,7 @@ import * as React from "react";
 import RyzenControllerAppContext, { isPresetValid } from "../contexts/RyzenControllerAppContext";
 import NotificationContext from "../contexts/NotificationContext";
 import PresetsOnlineContext from "../contexts/PresetsOnline";
+import { getTranslation } from "../contexts/LocaleContext";
 
 type PresetOnlineButtonsProps = {
   presetName: string;
@@ -19,32 +20,58 @@ function PresetOnlineButtons(props: PresetOnlineButtonsProps) {
           <div className="uk-button-group uk-margin-right">
             <button
               className="uk-button uk-button-small uk-button-primary"
-              uk-tooltip="title: Will save the preset to your local preset."
+              uk-tooltip={`title: ${getTranslation(
+                "presetOnlineBtn.downloadTooltip",
+                "Will save the preset to your local preset."
+              )}`}
               onClick={() => {
                 if (ryzenControllerAppContext.presets.hasOwnProperty(props.presetName)) {
-                  NotificationContext.warning("You already have a preset with the same name");
+                  NotificationContext.warning(
+                    getTranslation(
+                      "presetOnlineBtn.presetSameNameExist",
+                      "You already have a preset with the same name"
+                    )
+                  );
                   return;
                 }
                 if (!isPresetValid(props.preset)) {
-                  NotificationContext.error(`Preset "${props.presetName}" is invalid or obsolete`);
+                  const presetInvalidOrObsoleteMessage = getTranslation(
+                    "presetOnlineBtn.presetInvalidOrObsolete",
+                    'Preset "{presetName}" is invalid or obsolete',
+                    { presetName: props.presetName }
+                  );
+                  NotificationContext.error(presetInvalidOrObsoleteMessage);
                   return;
                 }
                 ryzenControllerAppContext.addPreset(props.presetName, props.preset);
-                NotificationContext.talk(`Preset "${props.presetName}" has been downloaded`);
+                const presetDownloadedMessage = getTranslation(
+                  "presetOnlineBtn.presetDownloaded",
+                  'Preset "{presetName}" has been downloaded',
+                  { presetName: props.presetName }
+                );
+                NotificationContext.talk(presetDownloadedMessage);
                 return;
               }}
             >
-              Download
+              {getTranslation("presetOnlineBtn.download", "Download")}
             </button>
             <button
               className="uk-button uk-button-small uk-button-default"
-              uk-tooltip="title: Without saving the preset, it will be loaded in RyzenAdj's tabs but not applied."
+              uk-tooltip={`title: ${getTranslation(
+                "presetOnlineBtn.loadTooltip",
+                "Without saving the preset, it will be loaded in RyzenAdj's tabs but not applied."
+              )}`}
               onClick={() => {
                 ryzenControllerAppContext.updateCurrentSettings(props.preset);
-                NotificationContext.talk(`Preset "${props.presetName}" has been loaded`);
+                const presetloadedMessage = getTranslation(
+                  "presetOnlineBtn.presetDownloaded",
+                  'Preset "{presetName}" has been loaded',
+                  { presetName: props.presetName }
+                );
+                NotificationContext.talk(presetloadedMessage);
               }}
             >
-              Load
+              {getTranslation("presetOnlineBtn.load", "Load")}
             </button>
           </div>
         )}

@@ -1,6 +1,7 @@
 import * as React from "react";
 import Card from "./Card";
 import SysInfoContext from "../contexts/SysInfoContext";
+import { getTranslation } from "../contexts/LocaleContext";
 
 function SysInfoCards() {
   return (
@@ -9,7 +10,7 @@ function SysInfoCards() {
         if (sysInfoContext.error) {
           return (
             <Card title="Error">
-              Unable to get system info:
+              {getTranslation("sysInfoCards.unableToGetSysInfo", "Unable to get system info:")}
               <br />
               {sysInfoContext.error}
             </Card>
@@ -23,41 +24,58 @@ function SysInfoCards() {
         const bios = sysInfoContext.bios;
         return (
           <div className="uk-margin-small-right uk-margin-small-left uk-flex uk-flex-center uk-flex-around uk-flex-wrap">
-            <Card title="Basic Information">
+            <Card title={getTranslation("sysInfoCards.basicInfoTitle", "Basic Information")}>
               {system === false || mem === false || bios === false ? (
                 <div uk-spinner=""></div>
               ) : (
                 <React.Fragment>
                   {system.manufacturer} {system.model} {system.version}
                   <br />
-                  Bios version: {bios.version} {bios.revision ? `rev${bios.revision}` : ""}
+                  {getTranslation("sysInfoCards.biosVersion", "Bios version:")} {bios.version}{" "}
+                  {bios.revision ? `rev${bios.revision}` : ""}
                   <br />
                   {(mem.total / (1024 * 1024 * 1024)).toFixed(2)}Gb Ram
                 </React.Fragment>
               )}
             </Card>
-            <Card title="CPU Information">
+            <Card title={getTranslation("sysInfoCards.CPUInfoTitle", "CPU Information")}>
               {cpu === false ? (
                 <div uk-spinner=""></div>
               ) : (
                 <React.Fragment>
                   {cpu.manufacturer} {cpu.brand}
                   <br />
-                  {cpu.speedmax}Ghz on {cpu.physicalCores} cores, {cpu.cores} threads.
+                  {getTranslation(
+                    "sysInfoCards.cpuPerfDesc",
+                    "{speedmax}Ghz on {physicalCores} cores, {cores} threads.",
+                    {
+                      speedmax: cpu.speedmax,
+                      physicalCores: cpu.physicalCores.toString(),
+                      cores: cpu.cores.toString(),
+                    }
+                  )}
                 </React.Fragment>
               )}
             </Card>
             {gpu === false ? (
-              <Card title={`GPU #0 Information`}>
+              <Card title={getTranslation("sysInfoCards.GPUInfoTitle", "GPU #{index} Information", { index: "0" })}>
                 <div uk-spinner=""></div>
               </Card>
             ) : (
               <React.Fragment>
                 {gpu.controllers.map((controller, index) => (
-                  <Card key={`gpu-${index}`} title={`GPU #${index} Information`}>
+                  <Card
+                    key={`gpu-${index}`}
+                    title={getTranslation("sysInfoCards.GPUInfoTitle", "GPU #{index} Information", {
+                      index: `${index}`,
+                    })}
+                  >
                     {controller.vendor} {controller.model}
                     <br />
-                    {controller.vram}Mb (Dynamic vram: {controller.vramDynamic.toString()})
+                    {getTranslation("sysInfoCards.gpuPerfDesc", "{ram}Mb (Dynamic vram: {dyn}).", {
+                      ram: controller.vram.toString(),
+                      dyn: controller.vramDynamic.toString(),
+                    })}
                   </Card>
                 ))}
               </React.Fragment>

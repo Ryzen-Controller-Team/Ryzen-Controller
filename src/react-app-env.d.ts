@@ -1,5 +1,8 @@
 /// <reference types="react-scripts" />
 
+/* Add language here */
+type AvailableLanguages = "en" | "fr" | "ch" | "de" | "tr";
+
 type RyzenControllerTabForRyzenAdj = "power" | "cpu" | "gpu";
 
 type RyzenAdjArguments =

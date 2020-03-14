@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Link, Switch, Route } from "react-router-dom";
 import LightModeContext from "../contexts/LightModeContext";
+import { getTranslation } from "../contexts/LocaleContext";
 
 function Tabs(props: { tabName: string; tabLocation: string; currentLocation: string }) {
   let isActive = "";
@@ -29,18 +30,38 @@ function SceneSelector() {
 
                   return (
                     <ul className="uk-tab uk-margin-remove-bottom">
-                      <Tabs tabName="CPU" tabLocation="/cpu" currentLocation={currentLocation} />
-                      <Tabs tabName="GPU" tabLocation="/gpu" currentLocation={currentLocation} />
-                      <Tabs tabName="Power" tabLocation="/power" currentLocation={currentLocation} />
-                      <Tabs tabName="Presets" tabLocation="/presets" currentLocation={currentLocation} />
-                      <Tabs tabName="Settings" tabLocation="/settings" currentLocation={currentLocation} />
+                      <Tabs
+                        tabName={getTranslation("sceneSelector.cpuTitle", "CPU")}
+                        tabLocation="/cpu"
+                        currentLocation={currentLocation}
+                      />
+                      <Tabs
+                        tabName={getTranslation("sceneSelector.gpuTitle", "GPU")}
+                        tabLocation="/gpu"
+                        currentLocation={currentLocation}
+                      />
+                      <Tabs
+                        tabName={getTranslation("sceneSelector.powerTitle", "Power")}
+                        tabLocation="/power"
+                        currentLocation={currentLocation}
+                      />
+                      <Tabs
+                        tabName={getTranslation("sceneSelector.presetsTitle", "Presets")}
+                        tabLocation="/presets"
+                        currentLocation={currentLocation}
+                      />
+                      <Tabs
+                        tabName={getTranslation("sceneSelector.settingsTitle", "Settings")}
+                        tabLocation="/settings"
+                        currentLocation={currentLocation}
+                      />
                       <li>
                         <a
                           href="https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases"
                           onClick={openExternal("https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases")}
                         >
                           <span uk-icon="link"></span>
-                          Releases
+                          {getTranslation("sceneSelector.releasesTitle", "Releases")}
                         </a>
                       </li>
                     </ul>

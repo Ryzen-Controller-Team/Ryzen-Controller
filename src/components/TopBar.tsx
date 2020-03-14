@@ -2,6 +2,7 @@ import * as React from "react";
 import logo from "../assets/icon.png";
 import Badge from "./Badge";
 import LightModeContext from "../contexts/LightModeContext";
+import { getTranslation } from "../contexts/LocaleContext";
 
 function TopBar() {
   return (
@@ -23,13 +24,13 @@ function TopBar() {
       />
       <Badge
         className="uk-margin-left"
-        value="Buy us some beers ❤️"
+        value={getTranslation("topbar.beer", "Buy us some beers ❤️")}
         onClick={openExternal("https://www.patreon.com/ryzencontrollerteam")}
         background="#888888"
       />
       <Badge
         className="uk-margin-left"
-        value="Join us on discord"
+        value={getTranslation("topbar.discord", "Join us on discord")}
         onClick={openExternal("https://discord.gg/EahayUv")}
         background="#7289da"
       />
@@ -43,6 +44,16 @@ function TopBar() {
           />
         )}
       </LightModeContext.Consumer>
+      <Badge
+        className="uk-margin-left"
+        value="🇧🇱"
+        onClick={() => {
+          require("uikit")
+            .modal(document.getElementById("locale-selector-modal"))
+            .show();
+        }}
+        background="rgba(0, 0, 0, 0)"
+      />
     </header>
   );
 }

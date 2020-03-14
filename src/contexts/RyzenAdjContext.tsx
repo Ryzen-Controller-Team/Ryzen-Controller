@@ -1,11 +1,14 @@
 import NotificationContext from "./NotificationContext";
 import { getRyzenAdjExecutablePath } from "./RyzenControllerAppContext";
+import { getTranslation } from "./LocaleContext";
 
 const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
   {
-    description:
-      "This define the period to be used out of boost period to deliver a constant power to be delivered to the socket.",
-    label: "Package Power Tracking (PPT) - Slow period",
+    description: getTranslation(
+      "ryzenAdj.slowTime.desc",
+      "This define the period to be used out of boost period to deliver a constant power to be delivered to the socket."
+    ),
+    label: getTranslation("ryzenAdj.slowTime.label", "Package Power Tracking (PPT) - Slow period"),
     tab: "power",
     min: 1,
     max: 3600,
@@ -15,8 +18,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: "toThousand",
   },
   {
-    description: "The limit of current we let the motherboard deliver to the PSI0.",
-    label: "PSI0 Current Limit (mA)",
+    description: getTranslation(
+      "ryzenAdj.psi0Current.desc",
+      "The limit of current we let the motherboard deliver to the PSI0."
+    ),
+    label: getTranslation("ryzenAdj.psi0Current.label", "PSI0 Current Limit (mA)"),
     tab: "power",
     min: 20,
     max: 100,
@@ -26,8 +32,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: "toHex",
   },
   {
-    description: "The limit of current we let the motherboard deliver to the CPU.",
-    label: "VRM Current (A)",
+    description: getTranslation(
+      "ryzenAdj.vrmmaxCurrent.desc",
+      "The limit of current we let the motherboard deliver to the CPU."
+    ),
+    label: getTranslation("ryzenAdj.vrmmaxCurrent.label", "VRM Current (A)"),
     tab: "power",
     min: 20,
     max: 75,
@@ -37,8 +46,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: "toThousand",
   },
   {
-    description: "The minimum clock speed the integrated (Vega) GPU is allowed to run at.",
-    label: "Minimum Vega iGPU Clock Frequency (Mhz)",
+    description: getTranslation(
+      "ryzenAdj.minGfxclk.desc",
+      "The minimum clock speed the integrated (Vega) GPU is allowed to run at."
+    ),
+    label: getTranslation("ryzenAdj.minGfxclk.label", "Minimum Vega iGPU Clock Frequency (Mhz)"),
     tab: "gpu",
     min: 400,
     max: 1300,
@@ -48,8 +60,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: "roundTen",
   },
   {
-    description: "The maximum clock speed the integrated (Vega) GPU is allowed to run at.",
-    label: "Maximum Vega iGPU Clock Frequency (Mhz)",
+    description: getTranslation(
+      "ryzenAdj.maxGfxclk.desc",
+      "The maximum clock speed the integrated (Vega) GPU is allowed to run at."
+    ),
+    label: getTranslation("ryzenAdj.maxGfxclk.label", "Maximum Vega iGPU Clock Frequency (Mhz)"),
     tab: "gpu",
     min: 400,
     max: 1300,
@@ -59,9 +74,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: "roundTen",
   },
   {
-    description:
-      "Infinity Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's min. clock limit.",
-    label: "Minimum Infinity Fabric frequency (Mhz)",
+    description: getTranslation(
+      "ryzenAdj.minFclkFrequency.desc",
+      "Infinity Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's min. clock limit."
+    ),
+    label: getTranslation("ryzenAdj.minFclkFrequency.label", "Minimum Infinity Fabric frequency (Mhz)"),
     tab: "gpu",
     min: 800,
     max: 1600,
@@ -71,9 +88,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: null,
   },
   {
-    description:
-      "Infinity Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's max. clock limit.",
-    label: "Maximum Infinity Fabric frequency (Mhz)",
+    description: getTranslation(
+      "ryzenAdj.maxFclkFrequency.desc",
+      "Infinity Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This define the bus's max. clock limit."
+    ),
+    label: getTranslation("ryzenAdj.maxFclkFrequency.label", "Maximum Infinity Fabric frequency (Mhz)"),
     tab: "gpu",
     min: 800,
     max: 1600,
@@ -83,8 +102,8 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: null,
   },
   {
-    description: "The temperature the CPU can reach before boost levels off.",
-    label: "Temperature Limit (°C)",
+    description: getTranslation("ryzenAdj.tctlTemp.desc", "The temperature the CPU can reach before boost levels off."),
+    label: getTranslation("ryzenAdj.tctlTemp.label", "Temperature Limit (°C)"),
     tab: "cpu",
     min: 50,
     max: 100,
@@ -94,9 +113,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: null,
   },
   {
-    description:
-      "Skin Temperature Aware Power Management. This will define the socket power package limit which is used to manage the device boost period.",
-    label: "CPU TDP (W)",
+    description: getTranslation(
+      "ryzenAdj.stapmLimit.desc",
+      "Skin Temperature Aware Power Management. This will define the socket power package limit which is used to manage the device boost period."
+    ),
+    label: getTranslation("ryzenAdj.stapmLimit.label", "CPU TDP (W)"),
     tab: "cpu",
     min: 5,
     max: 60,
@@ -106,8 +127,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: "toThousand",
   },
   {
-    description: "Skin Temperature Aware Power Management. This will define the boost period to be used.",
-    label: "CPU Boost Period",
+    description: getTranslation(
+      "ryzenAdj.stapmTime.desc",
+      "Skin Temperature Aware Power Management. This will define the boost period to be used."
+    ),
+    label: getTranslation("ryzenAdj.stapmTime.label", "CPU Boost Period"),
     tab: "cpu",
     min: 1,
     max: 3600,
@@ -117,8 +141,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: "toThousand",
   },
   {
-    description: "The amount of power the CPU can draw while boost levels on.",
-    label: "CPU Boost TDP (W)",
+    description: getTranslation(
+      "ryzenAdj.fastLimit.desc",
+      "The amount of power the CPU can draw while boost levels on."
+    ),
+    label: getTranslation("ryzenAdj.fastLimit.label", "CPU Boost TDP (W)"),
     tab: "cpu",
     min: 5,
     max: 60,
@@ -128,8 +155,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_value_convert: "toThousand",
   },
   {
-    description: "The amount of power the CPU can draw while boost levels off.",
-    label: "CPU Min TDP (W)",
+    description: getTranslation(
+      "ryzenAdj.slowLimit.desc",
+      "The amount of power the CPU can draw while boost levels off."
+    ),
+    label: getTranslation("ryzenAdj.slowLimit.label", "CPU Min TDP (W)"),
     tab: "cpu",
     min: 5,
     max: 60,
@@ -191,7 +221,9 @@ const ryzenAdjProcess = function(parameters: Array<string>): Promise<string> {
     const executablePath = getRyzenAdjExecutablePath();
 
     if (parameters.length === 0) {
-      NotificationContext.warning("Please add some options before applying ryzenAdj.");
+      NotificationContext.warning(
+        getTranslation("ryzenAdj.pleaseAddSomeOptions", "Please add some options before applying ryzenAdj.")
+      );
       return;
     }
 
@@ -211,19 +243,24 @@ const ryzenAdjProcess = function(parameters: Array<string>): Promise<string> {
 
 const executeRyzenAdj = function(parameters: Array<string>, notification: boolean = true, retry = 3) {
   if (retry === 0) {
-    NotificationContext.error("Unable to apply ryzenadj", "ryzenadj_applied");
+    NotificationContext.error(getTranslation("ryzenAdj.unableToApply", "Unable to apply ryzenadj"), "ryzenadj_applied");
     return;
   }
 
   if (parameters.length === 0) {
-    NotificationContext.warning("Please add some options before applying ryzenAdj.");
+    NotificationContext.warning(
+      getTranslation("ryzenAdj.pleaseAddSomeOptions", "Please add some options before applying ryzenAdj.")
+    );
     return;
   }
 
   ryzenAdjProcess(parameters)
     .then((output: string) => {
       if (notification) {
-        NotificationContext.success("RyzenAdj has been executed successfully.", "ryzenadj_applied");
+        NotificationContext.success(
+          getTranslation("ryzenAdj.applySuccess", "RyzenAdj has been executed successfully."),
+          "ryzenadj_applied"
+        );
         console.log(output);
       }
     })

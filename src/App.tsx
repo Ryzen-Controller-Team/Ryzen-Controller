@@ -6,6 +6,8 @@ import { HashRouter as Router } from "react-router-dom";
 import SysInfoContext, { createMachineSignature, SysInfoState } from "./contexts/SysInfoContext";
 import LightModeContext from "./contexts/LightModeContext";
 import { checkNewVersion } from "./contexts/RyzenControllerAppContext";
+import LocaleContext, { getTranslation } from "./contexts/LocaleContext";
+import LocaleSelectorModal from "./components/LocaleSelectorModal";
 const si = window.require("systeminformation");
 
 type AppState = {
@@ -13,6 +15,11 @@ type AppState = {
   lightMode: {
     mode: "light" | "dark";
     switch(): void;
+  };
+  locale: {
+    is: AvailableLanguages;
+    change(to: AvailableLanguages): void;
+    getTranslation(id: string, fallback?: string, variables?: Record<string, string>): string;
   };
 };
 
@@ -35,6 +42,11 @@ class App extends React.Component<{}, AppState> {
       mode: this.getLatestLightMode(),
       switch: this.switchLightMode.bind(this),
     },
+    locale: {
+      is: this.getLatestLocale(),
+      change: this.changeLocale.bind(this),
+      getTranslation: getTranslation,
+    },
   };
 
   switchLightMode(): void {
@@ -49,8 +61,17 @@ class App extends React.Component<{}, AppState> {
     });
   }
 
+  changeLocale(to: AvailableLanguages): void {
+    window.require("electron-settings").set("locale", to);
+    window.location.reload();
+  }
+
   getLatestLightMode(): "light" | "dark" {
     return window.require("electron-settings").get("lightMode") || "light";
+  }
+
+  getLatestLocale(): AvailableLanguages {
+    return window.require("electron-settings").get("locale") || "en";
   }
 
   componentDidMount() {
@@ -87,17 +108,20 @@ class App extends React.Component<{}, AppState> {
 
     return (
       <div className={classes}>
-        <SysInfoContext.Provider value={this.state.sysinfo}>
-          <LightModeContext.Provider value={this.state.lightMode}>
-            <Router>
-              <div className="uk-card uk-margin-bottom">
-                <TopBar />
-                <SceneSelector />
-              </div>
-              <Scene />
-            </Router>
-          </LightModeContext.Provider>
-        </SysInfoContext.Provider>
+        <LocaleContext.Provider value={this.state.locale}>
+          <SysInfoContext.Provider value={this.state.sysinfo}>
+            <LightModeContext.Provider value={this.state.lightMode}>
+              <Router>
+                <div className="uk-card uk-margin-bottom">
+                  <TopBar />
+                  <SceneSelector />
+                </div>
+                <Scene />
+              </Router>
+            </LightModeContext.Provider>
+          </SysInfoContext.Provider>
+          <LocaleSelectorModal />
+        </LocaleContext.Provider>
       </div>
     );
   }

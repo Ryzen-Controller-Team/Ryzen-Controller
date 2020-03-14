@@ -3,6 +3,7 @@ import { getOptionDefinition, executeRyzenAdj, createRyzenAdjCommandLine } from 
 import { isNumber } from "util";
 import compareVersions from "compare-versions";
 import NotificationContext from "./NotificationContext";
+import { getTranslation } from "./LocaleContext";
 const isDev = window.require("electron-is-dev");
 const electronSettings = window.require("electron-settings");
 const fileSystem = window.require("fs");
@@ -37,10 +38,13 @@ const getRyzenAdjExecutablePath = function(): string {
 const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList = {
   autoStartOnBoot: {
     displayTitle: false,
-    name: "Auto start on boot",
+    name: getTranslation("appContext.autoStartOnBoot.name", "Auto start on boot"),
     type: "boolean",
     default: false,
-    short_description: "Launch Ryzen Controller on computer start.",
+    short_description: getTranslation(
+      "appContext.autoStartOnBoot.shortDesc",
+      "Launch Ryzen Controller on computer start."
+    ),
     compatibility: {
       linux: false,
       win32: true,
@@ -98,10 +102,10 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
   },
   minimizeOnLaunch: {
     displayTitle: false,
-    name: "Minimize on launch",
+    name: getTranslation("appContext.minimizeOnLaunch.name", "Minimize on launch"),
     type: "boolean",
     default: false,
-    short_description: "Launch Ryzen Controller minimized.",
+    short_description: getTranslation("appContext.minimizeOnLaunch.shortDesc", "Launch Ryzen Controller minimized."),
     compatibility: {
       linux: true,
       win32: true,
@@ -114,10 +118,13 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
   },
   minimizeToTray: {
     displayTitle: false,
-    name: "Minimize to tray",
+    name: getTranslation("appContext.minimizeToTray.name", "Minimize to tray"),
     type: "boolean",
     default: false,
-    short_description: "Minimize Ryzen Controller to tray instead of taskbar.",
+    short_description: getTranslation(
+      "appContext.minimizeToTray.shortDesc",
+      "Minimize Ryzen Controller to tray instead of taskbar."
+    ),
     compatibility: {
       linux: true,
       win32: true,
@@ -130,12 +137,17 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
   },
   reApplyPeriodically: {
     displayTitle: true,
-    name: "Re-apply periodically",
+    name: getTranslation("appContext.reApplyPeriodically.name", "Re-apply periodically"),
     type: "range",
     default: 0,
-    short_description: "Allow you to re-apply RyzenAdj settings periodically (every X seconds).",
-    description:
-      "On some laptops, the bios sometimes reset what RyzenAdj is trying to do. You can use this to apply the settings periodically.",
+    short_description: getTranslation(
+      "appContext.reApplyPeriodically.shortDesc",
+      "Allow you to re-apply RyzenAdj settings periodically (every X seconds)."
+    ),
+    description: getTranslation(
+      "appContext.reApplyPeriodically.desc",
+      "On some laptops, the bios sometimes reset what RyzenAdj is trying to do. You can use this to apply the settings periodically."
+    ),
     compatibility: {
       linux: true,
       win32: true,
@@ -179,10 +191,10 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
   },
   ryzenAdjPath: {
     displayTitle: true,
-    name: "RyzenAdj path",
+    name: getTranslation("appContext.ryzenAdjPath.name", "RyzenAdj path"),
     type: "path",
     default: "\\bin\\ryzenadj.exe",
-    short_description: "The full path to ryzenadj binary.",
+    short_description: getTranslation("appContext.ryzenAdjPath.shortDesc", "The full path to ryzenadj binary."),
     compatibility: {
       linux: true,
       win32: true,
@@ -193,7 +205,12 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
           path = getRyzenAdjExecutablePath();
         }
         if (!fileSystem.existsSync(path)) {
-          reject("Path to ryzenadj.exe is wrong, please fix it in settings tab.");
+          reject(
+            getTranslation(
+              "appContext.ryzenAdjPath.wrongPath",
+              "Path to ryzenadj.exe is wrong, please fix it in settings tab."
+            )
+          );
         }
         resolve(true);
       });
@@ -345,7 +362,7 @@ const executeRyzenAdjUsingPreset = function(presetName: string): boolean {
     return false;
   }
   if (!isPresetValid(presets[presetName])) {
-    NotificationContext.warning("Unable to apply invalid preset");
+    NotificationContext.warning(getTranslation("appContext.invalidPreset", "Unable to apply invalid preset"));
     return false;
   }
   executeRyzenAdj(createRyzenAdjCommandLine(presets[presetName]));
@@ -372,7 +389,9 @@ const checkIfNewerReleaseExist = function(): void {
     })
     .then((isNewReleaseExist: boolean) => {
       if (isNewReleaseExist) {
-        NotificationContext.talk("A new release is available, please check the release tab.");
+        NotificationContext.talk(
+          getTranslation("appContext.newReleaseAvailable", "A new release is available, please check the release tab.")
+        );
       }
     })
     .catch(err => {

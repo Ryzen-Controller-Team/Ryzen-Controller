@@ -12,6 +12,7 @@ import RyzenAdjScene from "../scenes/RyzenAdjScene";
 import PresetsScene from "../scenes/PresetsScene";
 import SettingsScene from "../scenes/SettingsScene";
 import NotificationContext from "../contexts/NotificationContext";
+import { getTranslation } from "../contexts/LocaleContext";
 const electronSettings = window.require("electron-settings");
 const powerMonitor = window.require("electron").remote.powerMonitor;
 
@@ -157,7 +158,10 @@ class Scene extends React.Component<{}, RyzenControllerAppContextType> {
     if (newSettingsPromises.length > 0) {
       Promise.all(newSettingsPromises)
         .then(results => {
-          NotificationContext.success("Settings has been saved successfully", "settings_applied");
+          NotificationContext.success(
+            getTranslation("notification.settingsSaveSuccess", "Settings has been saved successfully"),
+            "settings_applied"
+          );
           this.setState({ settings: newSettings });
         })
         .catch((error: string) => {

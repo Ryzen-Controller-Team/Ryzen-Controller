@@ -1,5 +1,6 @@
 import * as React from "react";
 import LightModeContext from "../contexts/LightModeContext";
+import { getTranslation } from "../contexts/LocaleContext";
 
 function PresetListEmpty() {
   return (
@@ -9,13 +10,18 @@ function PresetListEmpty() {
         return (
           <div className={`uk-flex uk-flex-center uk-margin-left uk-margin-right`}>
             <div className={`uk-card uk-card-default uk-card-body uk-width-1-2@m ${classes}`}>
-              <h3 className="uk-card-title">You don't have any preset yet</h3>
+              <h3 className="uk-card-title">
+                {getTranslation("presetListEmpty.youDontHaveAny", "You don't have any preset yet")}
+              </h3>
               <p>
-                You can create one by using the
+                {getTranslation("presetListEmpty.sentencePart1", "You can create one by using the")}
                 <button className="uk-button uk-button-default uk-margin-small-left uk-margin-small-right">
-                  Create preset
+                  {getTranslation("presetListEmpty.createPresetBtn", "Create preset")}
                 </button>
-                button available on Ryzen Adj settings tabs (CPU, GPU, ...).
+                {getTranslation(
+                  "presetListEmpty.sentencePart2",
+                  "button available on Ryzen Adj settings tabs (CPU, GPU, ...)."
+                )}
               </p>
             </div>
           </div>
