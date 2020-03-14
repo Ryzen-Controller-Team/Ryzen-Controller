@@ -2,6 +2,35 @@
 
 <!--- next entry here -->
 
+## 2.0.0
+2020-03-14
+
+### Breaking changes
+
+#### :boom: v2.0.0 Beta. (7a829f184f8f6b88821ead1171166305945ed0d6)
+
+⚠ Please avoid using v1 and v2 simultaneously.
+
+This version is stable enough to be released but is still under heavy development,
+**You may encounter bugs, if you encounter any, you can uninstall this version and go back to v1.**
+
+For users:
+- Users can now share presets and vote for them.
+- New installer/uninstaller with customizable installation path
+- #66 Add multi-language: English, Français, 简体中文, Deutsch, Türkçe.
+- Presets triggers are now in preset tabs with more options
+- Added splash screen
+- Better night mode
+- Release tab now open browser
+- Notifications are now handled within the app/system accordingly to the app's minimized state
+
+For developers:
+- Now using React and TypeScript
+- Switched from npm to yarn: https://github.com/electron-userland/electron-builder/issues/1147#issuecomment-276284477
+- Updated Continuous Delivery
+
+Contributors: @rikoopa @Jamiexhz @Silvaburn#3669
+
 ## 1.17.0
 2020-01-05
 
