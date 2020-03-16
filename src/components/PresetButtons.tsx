@@ -119,6 +119,11 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
                 })
               );
               presetsOnlineContext.update();
+            })
+            .catch(() => {
+              NotificationContext.error(
+                getTranslation("presetButtons.uploadError", "An error occured while uploading the preset")
+              );
             });
         });
     };

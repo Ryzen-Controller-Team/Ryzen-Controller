@@ -104,5 +104,6 @@
   "appContext.newReleaseAvailable": "Eine neue Version ist verfügbar. Überprüfen Sie die Registerkarte Version.",
   "PresetOnline.errorLoadingPresets": "Presets können nicht geladen werden.",
   "PresetOnline.retryLoadingPresetListBtn": "Wiederholen",
-  "PresetOnline.pleaseCheckInternetConnection": "Bitte überprüfe deine Internetverbindung."
+  "PresetOnline.pleaseCheckInternetConnection": "Bitte überprüfe deine Internetverbindung.",
+  "presetButtons.uploadError": "Beim Hochladen der Voreinstellung ist ein Fehler aufgetreten"
 }

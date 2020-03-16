@@ -104,5 +104,6 @@
   "appContext.newReleaseAvailable": "A new release is available, please check the release tab.",
   "PresetOnline.errorLoadingPresets": "Unable to load presets.",
   "PresetOnline.retryLoadingPresetListBtn": "Retry",
-  "PresetOnline.pleaseCheckInternetConnection": "Please check your internet connection."
+  "PresetOnline.pleaseCheckInternetConnection": "Please check your internet connection.",
+  "presetButtons.uploadError": "An error occured while uploading the preset"
 }

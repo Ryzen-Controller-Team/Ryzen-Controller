@@ -104,5 +104,6 @@
   "appContext.newReleaseAvailable": "Yeni bir sürüm mevcut, lütfen Sürümler sekmesini kontrol edin.",
   "PresetOnline.errorLoadingPresets": "Ön ayarlar yüklenemiyor.",
   "PresetOnline.retryLoadingPresetListBtn": "Yeniden Dene",
-  "PresetOnline.pleaseCheckInternetConnection": "Lütfen internet bağlantınızı kontrol edin."
+  "PresetOnline.pleaseCheckInternetConnection": "Lütfen internet bağlantınızı kontrol edin.",
+  "presetButtons.uploadError": "Ön ayar yüklenirken bir hata oluştu"
 }

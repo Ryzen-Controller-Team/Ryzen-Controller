@@ -32,7 +32,7 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
     this.isUserAlreadyVotedForThisPreset = this.isUserAlreadyVotedForThisPreset.bind(this);
   }
 
-  uploadPreset(preset: ApiPreset) {
+  uploadPreset(preset: ApiPreset): Promise<ApiPreset> {
     const requestOption: RequestInit = {
       method: "POST",
       headers: {
