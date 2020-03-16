@@ -106,7 +106,7 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     label: getTranslation("ryzenAdj.tctlTemp.label", "Temperature Limit (°C)"),
     tab: "cpu",
     min: 50,
-    max: 100,
+    max: 110,
     step: 1,
     default: 75,
     ryzenadj_arg: "--tctl-temp=",
