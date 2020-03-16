@@ -24,6 +24,17 @@ function PresetOnline() {
                     return <PresetOnlineLine preset={preset} key={`online_${index}_${presetName}_btn`} />;
                   })}
               </ul>
+            ) : presetsOnlineContext.error && !presetsOnlineContext.loading ? (
+              <Card title={getTranslation("PresetOnline.errorLoadingPresets", "Unable to load presets.")}>
+                {getTranslation("PresetOnline.pleaseCheckInternetConnection", "Please check your internet connection.")}
+                <br />
+                <button
+                  className="uk-margin-small-bottom uk-button uk-button-small uk-button-default"
+                  onClick={() => presetsOnlineContext.update()}
+                >
+                  {getTranslation("PresetOnline.retryLoadingPresetListBtn", "Retry")}
+                </button>
+              </Card>
             ) : presetsOnlineContext.loading || !sysInfoContext?.signature ? (
               <div className="uk-flex uk-flex-center">
                 <div uk-spinner="ratio: 2"></div>

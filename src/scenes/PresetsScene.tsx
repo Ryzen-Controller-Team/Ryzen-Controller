@@ -13,6 +13,7 @@ const uikit = window.require("uikit");
 class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   _isMounted = false;
   state: PresetsOnlineContextType = {
+    error: false,
     loading: false,
     list: [],
     update: this.updatePresetList.bind(this),
@@ -72,7 +73,10 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
     fetch(process.env.REACT_APP_SERVER_ENDPOINT + "/presets", requestOption)
       .then(response => response.json())
       .then((data: Array<ApiPreset>) => {
-        if (this._isMounted) this.setState({ list: data, loading: false });
+        if (this._isMounted) this.setState({ list: data, loading: false, error: false });
+      })
+      .catch(reason => {
+        if (this._isMounted) this.setState({ error: true, loading: false });
       });
   }
 

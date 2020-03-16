@@ -99,5 +99,8 @@
   "ryzenAdjBottomBar.createPreset": "Preset erstellen",
   "ryzenAdjBottomBar.reset": "Zurücksetzen",
   "app.localeSelectorModalTitle": "Sprache ändern",
-  "appContext.newReleaseAvailable": "Eine neue Version ist verfügbar. Überprüfen Sie die Registerkarte Version."
+  "appContext.newReleaseAvailable": "Eine neue Version ist verfügbar. Überprüfen Sie die Registerkarte Version.",
+  "PresetOnline.errorLoadingPresets": "Presets können nicht geladen werden.",
+  "PresetOnline.retryLoadingPresetListBtn": "Wiederholen",
+  "PresetOnline.pleaseCheckInternetConnection": "Bitte überprüfe deine Internetverbindung."
 }

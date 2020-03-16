@@ -114,6 +114,7 @@ type ApiPreset = {
 };
 
 type PresetsOnlineContextType = {
+  error: boolean;
   loading: boolean;
   list: Array<ApiPreset>;
   update(): void;

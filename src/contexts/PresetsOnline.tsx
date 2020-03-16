@@ -1,6 +1,7 @@
 import { createContext } from "react";
 
 let context: PresetsOnlineContextType = {
+  error: false,
   loading: true,
   list: [],
   update() {},

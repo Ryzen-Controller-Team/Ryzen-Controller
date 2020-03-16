@@ -99,5 +99,8 @@
   "ryzenAdjBottomBar.createPreset": "Preset oluştur",
   "ryzenAdjBottomBar.reset": "Sıfırla",
   "app.localeSelectorModalTitle": "Dil değiştir",
-  "appContext.newReleaseAvailable": "Yeni bir sürüm mevcut, lütfen sürüm sekmesini kontrol edin."
+  "appContext.newReleaseAvailable": "Yeni bir sürüm mevcut, lütfen sürüm sekmesini kontrol edin.",
+  "PresetOnline.errorLoadingPresets": "Ön ayarlar yüklenemiyor.",
+  "PresetOnline.retryLoadingPresetListBtn": "Yeniden Dene",
+  "PresetOnline.pleaseCheckInternetConnection": "Lütfen internet bağlantınızı kontrol edin."
 }

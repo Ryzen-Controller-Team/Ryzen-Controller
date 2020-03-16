@@ -99,5 +99,8 @@
   "ryzenAdjBottomBar.createPreset": "Create preset",
   "ryzenAdjBottomBar.reset": "Reset",
   "app.localeSelectorModalTitle": "Change language",
-  "appContext.newReleaseAvailable": "A new release is available, please check the release tab."
+  "appContext.newReleaseAvailable": "A new release is available, please check the release tab.",
+  "PresetOnline.errorLoadingPresets": "Unable to load presets.",
+  "PresetOnline.retryLoadingPresetListBtn": "Retry",
+  "PresetOnline.pleaseCheckInternetConnection": "Please check your internet connection."
 }
