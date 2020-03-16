@@ -25,7 +25,10 @@ class SettingsScene extends React.PureComponent<{}, {}> {
                 "This will be used to ensure downloaded presets compatibility."
               )}`}
             >
-              System hash: {sysInfoContext.signature || getTranslation("SettingsScene.loadingSysHash", "Loading...")}
+              System hash:{" "}
+              {sysInfoContext.signature && sysInfoContext.permissiveSignature
+                ? `${sysInfoContext.signature} || ${sysInfoContext.permissiveSignature}`
+                : getTranslation("SettingsScene.loadingSysHash", "Loading...")}
             </p>
           )}
         </SysInfoContext.Consumer>

@@ -107,6 +107,7 @@ type RyzenControllerAppContextType = {
 type ApiPreset = {
   id: number;
   systemHash: string;
+  permissiveSystemHash: string;
   upvote: number;
   downvote: number;
   name: string;

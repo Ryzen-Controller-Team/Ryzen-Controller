@@ -51,7 +51,11 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
                     {(presetsOnlineContext: PresetsOnlineContextType) => (
                       <button
                         className="uk-button uk-button-small uk-button-default"
-                        onClick={this.uploadPreset(presetsOnlineContext, sysinfo.signature)}
+                        onClick={this.uploadPreset(
+                          presetsOnlineContext,
+                          sysinfo.signature,
+                          sysinfo.permissiveSignature
+                        )}
                       >
                         {getTranslation("presetButtons.upload", "Upload")}
                       </button>
@@ -77,17 +81,21 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
 
   uploadPreset(
     presetsOnlineContext: PresetsOnlineContextType,
-    signature: string | false
+    signature: string | false,
+    permissiveSignature: string | false
   ): (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void {
     return () => {
-      if (!signature) {
+      if (!signature || !permissiveSignature) {
         NotificationContext.warning(
           getTranslation("presetButtons.mustWaitForSignatureGen", "You must wait for laptop signature to be generated")
         );
         return;
       }
-      let presetsWithSameName = presetsOnlineContext.list.filter(preset => {
-        return preset.name === this.props.presetName && preset.systemHash === signature;
+      let presetsWithSameName = presetsOnlineContext.list.filter((preset: ApiPreset) => {
+        return (
+          preset.name === this.props.presetName &&
+          (preset.systemHash === signature || preset.permissiveSystemHash === permissiveSignature)
+        );
       });
       if (presetsWithSameName.length > 0) {
         NotificationContext.warning(
@@ -110,6 +118,7 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
             .uploadPreset({
               name: this.props.presetName,
               systemHash: signature,
+              permissiveSystemHash: permissiveSignature,
               ryzenAdjArguments: this.props.preset,
             })
             .then(value => {

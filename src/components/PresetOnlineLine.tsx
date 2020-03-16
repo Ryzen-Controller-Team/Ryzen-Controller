@@ -1,6 +1,10 @@
 import * as React from "react";
 import PresetSummary from "../components/PresetSummary";
 import PresetOnlineButtons from "../components/PresetOnlineButtons";
+import SysInfoContext, { SysInfoState } from "../contexts/SysInfoContext";
+import { getTranslation } from "../contexts/LocaleContext";
+
+const compatSentence = getTranslation("presetLine.compatibility", "Compatibility level:");
 
 type PresetOnlineLineProps = {
   preset: ApiPreset;
@@ -24,6 +28,22 @@ class PresetOnlineLine extends React.PureComponent<PresetOnlineLineProps, {}> {
               downvote={this.props.preset.downvote}
             />
           </div>
+          <SysInfoContext.Consumer>
+            {(sysInfo: SysInfoState) => {
+              var compatLevel = 1;
+              if (sysInfo.permissiveSignature === this.props.preset.permissiveSystemHash) {
+                compatLevel = 2;
+              }
+              if (sysInfo.signature === this.props.preset.systemHash) {
+                compatLevel = 3;
+              }
+              return (
+                <div className="uk-width-1-1">
+                  {compatSentence} {compatLevel}/3
+                </div>
+              );
+            }}
+          </SysInfoContext.Consumer>
         </div>
       </li>
     );

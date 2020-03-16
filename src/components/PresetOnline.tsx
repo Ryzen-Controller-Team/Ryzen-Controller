@@ -12,17 +12,20 @@ function PresetOnline() {
       {(sysInfoContext: SysInfoState) => (
         <PresetsOnlineContext.Consumer>
           {(presetsOnlineContext: PresetsOnlineContextType) => {
-            return presetsOnlineContext.list
+            const compatPresetList = presetsOnlineContext.list
               .filter(preset => isPresetValid(preset.ryzenAdjArguments))
-              .filter(preset => preset.systemHash === sysInfoContext.signature).length && sysInfoContext?.signature ? (
+              .filter(
+                preset =>
+                  preset.permissiveSystemHash === sysInfoContext.permissiveSignature ||
+                  preset.systemHash === sysInfoContext.signature
+              );
+
+            return compatPresetList.length && sysInfoContext?.signature ? (
               <ul className="uk-margin uk-list uk-list-large uk-list-striped">
-                {presetsOnlineContext.list
-                  .filter(preset => isPresetValid(preset.ryzenAdjArguments))
-                  .filter(preset => preset.systemHash === sysInfoContext.signature)
-                  .map((preset: ApiPreset, index) => {
-                    const presetName = preset.name;
-                    return <PresetOnlineLine preset={preset} key={`online_${index}_${presetName}_btn`} />;
-                  })}
+                {compatPresetList.map((preset: ApiPreset, index) => {
+                  const presetName = preset.name;
+                  return <PresetOnlineLine preset={preset} key={`online_${index}_${presetName}_btn`} />;
+                })}
               </ul>
             ) : presetsOnlineContext.error && !presetsOnlineContext.loading ? (
               <Card title={getTranslation("PresetOnline.errorLoadingPresets", "Unable to load presets.")}>
@@ -35,7 +38,7 @@ function PresetOnline() {
                   {getTranslation("PresetOnline.retryLoadingPresetListBtn", "Retry")}
                 </button>
               </Card>
-            ) : presetsOnlineContext.loading || !sysInfoContext?.signature ? (
+            ) : presetsOnlineContext.loading || !sysInfoContext?.signature || !sysInfoContext?.permissiveSignature ? (
               <div className="uk-flex uk-flex-center">
                 <div uk-spinner="ratio: 2"></div>
               </div>

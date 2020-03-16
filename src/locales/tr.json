@@ -105,5 +105,6 @@
   "PresetOnline.errorLoadingPresets": "Ön ayarlar yüklenemiyor.",
   "PresetOnline.retryLoadingPresetListBtn": "Yeniden Dene",
   "PresetOnline.pleaseCheckInternetConnection": "Lütfen internet bağlantınızı kontrol edin.",
-  "presetButtons.uploadError": "Ön ayar yüklenirken bir hata oluştu"
+  "presetButtons.uploadError": "Ön ayar yüklenirken bir hata oluştu",
+  "presetLine.compatibility": "bağdaşma:"
 }

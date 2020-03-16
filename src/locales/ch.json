@@ -105,5 +105,6 @@
   "PresetOnline.errorLoadingPresets": "无法加载预设。",
   "PresetOnline.retryLoadingPresetListBtn": "重试",
   "PresetOnline.pleaseCheckInternetConnection": "请检查您的互联网连接。",
-  "presetButtons.uploadError": "上载预设时发生错误"
+  "presetButtons.uploadError": "上载预设时发生错误",
+  "presetLine.compatibility": "兼容性:"
 }

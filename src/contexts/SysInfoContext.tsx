@@ -11,6 +11,7 @@ export type SysInfoState = {
   system: Systeminformation.SystemData | false;
   bios: Systeminformation.BiosData | false;
   signature: string | false;
+  permissiveSignature: string | false;
   error?: string;
 };
 
@@ -36,6 +37,20 @@ const createMachineSignature = function(data: SysInfoState): string | false {
   });
 };
 
+const createPermissiveMachineSignature = function(data: SysInfoState): string | false {
+  if (data.error) {
+    return false;
+  }
+  if (data.system === false || data.graphics === false) {
+    return false;
+  }
+
+  return hasher({
+    "system.manufacturer": data.system.manufacturer,
+    "system.model": data.system.model,
+  });
+};
+
 let context: SysInfoState = {
   cpu: false,
   graphics: false,
@@ -44,10 +59,11 @@ let context: SysInfoState = {
   system: false,
   bios: false,
   signature: false,
+  permissiveSignature: false,
 };
 
 const SysInfoContext = createContext(context);
 SysInfoContext.displayName = "SysInfoContext";
 
 export default SysInfoContext;
-export { createMachineSignature };
+export { createMachineSignature, createPermissiveMachineSignature };

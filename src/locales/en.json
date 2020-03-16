@@ -105,5 +105,6 @@
   "PresetOnline.errorLoadingPresets": "Unable to load presets.",
   "PresetOnline.retryLoadingPresetListBtn": "Retry",
   "PresetOnline.pleaseCheckInternetConnection": "Please check your internet connection.",
-  "presetButtons.uploadError": "An error occured while uploading the preset"
+  "presetButtons.uploadError": "An error occured while uploading the preset",
+  "presetLine.compatibility": "Compatibility:"
 }

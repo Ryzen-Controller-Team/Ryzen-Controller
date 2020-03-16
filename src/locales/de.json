@@ -105,5 +105,6 @@
   "PresetOnline.errorLoadingPresets": "Presets können nicht geladen werden.",
   "PresetOnline.retryLoadingPresetListBtn": "Wiederholen",
   "PresetOnline.pleaseCheckInternetConnection": "Bitte überprüfe deine Internetverbindung.",
-  "presetButtons.uploadError": "Beim Hochladen der Voreinstellung ist ein Fehler aufgetreten"
+  "presetButtons.uploadError": "Beim Hochladen der Voreinstellung ist ein Fehler aufgetreten",
+  "presetLine.compatibility": "Kompatibilität:"
 }

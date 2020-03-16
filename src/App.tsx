@@ -3,7 +3,11 @@ import TopBar from "./components/TopBar";
 import SceneSelector from "./components/SceneSelector";
 import Scene from "./scenes/Scene";
 import { HashRouter as Router } from "react-router-dom";
-import SysInfoContext, { createMachineSignature, SysInfoState } from "./contexts/SysInfoContext";
+import SysInfoContext, {
+  createMachineSignature,
+  SysInfoState,
+  createPermissiveMachineSignature,
+} from "./contexts/SysInfoContext";
 import LightModeContext from "./contexts/LightModeContext";
 import { checkNewVersion } from "./contexts/RyzenControllerAppContext";
 import LocaleContext, { getTranslation } from "./contexts/LocaleContext";
@@ -34,6 +38,7 @@ class App extends React.Component<{}, AppState> {
     system: false,
     bios: false,
     signature: false,
+    permissiveSignature: false,
   };
 
   state = {
@@ -79,6 +84,7 @@ class App extends React.Component<{}, AppState> {
     si.getAllData()
       .then((data: SysInfoState) => {
         data.signature = createMachineSignature(data);
+        data.permissiveSignature = createPermissiveMachineSignature(data);
         this._isMounted && this.setState({ sysinfo: data });
       })
       .catch((error: string) => {
