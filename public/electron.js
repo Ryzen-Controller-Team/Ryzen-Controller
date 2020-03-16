@@ -25,12 +25,12 @@ const createWindow = () => {
   let appIcon = "";
   let trayIcon = "";
   if (require("os").platform() === "win32") {
-    appIcon = __dirname + "/icons/app_icon.ico";
+    appIcon = __dirname + "/icons/app.ico";
   } else {
     appIcon = __dirname + "/icons/256x256.png";
   }
   if (require("os").platform() === "win32") {
-    trayIcon = __dirname + "/icons/tray_icon.ico";
+    trayIcon = __dirname + "/icons/tray.ico";
   } else {
     trayIcon = __dirname + "/icons/128x128.png";
   }
