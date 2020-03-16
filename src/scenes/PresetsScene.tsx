@@ -169,7 +169,6 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
 
   componentDidMount() {
     this._isMounted = true;
-    this.updatePresetList();
   }
 
   componentWillUnmount() {
