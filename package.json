@@ -106,13 +106,13 @@
   "build": {
     "appId": "ryzen-team.app.ryzen-controller",
     "productName": "Ryzen Controller",
-    "icon": "./build/icon.ico",
+    "icon": "./build/icons/app.ico",
     "asarUnpack": [
       "**/build/bin/*"
     ],
     "linux": {
       "category": "Utility",
-      "icon": "./build/icon.png",
+      "icon": "./build/icons/612x612.png",
       "target": [
         {
           "target": "deb"
@@ -123,6 +123,7 @@
       ]
     },
     "nsis": {
+      "installerIcon": "./build/icons/installer.ico",
       "oneClick": false,
       "perMachine": true,
       "allowToChangeInstallationDirectory": true

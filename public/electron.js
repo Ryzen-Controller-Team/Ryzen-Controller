@@ -23,10 +23,16 @@ const currentSettings = () => {
 
 const createWindow = () => {
   let appIcon = "";
+  let trayIcon = "";
   if (require("os").platform() === "win32") {
-    appIcon = __dirname + "/icon.ico";
+    appIcon = __dirname + "/icons/app_icon.ico";
   } else {
-    appIcon = __dirname + "/icon.png";
+    appIcon = __dirname + "/icons/256x256.png";
+  }
+  if (require("os").platform() === "win32") {
+    trayIcon = __dirname + "/icons/tray_icon.ico";
+  } else {
+    trayIcon = __dirname + "/icons/128x128.png";
   }
 
   const mainWindowOpt = {
@@ -84,7 +90,7 @@ const createWindow = () => {
     },
   ]);
 
-  tray = new Tray(appIcon);
+  tray = new Tray(trayIcon);
   tray.setContextMenu(contextMenu);
   tray.setIgnoreDoubleClickEvents(true);
   tray.on("click", function() {
