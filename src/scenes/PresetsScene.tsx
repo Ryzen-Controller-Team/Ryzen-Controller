@@ -62,6 +62,12 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   }
 
   updatePresetList() {
+    function confirmDataPrototype(data: any): data is Array<ApiPreset> {
+      if (typeof data?.filter === "function") {
+        return true;
+      }
+      return false;
+    }
     this.setState({ loading: true });
     const requestOption: RequestInit = {
       method: "GET",
@@ -72,11 +78,15 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
     };
     fetch(process.env.REACT_APP_SERVER_ENDPOINT + "/presets", requestOption)
       .then(response => response.json())
-      .then((data: Array<ApiPreset>) => {
+      .then(data => {
+        if (!confirmDataPrototype(data)) {
+          throw new Error("Preset list from API is malformed.");
+        }
         if (this._isMounted) this.setState({ list: data, loading: false, error: false });
       })
       .catch(reason => {
-        if (this._isMounted) this.setState({ error: true, loading: false });
+        if (this._isMounted) this.setState({ list: [], error: true, loading: false });
+        return [];
       });
   }
 
