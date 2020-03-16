@@ -16,6 +16,7 @@ export default function LocaleSelectorModal() {
               }}
             >
               <option value="en">English</option>
+              <option value="es">Spanish</option>
               <option value="fr">Français</option>
               <option value="ch">简体中文</option>
               <option value="de">Deutsch</option>
