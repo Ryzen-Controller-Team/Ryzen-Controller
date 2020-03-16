@@ -5,6 +5,8 @@
   "presetButtons.loadPresetTooltip": "将性能预设填充到所有调整项, 但暂不应用调整指令",
   "presetAutoApply.whenSessionResume": "重新打开窗口时",
   "presetAutoApply.whenRCStart": "当Ryzen Controller启动时",
+  "presetAutoApply.whenLaptopPluggedIn": "笔记本电脑插入时",
+  "presetAutoApply.whenLaptopPluggedOut": "笔记本电脑拔出电源时",
   "presetButtons.confirmDeletion": "确认删除预设 \"{preset}\"?",
   "presetButtons.loadedPreset": "已删除预设 {preset} .",
   "presetButtons.uploadPresetConfirmation": "确认上传预设 {preset}?",

@@ -5,6 +5,8 @@
   "presetButtons.loadPresetTooltip": "The preset will be loaded in RyzenAdj's tabs but not applied.",
   "presetAutoApply.whenSessionResume": "When session resume",
   "presetAutoApply.whenRCStart": "When Ryzen Controller starts",
+  "presetAutoApply.whenLaptopPluggedIn": "When laptop plugged in",
+  "presetAutoApply.whenLaptopPluggedOut": "When laptop plugged out",
   "presetButtons.confirmDeletion": "Are you sure to delete \"{preset}\"?",
   "presetButtons.loadedPreset": "Preset {preset} has been loaded.",
   "presetButtons.uploadPresetConfirmation": "Are you sure to upload the preset {preset}?",
