@@ -2,6 +2,8 @@ import { createContext } from "react";
 import LocaleTranslations from "../locales/LocaleTranslations";
 const fs = window.require("fs");
 
+const electronSettings = window.require("electron-settings");
+
 const LocaleContext = createContext({
   is: "en",
   change: (to: AvailableLanguages): void => {},
@@ -71,7 +73,6 @@ function addKeyToLocale(_id: string, _currentLocale: string, _fallback: string |
  * @param variables Variables to replace in the sentence
  */
 function getTranslation(id: string, fallback?: string, variables?: Record<string, string>): string {
-  const electronSettings = window.require("electron-settings");
   const currentLocale = electronSettings.get("locale") ? (electronSettings.get("locale") as AvailableLanguages) : "en";
   var sentence: string | undefined = LocaleTranslations[currentLocale][id];
 
