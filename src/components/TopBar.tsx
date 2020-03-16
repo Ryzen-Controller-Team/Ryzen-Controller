@@ -14,7 +14,7 @@ function TopBar() {
           display: "inline-block",
         }}
       >
-        <img src={logo} alt="Ryzen Controller" width="128px" height="128px" />
+        <img src={logo} alt="Ryzen Controller" style={{ padding: "10px" }} />
       </div>
       <Badge
         className="uk-margin-left"
