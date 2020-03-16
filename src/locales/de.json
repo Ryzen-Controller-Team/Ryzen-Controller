@@ -98,5 +98,6 @@
   "ryzenAdjBottomBar.apply": "Anwenden",
   "ryzenAdjBottomBar.createPreset": "Preset erstellen",
   "ryzenAdjBottomBar.reset": "Zurücksetzen",
-  "app.localeSelectorModalTitle": "Sprache ändern"
+  "app.localeSelectorModalTitle": "Sprache ändern",
+  "appContext.newReleaseAvailable": "Eine neue Version ist verfügbar. Überprüfen Sie die Registerkarte Version."
 }

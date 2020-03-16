@@ -98,5 +98,6 @@
   "ryzenAdjBottomBar.apply": "Apply",
   "ryzenAdjBottomBar.createPreset": "Create preset",
   "ryzenAdjBottomBar.reset": "Reset",
-  "app.localeSelectorModalTitle": "Change language"
+  "app.localeSelectorModalTitle": "Change language",
+  "appContext.newReleaseAvailable": "A new release is available, please check the release tab."
 }

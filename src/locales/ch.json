@@ -98,5 +98,6 @@
   "ryzenAdjBottomBar.apply": "应用",
   "ryzenAdjBottomBar.createPreset": "新增预设",
   "ryzenAdjBottomBar.reset": "重置",
-  "app.localeSelectorModalTitle": "更改语言"
+  "app.localeSelectorModalTitle": "更改语言",
+  "appContext.newReleaseAvailable": "有新版本发布，请检查发布标签。"
 }

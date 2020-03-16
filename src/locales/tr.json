@@ -98,5 +98,6 @@
   "ryzenAdjBottomBar.apply": "Uygula",
   "ryzenAdjBottomBar.createPreset": "Preset oluştur",
   "ryzenAdjBottomBar.reset": "Sıfırla",
-  "app.localeSelectorModalTitle": "Dil değiştir"
+  "app.localeSelectorModalTitle": "Dil değiştir",
+  "appContext.newReleaseAvailable": "Yeni bir sürüm mevcut, lütfen sürüm sekmesini kontrol edin."
 }
