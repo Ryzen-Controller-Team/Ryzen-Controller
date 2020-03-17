@@ -2,6 +2,31 @@
 
 <!--- next entry here -->
 
+## 2.1.0
+2020-03-17
+
+### Features
+
+- Display a preset compatibility note for each online preset. (775ac86f3500ba5f95ab3907cf4b13350cb1fc71)
+- Added Spanish translation. (8dd94fd1261b05ca8ff4cdb45fc547318556f7c2)
+
+### Fixes
+
+- Hide splash screen's scrollbars on litlle screens. (769ebc9da1cf6979fe433c7bb7db724a05490eb4)
+- Updated icons: separated tray, app and installer icons. (4bbd770ffd2af85fb3ae2fcb7f927188e9d30f90)
+- New release sentence was missing in translations files. (4cb89941f7512233e3fcda2de5bcd60d8e022bd1)
+- Increased temperature limit to 110°C instead of 100°C. (e87538940c906576e359a68352de9fba2c2b08a0)
+- Translation minor performance improvement. (79144f41681f2979cc95c53791a0ebbc7bea6f36)
+- Going to preset tabs does not load online preset anymore. (8fcbfc57a29fbcfb0a7f06e59dd74c5b4bc8d796)
+- Display an friendly message instead of loading indefinitely online presets. (605741b9c1aacfb06352b217f21ccc98c158f345)
+- #68 Preset page is now fully translated. (40e63d5021db9d804dc1c48747f15e2673885a19)
+- Avoid crash when an error exist in preset server response. (c36c657d04b0d6e05e4dc0a1f9106237b8bfc4dc)
+- Avoid crash when an error exist in upload preset request response. (adf71558005856c99f4be7fa19694abd63c8ab79)
+- New icon in top bar. (e5e0724871d910044c2af3decb1880bd6516c6a5)
+- #70 Unable to display tray icon on windows. (6ac94535c02116ec05112c5d21be20049de6dc70)
+- Handle storage correctly on software upgrade. (e178e860629fdd6986f1011729cb0dd9c3477938)
+- Updated language selector's icon in topbar. (0b6a74632d025f1ea6e49049411233d602ce1258)
+
 ## 2.0.0
 2020-03-14
 
