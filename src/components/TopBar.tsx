@@ -47,7 +47,7 @@ function TopBar() {
       </LightModeContext.Consumer>
       <Badge
         className="uk-margin-left"
-        value="🇧🇱"
+        value="🌐"
         onClick={() => {
           require("uikit")
             .modal(document.getElementById("locale-selector-modal"))
