@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.1.1
+2020-03-17
+
+### Fixes
+
+- The app was unable to start in some case. (1eaeb29730d532be9c5604690d0cce967a6c5847)
+
 ## 2.1.0
 2020-03-17
 
