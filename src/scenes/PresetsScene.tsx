@@ -8,7 +8,10 @@ import PresetOnline from "../components/PresetOnline";
 import NotificationContext from "../contexts/NotificationContext";
 import PresetsOnlineContext from "../contexts/PresetsOnline";
 import { getTranslation } from "../contexts/LocaleContext";
+import AppVersion from "../contexts/AppVersion";
 const uikit = window.require("uikit");
+const electronSettings = window.require("electron-settings");
+const votedPresetsSettingsKey = `${AppVersion.string}.votedPresets`;
 
 class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   _isMounted = false;
@@ -165,7 +168,7 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   }
 
   isUserAlreadyVotedForThisPreset(presetId: number): boolean {
-    const votedPresets: Array<number> = window.require("electron-settings").get("votedPresets");
+    const votedPresets: Array<number> = electronSettings.get(votedPresetsSettingsKey);
     if (!votedPresets) {
       return false;
     }
@@ -173,12 +176,12 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   }
 
   retainVotedPreset(presetId: number): void {
-    let votedPresets = window.require("electron-settings").get("votedPresets");
+    let votedPresets = electronSettings.get(votedPresetsSettingsKey);
     if (!votedPresets) {
       votedPresets = [];
     }
     votedPresets.push(presetId);
-    window.require("electron-settings").set("votedPresets", votedPresets);
+    electronSettings.set(votedPresetsSettingsKey, votedPresets);
   }
 
   componentDidMount() {

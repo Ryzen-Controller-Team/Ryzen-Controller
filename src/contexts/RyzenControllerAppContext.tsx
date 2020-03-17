@@ -4,10 +4,13 @@ import { isNumber } from "util";
 import compareVersions from "compare-versions";
 import NotificationContext from "./NotificationContext";
 import { getTranslation } from "./LocaleContext";
+import AppVersion from './AppVersion';
+
 const isDev = window.require("electron-is-dev");
 const electronSettings = window.require("electron-settings");
+const reApplyPeriodicallySettingsKey = `${AppVersion.string}.reApplyPeriodically`;
+const appContextSettingsKey = `${AppVersion.string}.appContext`;
 const fileSystem = window.require("fs");
-const app_version_as_string = process.env?.REACT_APP_VERSION?.replace(/\./g, "_") || "dev";
 
 const defaultPreset = {
   "--slow-time=": { enabled: false, value: getOptionDefinition("--slow-time=").default },
@@ -26,7 +29,7 @@ const defaultPreset = {
 
 const getRyzenAdjExecutablePath = function(): string {
   const cwd = window.require("electron").remote.app.getAppPath();
-  let path: string | undefined = electronSettings.get(app_version_as_string)?.settings?.ryzenAdjPath;
+  let path: string | undefined = electronSettings.get(appContextSettingsKey)?.settings?.ryzenAdjPath;
 
   if (path) {
     return path;
@@ -162,10 +165,10 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
       }
       return new Promise((resolve, reject) => {
         try {
-          let intervalId = electronSettings.get("reApplyPeriodically");
+          let intervalId = electronSettings.get(reApplyPeriodicallySettingsKey);
           clearInterval(intervalId);
           intervalId = false;
-          electronSettings.set("reApplyPeriodically", false);
+          electronSettings.set(reApplyPeriodicallySettingsKey, false);
 
           if (parsedSeconds <= 0) {
             resolve(false);
@@ -173,9 +176,9 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
           }
 
           electronSettings.set(
-            "reApplyPeriodically",
+            reApplyPeriodicallySettingsKey,
             setInterval(() => {
-              let preset = electronSettings.get(app_version_as_string).currentSettings;
+              let preset = electronSettings.get(appContextSettingsKey).currentSettings;
               if (!isPresetValid(preset)) {
                 return;
               }
@@ -336,7 +339,7 @@ const isPresetValid = function(preset: PartialRyzenAdjOptionListType): boolean {
   return true;
 };
 
-let loadedContext = window.require("electron-settings").get(app_version_as_string);
+let loadedContext = electronSettings.get(appContextSettingsKey);
 let context = defaultRyzenControllerAppContext;
 if (loadedContext) {
   context = {
@@ -353,11 +356,11 @@ const persistentSave = function(context: RyzenControllerAppContextType) {
     ...context,
     currentSettings: context.latestSettings,
   };
-  window.require("electron-settings").set(app_version_as_string, savedContext);
+  electronSettings.set(appContextSettingsKey, savedContext);
 };
 
 const executeRyzenAdjUsingPreset = function(presetName: string): boolean {
-  const presets = electronSettings.get(app_version_as_string)?.presets;
+  const presets = electronSettings.get(appContextSettingsKey)?.presets;
   if (!presets.hasOwnProperty(presetName)) {
     return false;
   }
@@ -407,7 +410,6 @@ export {
   RyzenControllerSettingsDefinitions,
   getSettingDefinition,
   getRyzenAdjExecutablePath,
-  app_version_as_string,
   executeRyzenAdjUsingPreset,
   checkIfNewerReleaseExist as checkNewVersion,
   isPresetValid,

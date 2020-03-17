@@ -3,6 +3,7 @@ import logo from "../assets/icon.png";
 import Badge from "./Badge";
 import LightModeContext from "../contexts/LightModeContext";
 import { getTranslation } from "../contexts/LocaleContext";
+import AppVersion from "../contexts/AppVersion";
 
 function TopBar() {
   return (
@@ -18,7 +19,7 @@ function TopBar() {
       </div>
       <Badge
         className="uk-margin-left"
-        value={process.env.REACT_APP_VERSION || "dev"}
+        value={AppVersion.semver}
         onClick={openExternal("https://gitlab.com/ryzen-controller-team/ryzen-controller/releases")}
         background="#EE0000"
       />

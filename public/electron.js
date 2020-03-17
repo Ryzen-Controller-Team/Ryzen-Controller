@@ -4,6 +4,7 @@ const electron = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 const electronSettings = require("electron-settings");
+const upgrader = require('./upgrader.js');
 
 const app = electron.app;
 const Tray = electron.Tray;
@@ -13,10 +14,12 @@ const app_version_as_string = app.getVersion().replace(/\./g, "_") + (isDev ? "-
 let mainWindow;
 let tray;
 
+upgrader();
+
 const currentSettings = () => {
   const localStorage = electronSettings.get(app_version_as_string);
   if (localStorage) {
-    return localStorage.settings;
+    return localStorage.appContext.settings;
   }
   return false;
 };

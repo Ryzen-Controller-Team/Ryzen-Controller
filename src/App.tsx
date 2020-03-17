@@ -8,11 +8,13 @@ import SysInfoContext, {
   SysInfoState,
   createPermissiveMachineSignature,
 } from "./contexts/SysInfoContext";
-import LightModeContext from "./contexts/LightModeContext";
+import LightModeContext, { lightModeSettingsKey } from "./contexts/LightModeContext";
 import { checkNewVersion } from "./contexts/RyzenControllerAppContext";
-import LocaleContext, { getTranslation } from "./contexts/LocaleContext";
+import LocaleContext, { getTranslation, localeSettingsKey } from "./contexts/LocaleContext";
 import LocaleSelectorModal from "./components/LocaleSelectorModal";
 const si = window.require("systeminformation");
+const electronSettings = window.require("electron-settings");
+
 
 type AppState = {
   sysinfo: SysInfoState;
@@ -55,9 +57,9 @@ class App extends React.Component<{}, AppState> {
   };
 
   switchLightMode(): void {
-    let lightMode = window.require("electron-settings").get("lightMode") || "light";
+    let lightMode = electronSettings.get(lightModeSettingsKey) || "light";
     lightMode = lightMode === "light" ? "dark" : "light";
-    window.require("electron-settings").set("lightMode", lightMode);
+    electronSettings.set(lightModeSettingsKey, lightMode);
     this.setState({
       lightMode: {
         mode: lightMode,
@@ -67,16 +69,16 @@ class App extends React.Component<{}, AppState> {
   }
 
   changeLocale(to: AvailableLanguages): void {
-    window.require("electron-settings").set("locale", to);
+    electronSettings.set(localeSettingsKey, to);
     window.location.reload();
   }
 
   getLatestLightMode(): "light" | "dark" {
-    return window.require("electron-settings").get("lightMode") || "light";
+    return electronSettings.get(lightModeSettingsKey) || "light";
   }
 
   getLatestLocale(): AvailableLanguages {
-    return window.require("electron-settings").get("locale") || "en";
+    return electronSettings.get(localeSettingsKey) || "en";
   }
 
   componentDidMount() {

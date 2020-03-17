@@ -5,7 +5,6 @@ import RyzenControllerAppContext, {
   defaultPreset,
   persistentSave,
   getSettingDefinition,
-  app_version_as_string,
   executeRyzenAdjUsingPreset,
 } from "../contexts/RyzenControllerAppContext";
 import RyzenAdjScene from "../scenes/RyzenAdjScene";
@@ -13,6 +12,7 @@ import PresetsScene from "../scenes/PresetsScene";
 import SettingsScene from "../scenes/SettingsScene";
 import NotificationContext from "../contexts/NotificationContext";
 import { getTranslation } from "../contexts/LocaleContext";
+import AppVersion from "../contexts/AppVersion";
 const electronSettings = window.require("electron-settings");
 const powerMonitor = window.require("electron").remote.powerMonitor;
 
@@ -27,7 +27,7 @@ class Scene extends React.Component<{}, RyzenControllerAppContextType> {
   };
 
   componentDidMount() {
-    let settings = electronSettings.get(app_version_as_string);
+    let settings = electronSettings.get(AppVersion.string);
     if (settings) {
       settings = settings.settings;
     } else {
@@ -58,7 +58,7 @@ class Scene extends React.Component<{}, RyzenControllerAppContextType> {
     }
 
     powerMonitor.on("unlock-screen", () => {
-      const presetName = electronSettings.get(app_version_as_string)?.settings?.onSessionResume;
+      const presetName = electronSettings.get(AppVersion.string)?.settings?.onSessionResume;
       if (presetName) {
         executeRyzenAdjUsingPreset(presetName);
       }
@@ -75,14 +75,14 @@ class Scene extends React.Component<{}, RyzenControllerAppContextType> {
 
   handleBatteryStatusChange() {
     powerMonitor.on("on-ac", () => {
-      const presetName = electronSettings.get(app_version_as_string)?.settings?.onLaptopPluggedIn;
+      const presetName = electronSettings.get(AppVersion.string)?.settings?.onLaptopPluggedIn;
       if (presetName !== false && presetName !== "") {
         executeRyzenAdjUsingPreset(presetName);
       }
     });
 
     powerMonitor.on("on-battery", () => {
-      const presetName = electronSettings.get(app_version_as_string)?.settings?.onLaptopPluggedOut;
+      const presetName = electronSettings.get(AppVersion.string)?.settings?.onLaptopPluggedOut;
       if (presetName !== false && presetName !== "") {
         executeRyzenAdjUsingPreset(presetName);
       }

@@ -1,8 +1,10 @@
 import { createContext } from "react";
 import LocaleTranslations from "../locales/LocaleTranslations";
+import AppVersion from "./AppVersion";
 const fs = window.require("fs");
 
 const electronSettings = window.require("electron-settings");
+const localeSettingsKey = `${AppVersion.string}.locale`;
 
 const LocaleContext = createContext({
   is: "en",
@@ -26,12 +28,12 @@ function addKeyToLocale(_id: string, _currentLocale: string, _fallback: string |
   let localeFile = `src/locales/${_currentLocale}.json`;
 
   let inter = setInterval(() => {
-    let lock = window.require("electron-settings").get("lock");
+    let lock = electronSettings.get("lock");
     if (lock) {
       return;
     }
     clearInterval(inter);
-    window.require("electron-settings").set("lock", true);
+    electronSettings.set("lock", true);
     console.log(`Writting key ${id} to locale ${currentLocale}...`);
     fs.readFile(localeFile, (err: string | null, data: string) => {
       if (err) {
@@ -44,7 +46,7 @@ function addKeyToLocale(_id: string, _currentLocale: string, _fallback: string |
         localeTranslation[id] = fallback;
       }
       fs.writeFile(localeFile, JSON.stringify(localeTranslation, null, 4), function(err: string | null) {
-        window.require("electron-settings").delete("lock");
+        electronSettings.delete("lock");
         if (err) {
           console.log("error", err);
           return;
@@ -73,13 +75,13 @@ function addKeyToLocale(_id: string, _currentLocale: string, _fallback: string |
  * @param variables Variables to replace in the sentence
  */
 function getTranslation(id: string, fallback?: string, variables?: Record<string, string>): string {
-  const currentLocale = electronSettings.get("locale") ? (electronSettings.get("locale") as AvailableLanguages) : "en";
+  const currentLocale = electronSettings.get(localeSettingsKey) ? (electronSettings.get(localeSettingsKey) as AvailableLanguages) : "en";
   var sentence: string | undefined = LocaleTranslations[currentLocale][id];
 
   if (!sentence && sentence !== "") {
     console.warn(`Missing translation for ${id} in locale ${currentLocale}.`);
 
-    if (process.env.REACT_APP_VERSION?.indexOf("-dev") !== -1) {
+    if (AppVersion.isDev) {
       addKeyToLocale(id, currentLocale, fallback);
     }
   }
@@ -100,5 +102,5 @@ function getTranslation(id: string, fallback?: string, variables?: Record<string
   return sentence;
 }
 
-export { getTranslation };
+export { localeSettingsKey, getTranslation };
 export default LocaleContext;

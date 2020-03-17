@@ -1,4 +1,7 @@
 import { createContext } from "react";
+import AppVersion from "./AppVersion";
+
+const lightModeSettingsKey = `${AppVersion.string}.lightMode`;
 
 const LightModeContext = createContext({
   mode: "light",
@@ -6,4 +9,5 @@ const LightModeContext = createContext({
 });
 LightModeContext.displayName = "LightModeContext";
 
+export { lightModeSettingsKey };
 export default LightModeContext;
