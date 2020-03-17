@@ -17,9 +17,9 @@ let tray;
 upgrader();
 
 const currentSettings = () => {
-  const localStorage = electronSettings.get(app_version_as_string);
+  const localStorage = electronSettings.get(`${app_version_as_string}.appContext.settings`);
   if (localStorage) {
-    return localStorage.appContext.settings;
+    return localStorage;
   }
   return false;
 };
