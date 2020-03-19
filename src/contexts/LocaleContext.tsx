@@ -9,7 +9,6 @@ const localeSettingsKey = `${AppVersion.string}.locale`;
 const LocaleContext = createContext({
   is: "en",
   change: (to: AvailableLanguages): void => {},
-  getTranslation: (id: string, fallback?: string, variables?: Record<string, string>): string => "",
 });
 
 LocaleContext.displayName = "LocaleContext";
@@ -45,7 +44,7 @@ function addKeyToLocale(_id: string, _currentLocale: string, _fallback: string |
       if (currentLocale === "en" && fallback) {
         localeTranslation[id] = fallback;
       }
-      fs.writeFile(localeFile, JSON.stringify(localeTranslation, null, 4), function(err: string | null) {
+      fs.writeFile(localeFile, JSON.stringify(localeTranslation, null, 2), function(err: string | null) {
         electronSettings.delete("lock");
         if (err) {
           console.log("error", err);
@@ -55,6 +54,22 @@ function addKeyToLocale(_id: string, _currentLocale: string, _fallback: string |
       });
     });
   }, 1000);
+}
+
+/**
+ * Will replace the variables in translated sentences.
+ *
+ * @param sentence The return value of getTranslation() below.
+ * @param variables The variables to be replaced.
+ */
+function variablesInTranslation(sentence: string, variables: Record<string, string>): string {
+  for (const variable in variables) {
+    if (variables.hasOwnProperty(variable)) {
+      const value = variables[variable];
+      sentence = sentence.replace(new RegExp(`{${variable}}`, "g"), value);
+    }
+  }
+  return sentence;
 }
 
 /**
@@ -75,7 +90,9 @@ function addKeyToLocale(_id: string, _currentLocale: string, _fallback: string |
  * @param variables Variables to replace in the sentence
  */
 function getTranslation(id: string, fallback?: string, variables?: Record<string, string>): string {
-  const currentLocale = electronSettings.get(localeSettingsKey) ? (electronSettings.get(localeSettingsKey) as AvailableLanguages) : "en";
+  const currentLocale = electronSettings.get(localeSettingsKey)
+    ? (electronSettings.get(localeSettingsKey) as AvailableLanguages)
+    : "en";
   var sentence: string | undefined = LocaleTranslations[currentLocale][id];
 
   if (!sentence && sentence !== "") {
@@ -91,16 +108,11 @@ function getTranslation(id: string, fallback?: string, variables?: Record<string
   }
 
   if (variables) {
-    for (const variable in variables) {
-      if (variables.hasOwnProperty(variable)) {
-        const value = variables[variable];
-        sentence = sentence.replace(new RegExp(`{${variable}}`, "g"), value);
-      }
-    }
+    variablesInTranslation(sentence, variables);
   }
 
   return sentence;
 }
 
-export { localeSettingsKey, getTranslation };
+export { localeSettingsKey, getTranslation, variablesInTranslation };
 export default LocaleContext;

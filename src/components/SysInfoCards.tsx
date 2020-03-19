@@ -1,7 +1,18 @@
 import * as React from "react";
 import Card from "./Card";
 import SysInfoContext from "../contexts/SysInfoContext";
-import { getTranslation } from "../contexts/LocaleContext";
+import { getTranslation, variablesInTranslation } from "../contexts/LocaleContext";
+
+const unableToGetSysInfoText = getTranslation("sysInfoCards.unableToGetSysInfo", "Unable to get system info:");
+const basicInfoTitleText = getTranslation("sysInfoCards.basicInfoTitle", "Basic Information");
+const biosVersionText = getTranslation("sysInfoCards.biosVersion", "Bios version:");
+const CPUInfoTitleText = getTranslation("sysInfoCards.CPUInfoTitle", "CPU Information");
+const cpuPerfDescText = getTranslation(
+  "sysInfoCards.cpuPerfDesc",
+  "{speedmax}Ghz on {physicalCores} cores, {cores} threads."
+);
+const GPUInfoTitleText = getTranslation("sysInfoCards.GPUInfoTitle", "GPU #{index} Information");
+const gpuPerfDescText = getTranslation("sysInfoCards.gpuPerfDesc", "{ram}Mb (Dynamic vram: {dyn}).");
 
 function SysInfoCards() {
   return (
@@ -10,7 +21,7 @@ function SysInfoCards() {
         if (sysInfoContext.error) {
           return (
             <Card title="Error">
-              {getTranslation("sysInfoCards.unableToGetSysInfo", "Unable to get system info:")}
+              {unableToGetSysInfoText}
               <br />
               {sysInfoContext.error}
             </Card>
@@ -24,41 +35,36 @@ function SysInfoCards() {
         const bios = sysInfoContext.bios;
         return (
           <div className="uk-margin-small-right uk-margin-small-left uk-flex uk-flex-center uk-flex-around uk-flex-wrap">
-            <Card title={getTranslation("sysInfoCards.basicInfoTitle", "Basic Information")}>
+            <Card title={basicInfoTitleText}>
               {system === false || mem === false || bios === false ? (
                 <div uk-spinner=""></div>
               ) : (
                 <React.Fragment>
                   {system.manufacturer} {system.model} {system.version}
                   <br />
-                  {getTranslation("sysInfoCards.biosVersion", "Bios version:")} {bios.version}{" "}
-                  {bios.revision ? `rev${bios.revision}` : ""}
+                  {biosVersionText} {bios.version} {bios.revision ? `rev${bios.revision}` : ""}
                   <br />
                   {(mem.total / (1024 * 1024 * 1024)).toFixed(2)}Gb Ram
                 </React.Fragment>
               )}
             </Card>
-            <Card title={getTranslation("sysInfoCards.CPUInfoTitle", "CPU Information")}>
+            <Card title={CPUInfoTitleText}>
               {cpu === false ? (
                 <div uk-spinner=""></div>
               ) : (
                 <React.Fragment>
                   {cpu.manufacturer} {cpu.brand}
                   <br />
-                  {getTranslation(
-                    "sysInfoCards.cpuPerfDesc",
-                    "{speedmax}Ghz on {physicalCores} cores, {cores} threads.",
-                    {
-                      speedmax: cpu.speedmax,
-                      physicalCores: cpu.physicalCores.toString(),
-                      cores: cpu.cores.toString(),
-                    }
-                  )}
+                  {variablesInTranslation(cpuPerfDescText, {
+                    speedmax: cpu.speedmax,
+                    physicalCores: cpu.physicalCores.toString(),
+                    cores: cpu.cores.toString(),
+                  })}
                 </React.Fragment>
               )}
             </Card>
             {gpu === false ? (
-              <Card title={getTranslation("sysInfoCards.GPUInfoTitle", "GPU #{index} Information", { index: "0" })}>
+              <Card title={variablesInTranslation(GPUInfoTitleText, { index: "0" })}>
                 <div uk-spinner=""></div>
               </Card>
             ) : (
@@ -66,13 +72,13 @@ function SysInfoCards() {
                 {gpu.controllers.map((controller, index) => (
                   <Card
                     key={`gpu-${index}`}
-                    title={getTranslation("sysInfoCards.GPUInfoTitle", "GPU #{index} Information", {
+                    title={variablesInTranslation(GPUInfoTitleText, {
                       index: `${index}`,
                     })}
                   >
                     {controller.vendor} {controller.model}
                     <br />
-                    {getTranslation("sysInfoCards.gpuPerfDesc", "{ram}Mb (Dynamic vram: {dyn}).", {
+                    {variablesInTranslation(gpuPerfDescText, {
                       ram: controller.vram.toString(),
                       dyn: controller.vramDynamic.toString(),
                     })}

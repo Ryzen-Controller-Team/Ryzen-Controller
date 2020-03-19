@@ -5,6 +5,9 @@ import LightModeContext from "../contexts/LightModeContext";
 import { getTranslation } from "../contexts/LocaleContext";
 import AppVersion from "../contexts/AppVersion";
 
+const beerText = getTranslation("topbar.beer", "Buy us some beers ❤️");
+const discordText = getTranslation("topbar.discord", "Join us on discord");
+
 function TopBar() {
   return (
     <header>
@@ -25,13 +28,13 @@ function TopBar() {
       />
       <Badge
         className="uk-margin-left"
-        value={getTranslation("topbar.beer", "Buy us some beers ❤️")}
+        value={beerText}
         onClick={openExternal("https://www.patreon.com/ryzencontrollerteam")}
         background="#888888"
       />
       <Badge
         className="uk-margin-left"
-        value={getTranslation("topbar.discord", "Join us on discord")}
+        value={discordText}
         onClick={openExternal("https://discord.gg/EahayUv")}
         background="#7289da"
       />

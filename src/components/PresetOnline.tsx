@@ -6,6 +6,24 @@ import PresetOnlineLine from "../components/PresetOnlineLine";
 import { isPresetValid } from "../contexts/RyzenControllerAppContext";
 import { getTranslation } from "../contexts/LocaleContext";
 
+const errorLoadingPresetsText = getTranslation("PresetOnline.errorLoadingPresets", "Unable to load presets.");
+const retryLoadingPresetListBtnText = getTranslation("PresetOnline.retryLoadingPresetListBtn", "Retry");
+const loadPresetListBtnText = getTranslation("PresetOnline.loadPresetListBtn", "Load preset list");
+const uploadBtnText = getTranslation("PresetOnline.uploadBtn", "Upload");
+const sentencePart2Text = getTranslation("PresetOnline.sentencePart2", "button available on your presets.");
+const pleaseCheckInternetConnectionText = getTranslation(
+  "PresetOnline.pleaseCheckInternetConnection",
+  "Please check your internet connection."
+);
+const listNotLoadedYetText = getTranslation(
+  "PresetOnline.listNotLoadedYet",
+  "List hasn't been loaded or there is no online preset yet."
+);
+const sentencePart1Text = getTranslation(
+  "PresetOnline.sentencePart1",
+  "You can share your own preset by clicking on the"
+);
+
 function PresetOnline() {
   return (
     <SysInfoContext.Consumer>
@@ -28,14 +46,14 @@ function PresetOnline() {
                 })}
               </ul>
             ) : presetsOnlineContext.error && !presetsOnlineContext.loading ? (
-              <Card title={getTranslation("PresetOnline.errorLoadingPresets", "Unable to load presets.")}>
-                {getTranslation("PresetOnline.pleaseCheckInternetConnection", "Please check your internet connection.")}
+              <Card title={errorLoadingPresetsText}>
+                {pleaseCheckInternetConnectionText}
                 <br />
                 <button
                   className="uk-margin-small-bottom uk-button uk-button-small uk-button-default"
                   onClick={() => presetsOnlineContext.update()}
                 >
-                  {getTranslation("PresetOnline.retryLoadingPresetListBtn", "Retry")}
+                  {retryLoadingPresetListBtnText}
                 </button>
               </Card>
             ) : presetsOnlineContext.loading || !sysInfoContext?.signature || !sysInfoContext?.permissiveSignature ? (
@@ -43,27 +61,22 @@ function PresetOnline() {
                 <div uk-spinner="ratio: 2"></div>
               </div>
             ) : (
-              <Card
-                title={getTranslation(
-                  "PresetOnline.listNotLoadedYet",
-                  "List hasn't been loaded or there is no online preset yet."
-                )}
-              >
+              <Card title={listNotLoadedYetText}>
                 <button
                   className="uk-margin-small-bottom uk-button uk-button-small uk-button-default"
                   onClick={() => presetsOnlineContext.update()}
                 >
-                  {getTranslation("PresetOnline.loadPresetListBtn", "Load preset list")}
+                  {loadPresetListBtnText}
                 </button>
                 <br />
-                {getTranslation("PresetOnline.sentencePart1", "You can share your own preset by clicking on the")}
+                {sentencePart1Text}
                 <button
                   className="uk-margin-small-right uk-margin-small-left uk-button uk-button-small uk-button-default"
                   onClick={() => false}
                 >
-                  {getTranslation("PresetOnline.uploadBtn", "Upload")}
+                  {uploadBtnText}
                 </button>
-                {getTranslation("PresetOnline.sentencePart2", "button available on your presets.")}
+                {sentencePart2Text}
               </Card>
             );
           }}

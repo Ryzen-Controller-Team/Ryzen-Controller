@@ -106,5 +106,14 @@
   "PresetOnline.retryLoadingPresetListBtn": "Retry",
   "PresetOnline.pleaseCheckInternetConnection": "Please check your internet connection.",
   "presetButtons.uploadError": "An error occured while uploading the preset",
-  "presetLine.compatibility": "Compatibility:"
+  "presetLine.compatibility": "Compatibility:",
+  "appContext.invalidPreset": "Unable to apply invalid preset",
+  "presetOnlineBtn.presetInvalidOrObsolete": "Preset \"{presetName}\" is invalid or obsolete",
+  "PresetsScene.errorWhileSendingVote": "Error while sending vote",
+  "sysInfoCards.unableToGetSysInfo": "Unable to get system info:",
+  "settingForm.windowsBinFileType": "Windows Binary",
+  "appContext.ryzenAdjPath.wrongPath": "Path to ryzenadj.exe is wrong, please fix it in settings tab.",
+  "ryzenAdjBottomBar.invalidPreset": "Unable to apply invalid preset",
+  "presetOnlineBtn.presetLoaded": "Preset \"{presetName}\" has been loaded",
+  "presetButtons.mustWaitForSignatureGen": "You must wait for laptop signature to be generated"
 }

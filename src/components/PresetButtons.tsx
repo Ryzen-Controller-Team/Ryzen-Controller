@@ -3,7 +3,36 @@ import NotificationContext from "../contexts/NotificationContext";
 import RyzenControllerAppContext, { executeRyzenAdjUsingPreset } from "../contexts/RyzenControllerAppContext";
 import SysInfoContext from "../contexts/SysInfoContext";
 import PresetsOnlineContext from "../contexts/PresetsOnline";
-import { getTranslation } from "../contexts/LocaleContext";
+import { getTranslation, variablesInTranslation } from "../contexts/LocaleContext";
+
+const applyBtnText = getTranslation("presetButtons.apply", "Apply");
+const deleteBtnText = getTranslation("presetButtons.delete", "Delete");
+const loadBtnText = getTranslation("presetButtons.load", "Load");
+const uploadBtnText = getTranslation("presetButtons.upload", "Upload");
+const uploadSucceedText = getTranslation("presetButtons.uploadSucceed", "Preset {preset} has been uploaded");
+const uploadErrorText = getTranslation("presetButtons.uploadError", "An error occured while uploading the preset");
+const loadedPresetText = getTranslation("presetButtons.loadedPreset", "Preset {preset} has been loaded.");
+const confirmDeletionText = getTranslation("presetButtons.confirmDeletion", 'Are you sure to delete "{preset}"?');
+const applyPresetTooltip = getTranslation(
+  "presetButtons.applyPresetTooltip",
+  "The preset will be loaded in RyzenAdj's tabs and applied."
+);
+const loadPresetTooltip = getTranslation(
+  "presetButtons.loadPresetTooltip",
+  "The preset will be loaded in RyzenAdj's tabs but not applied."
+);
+const mustWaitForSignatureGenText = getTranslation(
+  "presetButtons.mustWaitForSignatureGen",
+  "You must wait for laptop signature to be generated"
+);
+const presetWithSameNameAlreadyExistOnlineText = getTranslation(
+  "presetButtons.presetWithSameNameAlreadyExistOnline",
+  "A preset with the same name already exist online"
+);
+const uploadPresetConfirmationText = getTranslation(
+  "presetButtons.uploadPresetConfirmation",
+  "Are you sure to upload the preset {preset}?"
+);
 
 type PresetButtonsProps = {
   presetName: string;
@@ -19,31 +48,25 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
             <div className="uk-button-group uk-margin-right">
               <button
                 className="uk-button uk-button-small uk-button-primary"
-                uk-tooltip={`title: ${getTranslation(
-                  "presetButtons.applyPresetTooltip",
-                  "The preset will be loaded in RyzenAdj's tabs and applied."
-                )}`}
+                uk-tooltip={`title: ${applyPresetTooltip}`}
                 onClick={this.applyPreset(ryzenControllerAppContext)}
               >
-                {getTranslation("presetButtons.apply", "Apply")}
+                {applyBtnText}
               </button>
               <button
                 className="uk-button uk-button-small uk-button-danger"
                 onClick={this.removePreset(ryzenControllerAppContext)}
               >
-                {getTranslation("presetButtons.delete", "Delete")}
+                {deleteBtnText}
               </button>
             </div>
             <div className="uk-button-group uk-margin-right">
               <button
                 className="uk-button uk-button-small uk-button-default"
-                uk-tooltip={`title: ${getTranslation(
-                  "presetButtons.loadPresetTooltip",
-                  "The preset will be loaded in RyzenAdj's tabs but not applied."
-                )}`}
+                uk-tooltip={`title: ${loadPresetTooltip}`}
                 onClick={this.loadPreset(ryzenControllerAppContext)}
               >
-                {getTranslation("presetButtons.load", "Load")}
+                {loadBtnText}
               </button>
               <SysInfoContext.Consumer>
                 {sysinfo => (
@@ -57,7 +80,7 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
                           sysinfo.permissiveSignature
                         )}
                       >
-                        {getTranslation("presetButtons.upload", "Upload")}
+                        {uploadBtnText}
                       </button>
                     )}
                   </PresetsOnlineContext.Consumer>
@@ -86,9 +109,7 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
   ): (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void {
     return () => {
       if (!signature || !permissiveSignature) {
-        NotificationContext.warning(
-          getTranslation("presetButtons.mustWaitForSignatureGen", "You must wait for laptop signature to be generated")
-        );
+        NotificationContext.warning(mustWaitForSignatureGenText);
         return;
       }
       let presetsWithSameName = presetsOnlineContext.list.filter((preset: ApiPreset) => {
@@ -98,21 +119,15 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
         );
       });
       if (presetsWithSameName.length > 0) {
-        NotificationContext.warning(
-          getTranslation(
-            "presetButtons.presetWithSameNameAlreadyExistOnline",
-            "A preset with the same name already exist online"
-          )
-        );
+        NotificationContext.warning(presetWithSameNameAlreadyExistOnlineText);
         return;
       }
+      const uploadPresetConfirmationTextVariable = variablesInTranslation(uploadPresetConfirmationText, {
+        preset: this.props.presetName,
+      });
       window
         .require("uikit")
-        .modal.confirm(
-          getTranslation("presetButtons.uploadPresetConfirmation", "Are you sure to upload the preset {preset}?", {
-            preset: this.props.presetName,
-          })
-        )
+        .modal.confirm(uploadPresetConfirmationTextVariable)
         .then(() => {
           presetsOnlineContext
             .uploadPreset({
@@ -122,17 +137,14 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
               ryzenAdjArguments: this.props.preset,
             })
             .then(value => {
-              NotificationContext.success(
-                getTranslation("presetButtons.uploadSucceed", "Preset {preset} has been uploaded", {
-                  preset: value.name,
-                })
-              );
+              const uploadSucceedTextVariable = variablesInTranslation(uploadSucceedText, {
+                preset: value.name,
+              });
+              NotificationContext.success(uploadSucceedTextVariable);
               presetsOnlineContext.update();
             })
             .catch(() => {
-              NotificationContext.error(
-                getTranslation("presetButtons.uploadError", "An error occured while uploading the preset")
-              );
+              NotificationContext.error(uploadErrorText);
             });
         });
     };
@@ -143,11 +155,10 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
   ): (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void {
     return () => {
       ryzenControllerAppContext.updateCurrentSettings(this.props.preset);
-      NotificationContext.talk(
-        getTranslation("presetButtons.loadedPreset", "Preset {preset} has been loaded.", {
-          preset: this.props.presetName,
-        })
-      );
+      const loadedPresetTextVariable = variablesInTranslation(loadedPresetText, {
+        preset: this.props.presetName,
+      });
+      NotificationContext.talk(loadedPresetTextVariable);
     };
   }
 
@@ -155,12 +166,11 @@ class PresetButtons extends React.Component<PresetButtonsProps, {}> {
     ryzenControllerAppContext: RyzenControllerAppContextType
   ): (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void {
     return () => {
+      const confirmDeletionTextVariable = variablesInTranslation(confirmDeletionText, {
+        preset: this.props.presetName,
+      });
       require("uikit")
-        .modal.confirm(
-          getTranslation("presetButtons.confirmDeletion", 'Are you sure to delete "{preset}"?', {
-            preset: this.props.presetName,
-          })
-        )
+        .modal.confirm(confirmDeletionTextVariable)
         .then(() => {
           ryzenControllerAppContext.removePreset(this.props.presetName);
         })

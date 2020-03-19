@@ -7,11 +7,22 @@ import PresetAutoApplyCards from "../components/PresetAutoApplyCards";
 import PresetOnline from "../components/PresetOnline";
 import NotificationContext from "../contexts/NotificationContext";
 import PresetsOnlineContext from "../contexts/PresetsOnline";
-import { getTranslation } from "../contexts/LocaleContext";
+import { getTranslation, variablesInTranslation } from "../contexts/LocaleContext";
 import AppVersion from "../contexts/AppVersion";
 const uikit = window.require("uikit");
 const electronSettings = window.require("electron-settings");
+
 const votedPresetsSettingsKey = `${AppVersion.string}.votedPresets`;
+const confirmVoteText = getTranslation("PresetsScene.confirmVote", "Are you sure to {vote} this preset?");
+const errorWhileSendingVoteText = getTranslation("PresetsScene.errorWhileSendingVote", "Error while sending vote");
+const onlinePresetTitleText = getTranslation("PresetsScene.onlinePresetTitle", "Online Presets");
+const localPresetTitleText = getTranslation("PresetsScene.localPresetTitle", "Local Presets");
+const autoApplyTitleText = getTranslation("PresetsScene.autoApplyTitle", "Auto apply preset");
+const updatingVotesText = getTranslation("PresetsScene.updatingVotes", "Updating votes...");
+const cantVoteTwiceSamePresetText = getTranslation(
+  "PresetsScene.cantVoteTwiceSamePreset",
+  "You can't vote twice for the same preset"
+);
 
 class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   _isMounted = false;
@@ -94,33 +105,31 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   }
 
   downvote(presetId: number): Promise<ApiPreset> {
-    if (this.isUserAlreadyVotedForThisPreset(presetId)) {
-      let message = getTranslation("PresetsScene.cantVoteTwiceSamePreset", "You can't vote twice for the same preset");
-      NotificationContext.warning(message);
-      return new Promise((res, rej) => {
-        rej(message);
-      });
-    }
-    let confirmMessage = getTranslation("PresetsScene.confirmVote", "Are you sure to {vote} this preset?", {
+    const confirmVoteTextVariable = variablesInTranslation(confirmVoteText, {
       vote: "👎",
     });
-    return uikit.modal.confirm(confirmMessage).then(() => {
+    if (this.isUserAlreadyVotedForThisPreset(presetId)) {
+      NotificationContext.warning(cantVoteTwiceSamePresetText);
+      return new Promise((res, rej) => {
+        rej(cantVoteTwiceSamePresetText);
+      });
+    }
+    return uikit.modal.confirm(confirmVoteTextVariable).then(() => {
       return this.vote(presetId, "down");
     });
   }
 
   upvote(presetId: number): Promise<ApiPreset> {
-    if (this.isUserAlreadyVotedForThisPreset(presetId)) {
-      let message = getTranslation("PresetsScene.cantVoteTwiceSamePreset", "You can't vote twice for the same preset");
-      NotificationContext.warning(message);
-      return new Promise((res, rej) => {
-        rej(message);
-      });
-    }
-    let confirmMessage = getTranslation("PresetsScene.confirmVote", "Are you sure to {vote} this preset?", {
+    const confirmVoteTextVariable = variablesInTranslation(confirmVoteText, {
       vote: "👍",
     });
-    return uikit.modal.confirm(confirmMessage).then(() => {
+    if (this.isUserAlreadyVotedForThisPreset(presetId)) {
+      NotificationContext.warning(cantVoteTwiceSamePresetText);
+      return new Promise((res, rej) => {
+        rej(cantVoteTwiceSamePresetText);
+      });
+    }
+    return uikit.modal.confirm(confirmVoteTextVariable).then(() => {
       return this.vote(presetId, "up");
     });
   }
@@ -141,7 +150,7 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
         "Content-Type": "application/merge-patch+json",
       },
     };
-    NotificationContext.talk(getTranslation("PresetsScene.updatingVotes", "Updating votes..."));
+    NotificationContext.talk(updatingVotesText);
     return fetch(url, requestOptionGet)
       .then(response => response.json())
       .then((data: ApiPreset) => {
@@ -162,7 +171,7 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
           });
       })
       .catch(error => {
-        NotificationContext.error(getTranslation("PresetsScene.errorWhileSendingVote", "Error while sending vote"));
+        NotificationContext.error(errorWhileSendingVoteText);
         throw new Error(error);
       });
   }
@@ -193,9 +202,6 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
   }
 
   render() {
-    const onlinePresetTitle = getTranslation("PresetsScene.onlinePresetTitle", "Online Presets");
-    const localPresetTitle = getTranslation("PresetsScene.localPresetTitle", "Local Presets");
-    const autoApplyTitle = getTranslation("PresetsScene.autoApplyTitle", "Auto apply preset");
     return (
       <PresetsOnlineContext.Provider value={this.state}>
         <RyzenControllerAppContext.Consumer>
@@ -204,7 +210,7 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
               return (
                 <React.Fragment>
                   <PresetListEmpty />
-                  <SceneTitle title={onlinePresetTitle} />
+                  <SceneTitle title={onlinePresetTitleText} />
                   <PresetOnline />
                 </React.Fragment>
               );
@@ -213,16 +219,16 @@ class PresetsScene extends React.Component<{}, PresetsOnlineContextType> {
             const presetNames = Object.keys(ryzenControllerAppContext.presets);
             return (
               <React.Fragment>
-                <SceneTitle title={localPresetTitle} />
+                <SceneTitle title={localPresetTitleText} />
                 <ul className="uk-margin uk-list uk-list-large uk-list-striped">
                   {presetNames.map(presetName => {
                     const preset = ryzenControllerAppContext.presets[presetName];
                     return <PresetLine key={`0_${presetName}`} presetName={presetName} preset={preset} />;
                   })}
                 </ul>
-                <SceneTitle title={onlinePresetTitle} />
+                <SceneTitle title={onlinePresetTitleText} />
                 <PresetOnline />
-                <SceneTitle title={autoApplyTitle} />
+                <SceneTitle title={autoApplyTitleText} />
                 <PresetAutoApplyCards />
               </React.Fragment>
             );

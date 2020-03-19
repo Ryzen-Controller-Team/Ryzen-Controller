@@ -4,13 +4,23 @@ import { isNumber } from "util";
 import compareVersions from "compare-versions";
 import NotificationContext from "./NotificationContext";
 import { getTranslation } from "./LocaleContext";
-import AppVersion from './AppVersion';
+import AppVersion from "./AppVersion";
 
 const isDev = window.require("electron-is-dev");
 const electronSettings = window.require("electron-settings");
 const reApplyPeriodicallySettingsKey = `${AppVersion.string}.reApplyPeriodically`;
 const appContextSettingsKey = `${AppVersion.string}.appContext`;
 const fileSystem = window.require("fs");
+
+const invalidPresetText = getTranslation("appContext.invalidPreset", "Unable to apply invalid preset");
+const newReleaseAvailableText = getTranslation(
+  "appContext.newReleaseAvailable",
+  "A new release is available, please check the release tab."
+);
+const ryzenAdjPathWrongPathText = getTranslation(
+  "appContext.ryzenAdjPath.wrongPath",
+  "Path to ryzenadj.exe is wrong, please fix it in settings tab."
+);
 
 const defaultPreset = {
   "--slow-time=": { enabled: false, value: getOptionDefinition("--slow-time=").default },
@@ -208,12 +218,7 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
           path = getRyzenAdjExecutablePath();
         }
         if (!fileSystem.existsSync(path)) {
-          reject(
-            getTranslation(
-              "appContext.ryzenAdjPath.wrongPath",
-              "Path to ryzenadj.exe is wrong, please fix it in settings tab."
-            )
-          );
+          reject(ryzenAdjPathWrongPathText);
         }
         resolve(true);
       });
@@ -365,7 +370,7 @@ const executeRyzenAdjUsingPreset = function(presetName: string): boolean {
     return false;
   }
   if (!isPresetValid(presets[presetName])) {
-    NotificationContext.warning(getTranslation("appContext.invalidPreset", "Unable to apply invalid preset"));
+    NotificationContext.warning(invalidPresetText);
     return false;
   }
   executeRyzenAdj(createRyzenAdjCommandLine(presets[presetName]));
@@ -392,9 +397,7 @@ const checkIfNewerReleaseExist = function(): void {
     })
     .then((isNewReleaseExist: boolean) => {
       if (isNewReleaseExist) {
-        NotificationContext.talk(
-          getTranslation("appContext.newReleaseAvailable", "A new release is available, please check the release tab.")
-        );
+        NotificationContext.talk(newReleaseAvailableText);
       }
     })
     .catch(err => {

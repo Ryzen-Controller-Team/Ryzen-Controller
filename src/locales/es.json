@@ -105,5 +105,16 @@
   "PresetOnline.retryLoadingPresetListBtn": "Reintentar",
   "PresetOnline.pleaseCheckInternetConnection": "Verifique su conexión a Internet",
   "presetButtons.uploadError": "Se produjo un error al cargar el preset",
-  "presetLine.compatibility": "Compatibilidad:"
+  "presetLine.compatibility": "Compatibilidad:",
+  "ryzenAdj.minFclkFrequency.desc": "Infinity Fabric es el término de marketing de AMD para la conexión de bus que conecta los troqueles del procesador (GPU / CPU). Esto define el límite mínimo de reloj del bus.",
+  "notification.settingsSaveSuccess": "La configuración se ha guardado correctamente",
+  "appContext.invalidPreset": "No se puede aplicar el preajuste no válido",
+  "appContext.ryzenAdjPath.wrongPath": "La ruta a ryzenadj.exe es incorrecta, corríjala en la pestaña de configuración.",
+  "ryzenAdjBottomBar.invalidPreset": "No se puede aplicar el preajuste no válido",
+  "presetOnlineBtn.presetLoaded": "Se ha cargado el preajuste {presetName}",
+  "presetOnlineBtn.presetInvalidOrObsolete": "El preajuste \"{presetName}\" es inválido u obsoleto",
+  "PresetsScene.errorWhileSendingVote": "Error al enviar voto",
+  "sysInfoCards.unableToGetSysInfo": "No se puede obtener información del sistema:",
+  "presetButtons.mustWaitForSignatureGen": "Debe esperar a que se genere la firma de la computadora portátil",
+  "settingForm.windowsBinFileType": "Ejecutable de Windows"
 }

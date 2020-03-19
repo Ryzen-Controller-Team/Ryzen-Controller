@@ -16,6 +16,11 @@ import AppVersion from "../contexts/AppVersion";
 const electronSettings = window.require("electron-settings");
 const powerMonitor = window.require("electron").remote.powerMonitor;
 
+const settingsSaveSuccessText = getTranslation(
+  "notification.settingsSaveSuccess",
+  "Settings has been saved successfully"
+);
+
 class Scene extends React.Component<{}, RyzenControllerAppContextType> {
   state: RyzenControllerAppContextType = {
     ...defaultRyzenControllerAppContext,
@@ -158,10 +163,7 @@ class Scene extends React.Component<{}, RyzenControllerAppContextType> {
     if (newSettingsPromises.length > 0) {
       Promise.all(newSettingsPromises)
         .then(results => {
-          NotificationContext.success(
-            getTranslation("notification.settingsSaveSuccess", "Settings has been saved successfully"),
-            "settings_applied"
-          );
+          NotificationContext.success(settingsSaveSuccessText, "settings_applied");
           this.setState({ settings: newSettings });
         })
         .catch((error: string) => {

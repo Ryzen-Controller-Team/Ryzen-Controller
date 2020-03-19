@@ -3,6 +3,13 @@ import { Link, Switch, Route } from "react-router-dom";
 import LightModeContext from "../contexts/LightModeContext";
 import { getTranslation } from "../contexts/LocaleContext";
 
+const cpuTitleText = getTranslation("sceneSelector.cpuTitle", "CPU");
+const gpuTitleText = getTranslation("sceneSelector.gpuTitle", "GPU");
+const powerTitleText = getTranslation("sceneSelector.powerTitle", "Power");
+const presetsTitleText = getTranslation("sceneSelector.presetsTitle", "Presets");
+const settingsTitleText = getTranslation("sceneSelector.settingsTitle", "Settings");
+const releasesTitleText = getTranslation("sceneSelector.releasesTitle", "Releases");
+
 function Tabs(props: { tabName: string; tabLocation: string; currentLocation: string }) {
   let isActive = "";
   if (props.currentLocation === props.tabLocation) {
@@ -30,38 +37,18 @@ function SceneSelector() {
 
                   return (
                     <ul className="uk-tab uk-margin-remove-bottom">
-                      <Tabs
-                        tabName={getTranslation("sceneSelector.cpuTitle", "CPU")}
-                        tabLocation="/cpu"
-                        currentLocation={currentLocation}
-                      />
-                      <Tabs
-                        tabName={getTranslation("sceneSelector.gpuTitle", "GPU")}
-                        tabLocation="/gpu"
-                        currentLocation={currentLocation}
-                      />
-                      <Tabs
-                        tabName={getTranslation("sceneSelector.powerTitle", "Power")}
-                        tabLocation="/power"
-                        currentLocation={currentLocation}
-                      />
-                      <Tabs
-                        tabName={getTranslation("sceneSelector.presetsTitle", "Presets")}
-                        tabLocation="/presets"
-                        currentLocation={currentLocation}
-                      />
-                      <Tabs
-                        tabName={getTranslation("sceneSelector.settingsTitle", "Settings")}
-                        tabLocation="/settings"
-                        currentLocation={currentLocation}
-                      />
+                      <Tabs tabName={cpuTitleText} tabLocation="/cpu" currentLocation={currentLocation} />
+                      <Tabs tabName={gpuTitleText} tabLocation="/gpu" currentLocation={currentLocation} />
+                      <Tabs tabName={powerTitleText} tabLocation="/power" currentLocation={currentLocation} />
+                      <Tabs tabName={presetsTitleText} tabLocation="/presets" currentLocation={currentLocation} />
+                      <Tabs tabName={settingsTitleText} tabLocation="/settings" currentLocation={currentLocation} />
                       <li>
                         <a
                           href="https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases"
                           onClick={openExternal("https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases")}
                         >
                           <span uk-icon="link"></span>
-                          {getTranslation("sceneSelector.releasesTitle", "Releases")}
+                          {releasesTitleText}
                         </a>
                       </li>
                     </ul>

@@ -10,11 +10,10 @@ import SysInfoContext, {
 } from "./contexts/SysInfoContext";
 import LightModeContext, { lightModeSettingsKey } from "./contexts/LightModeContext";
 import { checkNewVersion } from "./contexts/RyzenControllerAppContext";
-import LocaleContext, { getTranslation, localeSettingsKey } from "./contexts/LocaleContext";
+import LocaleContext, { localeSettingsKey } from "./contexts/LocaleContext";
 import LocaleSelectorModal from "./components/LocaleSelectorModal";
 const si = window.require("systeminformation");
 const electronSettings = window.require("electron-settings");
-
 
 type AppState = {
   sysinfo: SysInfoState;
@@ -25,7 +24,6 @@ type AppState = {
   locale: {
     is: AvailableLanguages;
     change(to: AvailableLanguages): void;
-    getTranslation(id: string, fallback?: string, variables?: Record<string, string>): string;
   };
 };
 
@@ -52,7 +50,6 @@ class App extends React.Component<{}, AppState> {
     locale: {
       is: this.getLatestLocale(),
       change: this.changeLocale.bind(this),
-      getTranslation: getTranslation,
     },
   };
 

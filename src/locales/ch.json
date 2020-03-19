@@ -106,5 +106,14 @@
   "PresetOnline.retryLoadingPresetListBtn": "重试",
   "PresetOnline.pleaseCheckInternetConnection": "请检查您的互联网连接。",
   "presetButtons.uploadError": "上载预设时发生错误",
-  "presetLine.compatibility": "兼容性:"
+  "presetLine.compatibility": "兼容性:",
+  "appContext.invalidPreset": "无法套用无效的预设",
+  "appContext.ryzenAdjPath.wrongPath": "ryzenadj.exe的路径错误，请在“设置”选项卡中对其进行修复。",
+  "presetButtons.mustWaitForSignatureGen": "您必须等待生成笔记本电脑签名",
+  "presetOnlineBtn.presetLoaded": "预设 {presetName} 已加载",
+  "PresetsScene.errorWhileSendingVote": "发送投票时出错",
+  "ryzenAdjBottomBar.invalidPreset": "无法套用无效的预设",
+  "settingForm.windowsBinFileType": "Windows可执行文件",
+  "presetOnlineBtn.presetInvalidOrObsolete": "预设 {presetName} 无效或已过时",
+  "sysInfoCards.unableToGetSysInfo": "无法获取系统信息："
 }

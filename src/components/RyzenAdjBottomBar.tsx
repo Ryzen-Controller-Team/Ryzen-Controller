@@ -4,9 +4,21 @@ import Notification from "../contexts/NotificationContext";
 import { createRyzenAdjCommandLine, executeRyzenAdj } from "../contexts/RyzenAdjContext";
 import LightModeContext from "../contexts/LightModeContext";
 import NotificationContext from "../contexts/NotificationContext";
-import { getTranslation } from "../contexts/LocaleContext";
+import { getTranslation, variablesInTranslation } from "../contexts/LocaleContext";
 
 const UIkit = require("uikit");
+
+const applyText = getTranslation("ryzenAdjBottomBar.apply", "Apply");
+const createPresetText = getTranslation("ryzenAdjBottomBar.createPreset", "Create preset");
+const resetText = getTranslation("ryzenAdjBottomBar.reset", "Reset");
+const promptText = getTranslation("ryzenAdjBottomBar.prompt", "New preset name");
+const mustProvideNameText = getTranslation("ryzenAdjBottomBar.mustProvideName", "You must provide a name");
+const presetCreatedText = getTranslation("ryzenAdjBottomBar.presetCreated", 'Preset "{newPresetName}" created');
+const invalidPresetText = getTranslation("ryzenAdjBottomBar.invalidPreset", "Unable to apply invalid preset");
+const presetWithSameNameExistText = getTranslation(
+  "ryzenAdjBottomBar.presetWithSameNameExist",
+  'A preset with the name "{newPresetName}" already exist'
+);
 
 class RyzenAdjBottomBar extends React.PureComponent {
   render() {
@@ -23,19 +35,19 @@ class RyzenAdjBottomBar extends React.PureComponent {
                 return (
                   <div className={`uk-padding-small uk-position-fixed uk-position-bottom-right ${classes}`}>
                     <button className="uk-button uk-button-primary" onClick={this.apply(ryzenControllerAppContext)}>
-                      {getTranslation("ryzenAdjBottomBar.apply", "Apply")}
+                      {applyText}
                     </button>
                     <button
                       className="uk-button uk-button-default uk-margin-left"
                       onClick={this.createNewPreset(ryzenControllerAppContext)}
                     >
-                      {getTranslation("ryzenAdjBottomBar.createPreset", "Create preset")}
+                      {createPresetText}
                     </button>
                     <button
                       className="uk-button uk-button-default uk-margin-left"
                       onClick={this.reset(ryzenControllerAppContext)}
                     >
-                      {getTranslation("ryzenAdjBottomBar.reset", "Reset")}
+                      {resetText}
                     </button>
                   </div>
                 );
@@ -51,8 +63,8 @@ class RyzenAdjBottomBar extends React.PureComponent {
     ryzenControllerAppContext: RyzenControllerAppContextType
   ): (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void {
     return function() {
-      const promptMessage = getTranslation("ryzenAdjBottomBar.prompt", "New preset name");
-      const mustProvideNameMessage = getTranslation("ryzenAdjBottomBar.mustProvideName", "You must provide a name");
+      const promptMessage = promptText;
+      const mustProvideNameMessage = mustProvideNameText;
 
       UIkit.modal.prompt(promptMessage, "").then((newPresetName: string | null) => {
         if (newPresetName === null) {
@@ -60,20 +72,15 @@ class RyzenAdjBottomBar extends React.PureComponent {
         } else if (newPresetName.length <= 0) {
           Notification.warning(mustProvideNameMessage);
         } else if (ryzenControllerAppContext.presets.hasOwnProperty(newPresetName)) {
-          const presetWithSameNameExistMessage = getTranslation(
-            "ryzenAdjBottomBar.presetWithSameNameExist",
-            'A preset with the name "{newPresetName}" already exist',
-            { newPresetName: newPresetName }
-          );
-          Notification.warning(presetWithSameNameExistMessage);
+          const presetWithSameNameExistTextVariable = variablesInTranslation(presetWithSameNameExistText, {
+            newPresetName: newPresetName,
+          });
+          Notification.warning(presetWithSameNameExistTextVariable);
         } else {
           ryzenControllerAppContext.addPreset(newPresetName, ryzenControllerAppContext.currentSettings);
-          const presetCreatedMessage = getTranslation(
-            "ryzenAdjBottomBar.presetCreated",
-            'Preset "{newPresetName}" created',
-            { newPresetName: newPresetName }
-          );
-          Notification.success(presetCreatedMessage);
+
+          const presetCreatedTextVariable = variablesInTranslation(presetCreatedText, { newPresetName: newPresetName });
+          Notification.success(presetCreatedTextVariable);
         }
       });
     };
@@ -82,9 +89,7 @@ class RyzenAdjBottomBar extends React.PureComponent {
   apply(ryzenControllerAppContext: RyzenControllerAppContextType) {
     return function() {
       if (!isPresetValid(ryzenControllerAppContext.currentSettings)) {
-        NotificationContext.warning(
-          getTranslation("ryzenAdjBottomBar.invalidPreset", "Unable to apply invalid preset")
-        );
+        NotificationContext.warning(invalidPresetText);
         return;
       }
       ryzenControllerAppContext.updateLatestSettings();

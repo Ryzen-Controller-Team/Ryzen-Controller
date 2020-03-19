@@ -2,6 +2,14 @@ import * as React from "react";
 import LightModeContext from "../contexts/LightModeContext";
 import { getTranslation } from "../contexts/LocaleContext";
 
+const youDontHaveAnyText = getTranslation("presetListEmpty.youDontHaveAny", "You don't have any preset yet");
+const sentencePart1Text = getTranslation("presetListEmpty.sentencePart1", "You can create one by using the");
+const createPresetBtnText = getTranslation("presetListEmpty.createPresetBtn", "Create preset");
+const sentencePart2Text = getTranslation(
+  "presetListEmpty.sentencePart2",
+  "button available on Ryzen Adj settings tabs (CPU, GPU, ...)."
+);
+
 function PresetListEmpty() {
   return (
     <LightModeContext.Consumer>
@@ -10,18 +18,13 @@ function PresetListEmpty() {
         return (
           <div className={`uk-flex uk-flex-center uk-margin-left uk-margin-right`}>
             <div className={`uk-card uk-card-default uk-card-body uk-width-1-2@m ${classes}`}>
-              <h3 className="uk-card-title">
-                {getTranslation("presetListEmpty.youDontHaveAny", "You don't have any preset yet")}
-              </h3>
+              <h3 className="uk-card-title">{youDontHaveAnyText}</h3>
               <p>
-                {getTranslation("presetListEmpty.sentencePart1", "You can create one by using the")}
+                {sentencePart1Text}
                 <button className="uk-button uk-button-default uk-margin-small-left uk-margin-small-right">
-                  {getTranslation("presetListEmpty.createPresetBtn", "Create preset")}
+                  {createPresetBtnText}
                 </button>
-                {getTranslation(
-                  "presetListEmpty.sentencePart2",
-                  "button available on Ryzen Adj settings tabs (CPU, GPU, ...)."
-                )}
+                {sentencePart2Text}
               </p>
             </div>
           </div>

@@ -1,13 +1,15 @@
 import * as React from "react";
 import LocaleContext, { getTranslation } from "../contexts/LocaleContext";
 
+const localeSelectorModalTitle = getTranslation("app.localeSelectorModalTitle", "Change language");
+
 export default function LocaleSelectorModal() {
   return (
     <LocaleContext.Consumer>
       {locale => (
         <div id="locale-selector-modal" uk-modal="">
           <div className="uk-modal-dialog uk-modal-body">
-            <h2 className="uk-modal-title">{getTranslation("app.localeSelectorModalTitle", "Change language")}</h2>
+            <h2 className="uk-modal-title">{localeSelectorModalTitle}</h2>
             <select
               defaultValue={locale.is}
               className="uk-select"

@@ -3,6 +3,12 @@ import Card from "./Card";
 import RyzenControllerAppContext from "../contexts/RyzenControllerAppContext";
 import { getTranslation } from "../contexts/LocaleContext";
 
+const whenLaptopPluggedInTitle = getTranslation("presetAutoApply.whenLaptopPluggedIn", "When laptop plugged in");
+const nonePresetMessage = getTranslation("presetAutoApply.nonePreset", "None");
+const whenLaptopPluggedOutTitle = getTranslation("presetAutoApply.whenLaptopPluggedOut", "When laptop plugged out");
+const whenSessionResumeTitle = getTranslation("presetAutoApply.whenSessionResume", "When session resume");
+const whenRCStartTitle = getTranslation("presetAutoApply.whenRCStart", "When Ryzen Controller starts");
+
 class PresetAutoApplyCards extends React.PureComponent {
   updateOnLaptopPluggedIn(ryzenControllerAppContext: RyzenControllerAppContextType) {
     return function(event: React.ChangeEvent<HTMLSelectElement>): void {
@@ -44,16 +50,13 @@ class PresetAutoApplyCards extends React.PureComponent {
             <div className="uk-flex uk-flex-wrap">
               {window.require("os").platform() === "win32" ? (
                 <React.Fragment>
-                  <Card
-                    title={getTranslation("presetAutoApply.whenLaptopPluggedIn", "When laptop plugged in")}
-                    type="small"
-                  >
+                  <Card title={whenLaptopPluggedInTitle} type="small">
                     <select
                       onChange={this.updateOnLaptopPluggedIn(ryzenControllerAppContext)}
                       className="uk-select"
                       value={ryzenControllerAppContext.settings.onLaptopPluggedIn || ""}
                     >
-                      <option value="">{getTranslation("presetAutoApply.nonePreset", "None")}</option>
+                      <option value="">{nonePresetMessage}</option>
                       {presetNames.map(presetName => {
                         return (
                           <option key={`1_${presetName}`} value={presetName}>
@@ -63,16 +66,13 @@ class PresetAutoApplyCards extends React.PureComponent {
                       })}
                     </select>
                   </Card>
-                  <Card
-                    title={getTranslation("presetAutoApply.whenLaptopPluggedOut", "When laptop plugged out")}
-                    type="small"
-                  >
+                  <Card title={whenLaptopPluggedOutTitle} type="small">
                     <select
                       onChange={this.updateOnLaptopPluggedOut(ryzenControllerAppContext)}
                       className="uk-select"
                       value={ryzenControllerAppContext.settings.onLaptopPluggedOut || ""}
                     >
-                      <option value="">{getTranslation("presetAutoApply.nonePreset", "None")}</option>
+                      <option value="">{nonePresetMessage}</option>
                       {presetNames.map(presetName => {
                         return (
                           <option key={`2_${presetName}`} value={presetName}>
@@ -84,13 +84,13 @@ class PresetAutoApplyCards extends React.PureComponent {
                   </Card>
                 </React.Fragment>
               ) : null}
-              <Card title={getTranslation("presetAutoApply.whenSessionResume", "When session resume")} type="small">
+              <Card title={whenSessionResumeTitle} type="small">
                 <select
                   onChange={this.updateOnSessionResume(ryzenControllerAppContext)}
                   className="uk-select"
                   value={ryzenControllerAppContext.settings.onSessionResume || ""}
                 >
-                  <option value="">{getTranslation("presetAutoApply.nonePreset", "None")}</option>
+                  <option value="">{nonePresetMessage}</option>
                   {presetNames.map(presetName => {
                     return (
                       <option key={`2_${presetName}`} value={presetName}>
@@ -100,13 +100,13 @@ class PresetAutoApplyCards extends React.PureComponent {
                   })}
                 </select>
               </Card>
-              <Card title={getTranslation("presetAutoApply.whenRCStart", "When Ryzen Controller starts")} type="small">
+              <Card title={whenRCStartTitle} type="small">
                 <select
                   onChange={this.updateOnRCStart(ryzenControllerAppContext)}
                   className="uk-select"
                   value={ryzenControllerAppContext.settings.onRCStart || ""}
                 >
-                  <option value="">{getTranslation("presetAutoApply.nonePreset", "None")}</option>
+                  <option value="">{nonePresetMessage}</option>
                   {presetNames.map(presetName => {
                     return (
                       <option key={`2_${presetName}`} value={presetName}>

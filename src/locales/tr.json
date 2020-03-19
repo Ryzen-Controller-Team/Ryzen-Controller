@@ -106,5 +106,14 @@
   "PresetOnline.retryLoadingPresetListBtn": "Yeniden Dene",
   "PresetOnline.pleaseCheckInternetConnection": "Lütfen internet bağlantınızı kontrol edin.",
   "presetButtons.uploadError": "Ön ayar yüklenirken bir hata oluştu",
-  "presetLine.compatibility": "bağdaşma:"
+  "presetLine.compatibility": "bağdaşma:",
+  "appContext.invalidPreset": "Geçersiz önayar uygulanamıyor",
+  "appContext.ryzenAdjPath.wrongPath": "Ryzenadj.exe yolu yanlış, lütfen ayarlar sekmesinde düzeltin.",
+  "ryzenAdjBottomBar.invalidPreset": "Geçersiz önayar uygulanamıyor",
+  "presetButtons.mustWaitForSignatureGen": "Dizüstü bilgisayar imzasının oluşturulmasını beklemelisiniz",
+  "presetOnlineBtn.presetLoaded": "{PresetName} hazır ayarı yüklendi",
+  "PresetsScene.errorWhileSendingVote": "Oy gönderilirken hata oluştu",
+  "sysInfoCards.unableToGetSysInfo": "Sistem bilgisi alınamıyor:",
+  "settingForm.windowsBinFileType": "Windows yürütülebilir",
+  "presetOnlineBtn.presetInvalidOrObsolete": "Önceden ayarlanmış \"{presetName}\" geçersiz veya eski"
 }
