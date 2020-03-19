@@ -6,7 +6,7 @@ const app = electron.app;
 const app_version_as_string = app.getVersion().replace(/\./g, "_") + (isDev ? "-dev" : "");
 
 function storageHaveCurrentVersion() {
-  return typeof electronSettings.get(app_version_as_string) === "object";
+  return electronSettings.has(app_version_as_string);
 }
 
 function getAllAvailableVersion() {
