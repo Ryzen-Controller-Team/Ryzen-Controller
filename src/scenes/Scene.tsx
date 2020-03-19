@@ -121,10 +121,6 @@ class Scene extends React.Component<{}, RyzenControllerAppContextType> {
       },
     };
 
-    if (this.state.presets.hasOwnProperty(name)) {
-      // @TODO handle preset creation when name already existing.
-    }
-
     this.setState({
       presets: {
         ...this.state.presets,
