@@ -416,4 +416,5 @@ export {
   executeRyzenAdjUsingPreset,
   checkIfNewerReleaseExist as checkNewVersion,
   isPresetValid,
+  appContextSettingsKey,
 };
