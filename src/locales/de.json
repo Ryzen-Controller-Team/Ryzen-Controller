@@ -105,15 +105,15 @@
   "PresetOnline.errorLoadingPresets": "Presets können nicht geladen werden.",
   "PresetOnline.retryLoadingPresetListBtn": "Wiederholen",
   "PresetOnline.pleaseCheckInternetConnection": "Bitte überprüfe deine Internetverbindung.",
-  "presetButtons.uploadError": "Beim Hochladen der Voreinstellung ist ein Fehler aufgetreten",
+  "presetButtons.uploadError": "Beim Hochladen der Presets ist ein Fehler aufgetreten",
   "presetLine.compatibility": "Kompatibilität:",
-  "appContext.invalidPreset": "Ungültig voreingestellte Anwendung nicht möglich",
-  "appContext.ryzenAdjPath.wrongPath": "Der Pfad zu ryzenadj.exe ist falsch. Bitte korrigieren Sie ihn auf der Registerkarte Einstellungen.",
-  "ryzenAdjBottomBar.invalidPreset": "Ungültig voreingestellte Anwendung nicht möglich",
-  "presetButtons.mustWaitForSignatureGen": "Sie müssen warten, bis die Laptop-Signatur generiert wurde",
+  "appContext.invalidPreset": "Kann ungültige Presets nicht anwenden",
+  "presetOnlineBtn.presetInvalidOrObsolete": "Preset \"{presetName}\" ist ungültig oder veraltet",
+  "PresetsScene.errorWhileSendingVote": "Fehler beim Senden der Abstimmung",
   "sysInfoCards.unableToGetSysInfo": "Systeminformationen können nicht abgerufen werden:",
   "settingForm.windowsBinFileType": "Windows ausführbare Datei",
+  "appContext.ryzenAdjPath.wrongPath": "Der Pfad zu ryzenadj.exe ist falsch. Bitte korrigiere diesen in den Tab für Einstellungen.",
+  "ryzenAdjBottomBar.invalidPreset": "Kann ungültige Presets nicht anwenden",
   "presetOnlineBtn.presetLoaded": "Preset {presetName} wurde geladen",
-  "presetOnlineBtn.presetInvalidOrObsolete": "Preset \"{presetName}\" ist ungültig oder veraltet",
-  "PresetsScene.errorWhileSendingVote": "Fehler beim Senden der Abstimmung"
+  "presetButtons.mustWaitForSignatureGen": "Du musst warten, bis die Laptop-Signatur generiert wurde"
 }
