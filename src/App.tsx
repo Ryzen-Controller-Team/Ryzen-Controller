@@ -84,16 +84,17 @@ class App extends React.Component<{}, AppState> {
       .then((data: SysInfoState) => {
         data.signature = createMachineSignature(data);
         data.permissiveSignature = createPermissiveMachineSignature(data);
-        this._isMounted && this.setState({ sysinfo: data });
+        if (this._isMounted) this.setState({ sysinfo: data });
       })
       .catch((error: string) => {
-        this._isMounted &&
+        if (this._isMounted) {
           this.setState({
             sysinfo: {
               ...this.state.sysinfo,
               error: error,
             },
           });
+        }
       });
 
     checkNewVersion();
