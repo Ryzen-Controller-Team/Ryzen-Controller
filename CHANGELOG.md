@@ -2,6 +2,18 @@
 
 <!--- next entry here -->
 
+## 2.1.2
+2020-03-21
+
+### Fixes
+
+- Ensure storage upgrade path from any version to above. (2388d4b97429784ee5a5f5f69c606e71719ef520)
+- Unable to initialize persistent data in some cases. (2cf1007b5d82def2af6b712e2ffe3846b6dcb71f)
+- #74 Reduce freezes due to translation. (df2d7d6357d9a9995b8c0f326b251d5bcc9681b7)
+- Unable to change language while loading system signature in some case. (347b05bad7da0615fc887aff445d60cb05bba176)
+- Auto apply presets wasn't working as expected in some cases. (5629f8034ae41d924d14887cdd28273934565a62)
+- #74 Better DA and TR locales. (70989bf77e7af8d128531673b8b03a600f4cc44a)
+
 ## 2.1.1
 2020-03-17
 
