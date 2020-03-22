@@ -6,4 +6,5 @@ export default {
   ch: require("./ch.json") as Record<string, string>,
   de: require("./de.json") as Record<string, string>,
   tr: require("./tr.json") as Record<string, string>,
+  ru: require("./ru.json") as Record<string, string>,
 };
