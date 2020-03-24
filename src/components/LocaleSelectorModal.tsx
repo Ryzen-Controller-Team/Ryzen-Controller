@@ -24,6 +24,7 @@ export default function LocaleSelectorModal() {
               <option value="de">Deutsch</option>
               <option value="tr">Türkçe</option>
               <option value="ru">Русский</option>
+              <option value="ua">Українська</option>
               {/* Add language here with the name of the language in his native name */}
             </select>
           </div>
