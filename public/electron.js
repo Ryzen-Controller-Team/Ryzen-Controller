@@ -14,8 +14,6 @@ const app_version_as_string = app.getVersion().replace(/\./g, "_") + (isDev ? "-
 let mainWindow;
 let tray;
 
-upgrader();
-
 const currentSettings = () => {
   const localStorage = electronSettings.get(`${app_version_as_string}.appContext.settings`);
   if (localStorage) {
@@ -25,6 +23,8 @@ const currentSettings = () => {
 };
 
 const createWindow = () => {
+  upgrader();
+
   let appIcon = "";
   let trayIcon = "";
   if (require("os").platform() === "win32") {
@@ -56,7 +56,7 @@ const createWindow = () => {
       showOnStart = false;
     }
   }
-  const splashTimeOut = 4000;
+  const splashTimeOut = 5000;
   if (showOnStart) {
     mainWindow = Splashscreen.initSplashScreen({
       windowOpts: mainWindowOpt,
