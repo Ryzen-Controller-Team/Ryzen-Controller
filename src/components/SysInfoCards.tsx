@@ -34,7 +34,7 @@ function SysInfoCards() {
         const gpu = sysInfoContext.graphics;
         const bios = sysInfoContext.bios;
         return (
-          <div className="uk-margin-small-right uk-margin-small-left uk-flex uk-flex-center uk-flex-around uk-flex-wrap">
+          <div className="uk-margin-small-right uk-margin-small-left uk-flex uk-flex-left uk-flex-wrap">
             <Card title={basicInfoTitleText}>
               {system === false || mem === false || bios === false ? (
                 <div uk-spinner=""></div>

@@ -13,8 +13,8 @@ function TopBar() {
     <header>
       <div
         style={{
-          width: "128px",
-          height: "128px",
+          width: "96px",
+          height: "96px",
           display: "inline-block",
         }}
       >
@@ -36,27 +36,27 @@ function TopBar() {
         className="uk-margin-left"
         value={discordText}
         onClick={openExternal("https://discord.gg/EahayUv")}
-        background="#7289da"
+        background="#888888"
       />
       <LightModeContext.Consumer>
         {mode => (
           <Badge
             className="uk-margin-left"
-            value={mode.mode === "dark" ? "☀️" : "🌙"}
+            value={mode.mode === "dark" ? "🌙 Dark" : "☀️ Light"}
             onClick={mode.switch}
-            background={mode.mode === "dark" ? "#FFF" : "#000"}
+            background={mode.mode === "dark" ? "#888888" : "#888888"}
           />
         )}
       </LightModeContext.Consumer>
       <Badge
         className="uk-margin-left"
-        value="🌐"
+        value="🌐 Language"
         onClick={() => {
           require("uikit")
             .modal(document.getElementById("locale-selector-modal"))
             .show();
         }}
-        background="rgba(0, 0, 0, 0)"
+        background="#888888"
       />
     </header>
   );

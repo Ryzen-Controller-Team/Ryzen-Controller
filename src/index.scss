@@ -10,8 +10,40 @@ html {
     cursor: pointer;
   }
 
+  .uk-h1,
+  .uk-h2,
+  .uk-h3,
+  .uk-h4,
+  .uk-h5,
+  .uk-h6,
+  .uk-heading-2xlarge,
+  .uk-heading-large,
+  .uk-heading-medium,
+  .uk-heading-small,
+  .uk-heading-xlarge,
+  .uk-tab,
+  .uk-card-title,
+  .uk-badge,
+  .uk-button, h1, h2, h3, h4, h5, h6, html {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .uk-h2 {
+    font-size: 23px;
+    line-height: 0.3;
+  }
+
+  .uk-card-title {
+    font-weight: 600;
+  }
+
+  .uk-badge {
+    height: 28px;
+    border-radius: 5px;
+  }
+
   .uk-modal {
-    background-color: rgba(50, 50, 50, 0.6);
+    background-color: rgba(0, 0, 0, 0.75);
 
     .uk-modal-dialog {
       background-color: #1e87f0;
