@@ -2,6 +2,19 @@
 
 <!--- next entry here -->
 
+## 2.2.0
+2020-03-29
+
+### Features
+
+- Added Russian Translation. (f78e3c52b850ee8eb99e475db0a94d22457be93d)
+- added Ukrainian lng, declared configs (f8134daae37204bec238919fab0e34470616859c)
+- Interface re-styling by @danielderbenev. (c54ed5aedf531cc5b1ba2546147c42a03f134e4e)
+
+### Fixes
+
+- The app was unable to load the settings in some case. (6b600ccc382ee593638ffd6365e9a3bf406de479)
+
 ## 2.1.2
 2020-03-21
 
