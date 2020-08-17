@@ -15,26 +15,29 @@ stages:
 ##              TEST
 ###############################################################################
 
-code_quality:
-  stage: test
-  only:
-    - branches
-    - schedules@ryzen-controller-team/ryzen-controller
-  except: []
+# See https://gitlab.com/ryzen-controller-team/ryzen-controller/-/pipelines/156178573
+# code_quality:
+#   stage: test
+#   only:
+#     - branches
+#     - schedules@ryzen-controller-team/ryzen-controller
+#   except: []
 
-dependency_scanning:
-  stage: test
-  only:
-    - branches
-    - schedules@ryzen-controller-team/ryzen-controller
-  except: []
+# See https://gitlab.com/ryzen-controller-team/ryzen-controller/-/pipelines/156177371
+# dependency_scanning:
+#   stage: test
+#   only:
+#     - branches
+#     - schedules@ryzen-controller-team/ryzen-controller
+#   except: []
 
-sast:
-  stage: test
-  only:
-    - branches
-    - schedules@ryzen-controller-team/ryzen-controller
-  except: []
+# See https://gitlab.com/ryzen-controller-team/ryzen-controller/-/pipelines/156178280
+# sast:
+#   stage: test
+#   only:
+#     - branches
+#     - schedules@ryzen-controller-team/ryzen-controller
+#   except: []
 
 release-check:
   tags: [ docker ]

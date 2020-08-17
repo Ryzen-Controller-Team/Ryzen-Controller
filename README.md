@@ -52,6 +52,9 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 - Set the path to your freshly builded `ryzenadj` binary into the "settings" tab.
 - Enjoy!
 
+### Caution!
+- Ryzen Controller Team is not liable for any damages that my occur from using Ryzen Controller or RyzenADJ, Please use at your own risk!
+
 ## Troubleshoot, Q&A
 
 > I'm getting an error when installing ryzen controller on linux
