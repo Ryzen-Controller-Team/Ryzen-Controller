@@ -112,7 +112,6 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_arg: "--stapm-limit=",
     ryzenadj_value_convert: "toThousand",
   },
-  
   {
     description: getTranslation(
       "ryzenAdj.stapmTime.desc",
@@ -143,11 +142,6 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
   },
   {
     description: getTranslation(
-      "ryzenAdj.slowLimit.desc",
-      "The amount of power the CPU can draw while boost levels off."
-    ),
-    {
-    description: getTranslation(
       "ryzenAdj.slowTime.desc",
       "This define the period to be used out of boost period to deliver a constant power to be delivered to the socket."
     ),
@@ -160,6 +154,11 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_arg: "--slow-time=",
     ryzenadj_value_convert: null,
   },
+  {
+    description: getTranslation(
+      "ryzenAdj.slowLimit.desc",
+      "The amount of power the CPU can draw while boost levels off."
+    ),
     label: getTranslation("ryzenAdj.slowLimit.label", "Short Boost TDP (W)"),
     tab: "cpu",
     min: 5,
