@@ -5,20 +5,6 @@ import { getTranslation } from "./LocaleContext";
 const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
   {
     description: getTranslation(
-      "ryzenAdj.slowTime.desc",
-      "This define the period to be used out of boost period to deliver a constant power to be delivered to the socket."
-    ),
-    label: getTranslation("ryzenAdj.slowTime.label", "Package Power Tracking (PPT) - Slow period"),
-    tab: "power",
-    min: 1,
-    max: 3600,
-    step: 1,
-    default: 900,
-    ryzenadj_arg: "--slow-time=",
-    ryzenadj_value_convert: null,
-  },
-  {
-    description: getTranslation(
       "ryzenAdj.psi0Current.desc",
       "The limit of current we let the motherboard deliver to the PSI0."
     ),
@@ -128,10 +114,24 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
   },
   {
     description: getTranslation(
+      "ryzenAdj.slowTime.desc",
+      "This define the period to be used out of boost period to deliver a constant power to be delivered to the socket."
+    ),
+    label: getTranslation("ryzenAdj.slowTime.label", "Short Boost Duration "),
+    tab: "cpu",
+    min: 1,
+    max: 3600,
+    step: 1,
+    default: 900,
+    ryzenadj_arg: "--slow-time=",
+    ryzenadj_value_convert: null,
+  },
+  {
+    description: getTranslation(
       "ryzenAdj.stapmTime.desc",
       "Skin Temperature Aware Power Management. This will define the boost period to be used."
     ),
-    label: getTranslation("ryzenAdj.stapmTime.label", "CPU Boost Period"),
+    label: getTranslation("ryzenAdj.stapmTime.label", "Long Boost Duration"),
     tab: "cpu",
     min: 1,
     max: 3600,
@@ -145,7 +145,7 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
       "ryzenAdj.fastLimit.desc",
       "The amount of power the CPU can draw while boost levels on."
     ),
-    label: getTranslation("ryzenAdj.fastLimit.label", "CPU Boost TDP (W)"),
+    label: getTranslation("ryzenAdj.fastLimit.label", "Long Boost TDP (W)"),
     tab: "cpu",
     min: 5,
     max: 100,
@@ -159,7 +159,7 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
       "ryzenAdj.slowLimit.desc",
       "The amount of power the CPU can draw while boost levels off."
     ),
-    label: getTranslation("ryzenAdj.slowLimit.label", "CPU Min TDP (W)"),
+    label: getTranslation("ryzenAdj.slowLimit.label", "Sort Boost TDP (W)"),
     tab: "cpu",
     min: 5,
     max: 100,
