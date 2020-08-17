@@ -160,7 +160,7 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     ryzenadj_arg: "--slow-time=",
     ryzenadj_value_convert: null,
   },
-    label: getTranslation("ryzenAdj.slowLimit.label", "Sort Boost TDP (W)"),
+    label: getTranslation("ryzenAdj.slowLimit.label", "Short Boost TDP (W)"),
     tab: "cpu",
     min: 5,
     max: 100,
