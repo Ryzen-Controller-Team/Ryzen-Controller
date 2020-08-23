@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.2.1
+2020-08-23
+
+### Fixes
+
+- Support for Renoir APUs. (40c842c2c5e736f498b895a8fc7c12ca574d9a03)
+
 ## 2.2.0
 2020-03-29
 
