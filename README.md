@@ -17,6 +17,10 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
     - [Using Windows](#using-windows)
     - [Using Linux](#using-linux)
 
+## Disclaimer 
+
+- if you intend to use Ryzen Controller in a video posted online e.g. YouTube, please credit the Ryzen Controller team and post a link to the Ryzen Controller website where the users can download the software!!
+
 ## What's this?
 
 - It's a little Ryzen Master for laptops.
@@ -53,6 +57,7 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 - Enjoy!
 
 ### Caution!
+
 - Ryzen Controller Team is not liable for any damages that my occur from using Ryzen Controller or RyzenADJ, Please use at your own risk!
 
 ## Troubleshoot, Q&A
