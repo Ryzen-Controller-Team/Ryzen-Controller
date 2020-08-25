@@ -17,9 +17,10 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
     - [Using Windows](#using-windows)
     - [Using Linux](#using-linux)
 
-## Disclaimer 
+## Disclaimers & Cautions
 
-- If you intend to use Ryzen Controller in a video posted online e.g. YouTube, please credit the Ryzen Controller team and post a link to the Ryzen Controller website where the users can download the software!!
+- If you intend to use Ryzen Controller in a video/text post online (e.g. YouTube, Reddit) please credit the Ryzen Controller team by linking to the Ryzen Controller website! We ask this so that viewers/readers can download the software from a trusted source and so the developers get the proper recognition for their work.
+- Ryzen Controller Team is not liable for any damages that my occur from using Ryzen Controller or RyzenADJ, Please use at your own risk!
 
 ## What's this?
 
@@ -55,10 +56,6 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 - Launch with `sudo ryzencontroller`
 - Set the path to your freshly builded `ryzenadj` binary into the "settings" tab.
 - Enjoy!
-
-### Caution!
-
-- Ryzen Controller Team is not liable for any damages that my occur from using Ryzen Controller or RyzenADJ, Please use at your own risk!
 
 ## Troubleshoot, Q&A
 
