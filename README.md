@@ -19,7 +19,7 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 
 ## Disclaimer 
 
-- if you intend to use Ryzen Controller in a video posted online e.g. YouTube, please credit the Ryzen Controller team and post a link to the Ryzen Controller website where the users can download the software!!
+- If you intend to use Ryzen Controller in a video posted online e.g. YouTube, please credit the Ryzen Controller team and post a link to the Ryzen Controller website where the users can download the software!!
 
 ## What's this?
 
