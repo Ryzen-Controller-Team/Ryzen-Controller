@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.2.4
+2020-08-26
+
+### Fixes
+
+- Updated default Slow Boost Duration to fix preset invalid error (5368ca483212095a1addf5d0a7d92a4351ed81b4)
+
 ## 2.2.3
 2020-08-26
 
