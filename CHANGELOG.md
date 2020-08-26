@@ -2,6 +2,24 @@
 
 <!--- next entry here -->
 
+## 2.2.2
+2020-08-26
+
+### Fixes
+
+- changed settings names (b6c62d4a3f33b3fef22c1334029a0d93e3f31cf2)
+- changed settings name to better illustrate what they do (8cf4af4977293ebe51256dcd0f9ef1041db8b5b9)
+- fixed spelling of short boost (04f3f7513d4ec4df4cb63d139cda2781191c3297)
+- fixed short duration (9ab8b5b6659bc237ba9452d4477958cf23ea930d)
+- updated short and long boost limits (507cb8c75f799512f95a184dee3512d57e2319ca)
+- read me file (4f1637175695f233db90fb4c527a502ce06db281)
+- read me file (aa395666fcedab3011bbfbcbd8f67eb261ac98aa)
+- updated read me file (0de550ae83bdf340a80b2d1f0de8a4c1e32d5216)
+- 3000/2000 series fix (558c15b9186d8e4814331923919e777624dab289)
+- 3000/2000 series fix (990dbefac4ef6496fcb60a542a24c1d4a75fa446)
+- 3000/2000 series fix (1f8e65be339148752afe3228e2e12cc00032ce9e)
+- 3000/2000 series fix (fe5e1418160747400e508b33bb11d7b927f3e052)
+
 ## 2.2.1
 2020-08-23
 
