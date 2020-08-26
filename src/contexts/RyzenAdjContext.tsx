@@ -150,7 +150,7 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     min: 1,
     max: 60,
     step: 1,
-    default: 900,
+    default: 60,
     ryzenadj_arg: "--slow-time=",
     ryzenadj_value_convert: null,
   },
