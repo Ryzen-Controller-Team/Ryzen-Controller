@@ -2,6 +2,15 @@
 
 <!--- next entry here -->
 
+## 2.2.3
+2020-08-26
+
+### Fixes
+
+- fixes 3000/2000 series CPU clock clock (2d14520df22e93a0d4868209e4b02f094bb184e5)
+- fixes 3000/2000 series CPU clock clock (981f916ba2bb27675bea2315a1c459bccff0bfaf)
+- fixes 3000/2000 series CPU clock clock (a6c374d7ee241306e6c3205f758ac22d7b9e3b73)
+
 ## 2.2.2
 2020-08-26
 
