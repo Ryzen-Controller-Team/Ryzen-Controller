@@ -1,6 +1,6 @@
 # Ryzen controller
 
-*_I'm looking for maintainers and reviewers, if you know Electron/React and have some spare times, please open an issue or ping `@storm1er#0376` on [discord](https://discord.gg/EahayUv)._*
+*_I'm looking for maintainers and reviewers, if you know Electron/React and have some spare times, please open an issue or ping `@storm1er#0376` or `@JamesCJ#2020` on [discord](https://discord.gg/8uHWnsz)._*
 
 Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is included (windows only for now).
 
@@ -21,17 +21,18 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 
 - If you intend to use Ryzen Controller in a video/text post online (e.g. YouTube, Reddit) please credit the Ryzen Controller team by linking to the Ryzen Controller website! We ask this so that viewers/readers can download the software from a trusted source and so the developers get the proper recognition for their work.
 - Ryzen Controller Team is not liable for any damages that my occur from using Ryzen Controller or RyzenADJ, Please use at your own risk!
+- If you wish to join us developing Ryzen Controller, please join the community [discord server](https://discord.gg/8uHWnsz) and ping either  `@storm1er#0376` or `@JamesCJ#2020`.
 
 ## What's this?
 
 - It's a little Ryzen Master for laptops.
-- Works best on 2xxx Ryzen series (3xxx series is experimental)
+- Works best on 2xxx and 3xxx Ryzen series (4xxx series is experimental)
 
 ## Installation
 
 ### Windows
 
-- Go to [release page](https://gitlab.com/le.storm1er/ryzen-controller/releases)
+- Go to [release page](https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases)
 - Download the latest `Ryzen Controller Setup X.X.X.exe`
 - Enjoy!
 
@@ -39,7 +40,7 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 
 - Go to [RyzenAdj](https://github.com/FlyGoat/RyzenAdj) repo.
 - Download and build as explained in [Build requirements](https://github.com/FlyGoat/RyzenAdj#build-requirements).
-- Go to Ryzen Controller's [release page](https://gitlab.com/le.storm1er/ryzen-controller/releases)
+- Go to Ryzen Controller's [release page](https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases)
 - Download the latest `ryzen-controller_X.X.X_ARCH.deb` file.
 - `sudo dpkg -i ryzen-controller_X.X.X_ARCH.deb`
 - Launch with `sudo ryzencontroller`
@@ -50,7 +51,7 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 
 - Go to [RyzenAdj](https://github.com/FlyGoat/RyzenAdj) repo.
 - Download and build as explained in [Build requirements](https://github.com/FlyGoat/RyzenAdj#build-requirements).
-- Go to Ryzen Controller's [release page](https://gitlab.com/le.storm1er/ryzen-controller/releases)
+- Go to Ryzen Controller's [release page](https://gitlab.com/ryzen-controller-team/ryzen-controller/-/releases)
 - Download the latest `ryzen-controller-X.X.X.ARCH.rpm` file.
 - `sudo rpm -u ryzen-controller-X.X.X.ARCH.rpm`
 - Launch with `sudo ryzencontroller`
