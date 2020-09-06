@@ -2,6 +2,14 @@
 
 <!--- next entry here -->
 
+## 2.2.5
+2020-09-06
+
+### Fixes
+
+- altered restrictions for Renoir (d7a5fc805537ae602799632c3beec2ee0d8b4627)
+- update release page link (22432dbfd4c645c002e97d3b681e165e702c4cbd)
+
 ## 2.2.4
 2020-08-26
 
