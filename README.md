@@ -19,7 +19,7 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 
 ## Disclaimers & Cautions
 
-- If you intend to use Ryzen Controller in a video/text post online (e.g. YouTube, Reddit) please credit the Ryzen Controller team by linking to the Ryzen Controller website! We ask this so that viewers/readers can download the software from a trusted source and so the developers get the proper recognition for their work.
+- If you intend to use Ryzen Controller in a video/text post online (e.g. YouTube, Reddit) you must credit the Ryzen Controller team by linking to the Ryzen Controller website! We ask this so that viewers/readers can download the software from a trusted source and so the developers get the proper recognition for their work.
 - Ryzen Controller Team is not liable for any damages that my occur from using Ryzen Controller or RyzenADJ, Please use at your own risk!
 - If you wish to join us developing Ryzen Controller, please join the community [discord server](https://discord.gg/8uHWnsz) and ping either  `@storm1er#0376` or `@JamesCJ#2020`.
 
