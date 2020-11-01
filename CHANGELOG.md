@@ -2,6 +2,15 @@
 
 <!--- next entry here -->
 
+## 2.2.7
+2020-11-01
+
+### Fixes
+
+- updated links (806165e826754a0a72d6700500ebdcce1402cea5)
+- updated links (d2216f4b9fb4a302141d1a6b8948deb3eebbf561)
+- further alterations for Renoir (7a8aa3957fd265f38092edfc377f6ef21dfc7eb8)
+
 ## 2.2.6
 2020-10-23
 
