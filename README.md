@@ -1,6 +1,6 @@
 # Ryzen controller
 
-*_I'm looking for maintainers and reviewers, if you know Electron/React and have some spare times, please open an issue or ping `@storm1er#0376` or `@JamesCJ#2020` on [discord](https://discord.gg/8uHWnsz)._*
+*_I'm looking for maintainers and reviewers, if you know Electron/React and have some spare times, please open an issue or ping `@storm1er#0376` or `@JamesCJ#2020` on [discord](https://discord.gg/M3hVqnT4pQ)._*
 
 Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is included (windows only for now).
 
@@ -21,7 +21,7 @@ Thanks to https://github.com/FlyGoat/RyzenAdj and his author, ryzenadj.exe is in
 
 - If you intend to use Ryzen Controller in a video/text post online (e.g. YouTube, Reddit) you must credit the Ryzen Controller team by linking to the Ryzen Controller website! We ask this so that viewers/readers can download the software from a trusted source and so the developers get the proper recognition for their work.
 - Ryzen Controller Team is not liable for any damages that my occur from using Ryzen Controller or RyzenADJ, Please use at your own risk!
-- If you wish to join us developing Ryzen Controller, please join the community [discord server](https://discord.gg/8uHWnsz) and ping either  `@storm1er#0376` or `@JamesCJ#2020`.
+- If you wish to join us developing Ryzen Controller, please join the community [discord server](https://discord.gg/M3hVqnT4pQ) and ping either  `@storm1er#0376` or `@JamesCJ#2020`.
 
 ## What's this?
 
