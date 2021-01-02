@@ -8,4 +8,5 @@ export default {
   tr: require("./tr.json") as Record<string, string>,
   ru: require("./ru.json") as Record<string, string>,
   ua: require("./ua.json") as Record<string, string>,
+  ko: require("./ko.json") as Record<string, string>,
 };

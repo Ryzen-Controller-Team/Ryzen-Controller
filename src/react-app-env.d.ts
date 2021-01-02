@@ -1,7 +1,7 @@
 /// <reference types="react-scripts" />
 
 /* Add language here */
-type AvailableLanguages = "en" | "fr" | "ch" | "de" | "tr";
+type AvailableLanguages = "en" | "fr" | "ch" | "de" | "tr" | "ko";
 
 type RyzenControllerTabForRyzenAdj = "power" | "cpu" | "gpu";
 
