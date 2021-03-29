@@ -135,6 +135,7 @@ installers:
       - .exe_link
       - .rpm_link
       - .deb_link
+    expire_in: never
   needs:
     - node
     - build
