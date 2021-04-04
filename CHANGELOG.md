@@ -2,6 +2,17 @@
 
 <!--- next entry here -->
 
+## 2.4.0
+2021-04-04
+
+### Features
+
+- Added Korean Translation, by @lyttiya. (b623fc377701efb58e2fd535660be996ee77bc75)
+
+### Fixes
+
+- Ensure all releases are kept forever. (3b40fe49e64123372ef12af8490d816ab6e21445)
+
 ## 2.3.0
 2021-03-26
 
