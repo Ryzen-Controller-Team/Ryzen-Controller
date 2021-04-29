@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.4.1
+2021-04-29
+
+### Fixes
+
+- Updated temp limit based on new advice (1693d277502a14840a5e0136cfbdf18c41a36f40)
+
 ## 2.4.0
 2021-04-04
 
