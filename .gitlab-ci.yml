@@ -63,7 +63,7 @@ node:
     - schedules@ryzen-controller-team/ryzen-controller
   stage: install
   tags: [ docker ]
-  image: storm1er/electron-builder-wine-dubnium:1.0.2
+  image: storm1er/electron-builder-wine-dubnium:1.0.3
   needs:
     - release-check
   script:
@@ -89,7 +89,7 @@ build:
     - schedules@ryzen-controller-team/ryzen-controller
   stage: build
   tags: [ docker ]
-  image: storm1er/electron-builder-wine-dubnium:1.0.2
+  image: storm1er/electron-builder-wine-dubnium:1.0.3
   script:
     - yarn build
   artifacts:
@@ -108,7 +108,7 @@ installers:
     - schedules@ryzen-controller-team/ryzen-controller
   stage: installer
   tags: [ docker ]
-  image: storm1er/electron-builder-wine-dubnium:1.0.2
+  image: storm1er/electron-builder-wine-dubnium:1.0.3
   script:
     - export ELECTRON_CACHE=`pwd`/.cache/electron
     - export ELECTRON_BUILDER_CACHE=`pwd`/.cache/builder

@@ -1,11 +1,11 @@
-# storm1er/electron-builder-wine-dubnium:1.0.2
+# storm1er/electron-builder-wine-dubnium:1.0.3
 
 FROM electronuserland/builder:wine
 
 RUN rm `which node`
 RUN rm `which npm`
 
-ENV NODE_VERSION=10.18.0
+ENV NODE_VERSION=14.17.5
 RUN wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.2/install.sh | bash
 
 RUN echo 'export NVM_DIR="$HOME/.nvm"'                                       >> "$HOME/.bashrc"
