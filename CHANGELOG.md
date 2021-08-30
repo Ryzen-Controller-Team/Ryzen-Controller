@@ -2,6 +2,19 @@
 
 <!--- next entry here -->
 
+## 2.5.0
+2021-08-30
+
+### Features
+
+- You can now see the current values in the status tab (by @TSGames) (98383a6a76aaeb9de43bc73082055d8bc2fe6ebb)
+
+### Fixes
+
+- Updated RyzenAdj to version 0.8.2. (1b369ef54cd8182654a6e81a59f5b1f5b99c06a9)
+- Updated some visual aspects for better understanding. (117c52acbb6b4122a9fa4619f23c7917aac257d3)
+- Updated discord link. (570d01cdf7f83cffb89c7145530a2401a502c492)
+
 ## 2.4.1
 2021-04-29
 

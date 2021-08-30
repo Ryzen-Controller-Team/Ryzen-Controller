@@ -1,6 +1,6 @@
 {
   "name": "ryzen-controller",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "A minimal Electron application to use ryzenAdj through a friendly interface.",
   "scripts": {
     "all": "yarn clean && yarn dist-pack",
