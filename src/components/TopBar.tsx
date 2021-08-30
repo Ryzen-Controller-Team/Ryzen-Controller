@@ -6,7 +6,7 @@ import { getTranslation } from "../contexts/LocaleContext";
 import AppVersion from "../contexts/AppVersion";
 
 const beerText = getTranslation("topbar.beer", "Buy us some beers ❤️");
-const discordText = getTranslation("topbar.discord", "Join our new discord server");
+const discordText = getTranslation("topbar.discord", "Ask for help");
 
 function TopBar() {
   return (
@@ -35,7 +35,7 @@ function TopBar() {
       <Badge
         className="uk-margin-left badge"
         value={discordText}
-        onClick={openExternal("https://discord.gg/M3hVqnT4pQ")}
+        onClick={openExternal("https://discord.gg/8E7TxQmqv2")}
         background="#888888"
       />
       <LightModeContext.Consumer>
