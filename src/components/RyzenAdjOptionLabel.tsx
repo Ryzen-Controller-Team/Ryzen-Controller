@@ -29,9 +29,9 @@ class RyzenAdjOptionLabel extends React.PureComponent<RyzenAdjOptionLabelProps, 
     return (
       <RyzenControllerAppContext.Consumer>
         {ryzenControllerAppContext => (
-          <div className="uk-grid-small" uk-grid="">
+          <div className="uk-grid-small form-label" uk-grid="">
             <div className="uk-width-expend">
-              <h2>
+              <h2 className="uk-flex uk-flex-middle">
                 <label className="uk-pointer">
                   <input
                     className="uk-margin-right uk-checkbox"

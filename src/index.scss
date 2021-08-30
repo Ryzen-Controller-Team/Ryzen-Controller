@@ -24,7 +24,14 @@ html {
   .uk-tab,
   .uk-card-title,
   .uk-badge,
-  .uk-button, h1, h2, h3, h4, h5, h6, html {
+  .uk-button,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  html {
     font-family: Arial, Helvetica, sans-serif;
   }
 
@@ -55,6 +62,36 @@ html {
       }
       .uk-modal-footer {
         background-color: #1e87f0;
+      }
+    }
+  }
+
+  // custom app related styles
+  .app-header {
+    background-color: rgba(128, 128, 128, 0.15);
+    .badge {
+      height: 35px;
+      padding: 5px 10px !important;
+    }
+  }
+  .settings-element {
+    h4 {
+      font-size: 125%;
+    }
+  }
+  .form-range {
+    display: flex;
+    align-items: center;
+    > div {
+      padding: 2px 20px;
+    }
+  }
+  .form-label {
+    h2 {
+      font-size: 130%;
+      margin: 10px 10px 0 10px;
+      > label {
+        flex-grow: 1;
       }
     }
   }

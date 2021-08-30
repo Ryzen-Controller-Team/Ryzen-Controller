@@ -30,7 +30,7 @@ class RyzenAdjOptionForm extends React.PureComponent<RyzenAdjOptionFormProps, Ry
           }
 
           return (
-            <div className="uk-grid-small" uk-grid="">
+            <div className="uk-grid-small form-range" uk-grid="">
               <div className="uk-width-1-6">
                 <input
                   onChange={onChange(ryzenControllerAppContext).bind(this)}

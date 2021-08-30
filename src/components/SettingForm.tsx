@@ -18,7 +18,10 @@ type SettingFormProps = {
 class SettingForm extends React.PureComponent<SettingFormProps> {
   render(): React.ReactNode {
     return (
-      <div uk-tooltip={this.props.setting.description || ""} className="uk-form-controls uk-form-controls-text">
+      <div
+        uk-tooltip={this.props.setting.description || ""}
+        className="uk-form-controls uk-form-controls-text settings-element"
+      >
         {this.props.setting.displayTitle ? <h4 className="uk-margin-top">{this.props.setting.name}</h4> : null}
         <label className="uk-form-label uk-pointer">
           {this.renderType(this.props.setting.type)} {this.props.setting.short_description}
