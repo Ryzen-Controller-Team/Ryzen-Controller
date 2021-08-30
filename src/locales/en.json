@@ -28,6 +28,7 @@
   "appContext.ryzenAdjPath.name": "RyzenAdj path",
   "sceneSelector.settingsTitle": "Settings",
   "sceneSelector.powerTitle": "Power",
+  "sceneSelector.statusTitle": "Status",
   "ryzenAdj.slowTime.desc": "This defines the period to be used out of boost period to deliver a constant power to be delivered to the socket.",
   "ryzenAdj.slowTime.label": "Package Power Tracking (PPT) - Slow period",
   "ryzenAdj.minFclkFrequency.desc": "Infinity Fabric is AMD's marketing term for the bus connection that connects processor dies (GPU/CPU). This defines the bus's min. clock limit.",
@@ -58,6 +59,9 @@
   "sceneSelector.releasesTitle": "Releases",
   "ryzenAdj.tctlTemp.desc": "The temperature the CPU can reach before boost levels off.",
   "appContext.reApplyPeriodically.name": "Re-apply periodically",
+  "appContext.statusUpdateInterval.name": "Status Update Interval",
+  "appContext.statusUpdateInterval.shortDesc": "Define how often the status page shall update (in milliseconds)",
+  "appContext.statusUpdateInterval.desc": "The default value is 2000ms. The minimum value is 500ms",
   "ryzenAdj.tctlTemp.label": "Temperature Limit (°C)",
   "appContext.reApplyPeriodically.shortDesc": "Allow you to re-apply RyzenAdj settings periodically (every X seconds).",
   "PresetsScene.onlinePresetTitle": "Online Presets",
@@ -115,5 +119,12 @@
   "appContext.ryzenAdjPath.wrongPath": "Path to ryzenadj.exe is wrong, please fix it in settings tab.",
   "ryzenAdjBottomBar.invalidPreset": "Unable to apply invalid preset",
   "presetOnlineBtn.presetLoaded": "Preset \"{presetName}\" has been loaded",
-  "presetButtons.mustWaitForSignatureGen": "You must wait for laptop signature to be generated"
+  "presetButtons.mustWaitForSignatureGen": "You must wait for laptop signature to be generated",
+  "statusScene.noData": "No data to show",
+  "statusScene.thmValueCore": "Core Temperature",
+  "statusScene.pptValueApu": "Package Power Consumption",
+  "statusScene.showRawData": "Show raw data",
+  "statusScene.tableParameter": "Parameter",
+  "statusScene.tableValue": "Current value",
+  "statusScene.tableMaxValue": "Max. value"
 }

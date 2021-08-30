@@ -56,6 +56,7 @@ type RyzenControllerSettingsNames =
   | "minimizeOnLaunch"
   | "minimizeToTray"
   | "reApplyPeriodically"
+  | "statusUpdateInterval"
   | "ryzenAdjPath"
   | "onLaptopPluggedIn"
   | "onLaptopPluggedOut"
@@ -67,6 +68,7 @@ type RyzenControllerSettings = {
   minimizeOnLaunch: boolean;
   minimizeToTray: boolean;
   reApplyPeriodically: number | false;
+  statusUpdateInterval: number;
   ryzenAdjPath: string;
   onLaptopPluggedIn: string | false;
   onLaptopPluggedOut: string | false;

@@ -115,5 +115,16 @@
   "appContext.ryzenAdjPath.wrongPath": "Ryzenadj.exe dizin yolu yanlış, lütfen ayarlar sekmesinde düzelt.",
   "ryzenAdjBottomBar.invalidPreset": "Geçersiz Preset uygulanamıyor",
   "presetOnlineBtn.presetLoaded": "Preset {PresetName} yüklendi",
-  "presetButtons.mustWaitForSignatureGen": "Laptop imzasının oluşturulmasını beklemelisiniz"
+  "presetButtons.mustWaitForSignatureGen": "Laptop imzasının oluşturulmasını beklemelisiniz",
+  "appContext.statusUpdateInterval.name": "Durum Güncelleme Aralığı",
+  "appContext.statusUpdateInterval.shortDesc": "Durum sayfasının ne sıklıkla güncelleneceğini tanımlayın (milisaniye cinsinden)",
+  "appContext.statusUpdateInterval.desc": "Varsayılan değer 2000ms'dir. Minimum değer 500ms",
+  "sceneSelector.statusTitle": "Durum",
+  "statusScene.noData": "gösterilecek bilgi yok",
+  "statusScene.thmValueCore": "Çekirdek sıcaklığı",
+  "statusScene.pptValueApu": "Paket güç tüketimi",
+  "statusScene.showRawData": "Ham verileri göster",
+  "statusScene.tableParameter": "Parametre",
+  "statusScene.tableValue": "Mevcut değer",
+  "statusScene.tableMaxValue": "Maks. değer"
 }

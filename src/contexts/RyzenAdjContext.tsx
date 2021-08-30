@@ -215,7 +215,7 @@ const createRyzenAdjCommandLine = function(preset: RyzenAdjOptionListType): Arra
   return commandLine;
 };
 
-const ryzenAdjProcess = function(parameters: Array<string>): Promise<string> {
+export const ryzenAdjProcess = function(parameters: Array<string>): Promise<string> {
   return new Promise((res, rej) => {
     const child = window.require("child_process").execFile;
     const executablePath = getRyzenAdjExecutablePath();

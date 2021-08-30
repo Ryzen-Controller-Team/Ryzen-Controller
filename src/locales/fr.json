@@ -115,5 +115,16 @@
   "appContext.ryzenAdjPath.wrongPath": "Le chemin vers ryzenadj.exe est invalide, veuillez le corriger dans l'onglet paramètres.",
   "ryzenAdjBottomBar.invalidPreset": "Preset corrompu, impossible de l'appliquer",
   "presetOnlineBtn.presetLoaded": "Le preset \"{presetName}\" est chargé",
-  "presetButtons.mustWaitForSignatureGen": "Vous devez attendre que la signature de votre PC ai été généré."
+  "presetButtons.mustWaitForSignatureGen": "Vous devez attendre que la signature de votre PC ai été généré.",
+  "appContext.statusUpdateInterval.name": "Intervalle de mise à jour du statut",
+  "appContext.statusUpdateInterval.shortDesc": "Définissez la fréquence de mise à jour de la page statut (en millisecondes).",
+  "appContext.statusUpdateInterval.desc": "La valeur par défaut est de 2000ms. La valeur minimale est de 500ms",
+  "sceneSelector.statusTitle": "Statut",
+  "statusScene.noData": "Aucune donnée à afficher",
+  "statusScene.thmValueCore": "Température du coeur",
+  "statusScene.pptValueApu": "Consommation package power",
+  "statusScene.showRawData": "Afficher les données brutes",
+  "statusScene.tableParameter": "Paramètre",
+  "statusScene.tableValue": "Valeur actuelle",
+  "statusScene.tableMaxValue": "Valeur max."
 }

@@ -13,6 +13,7 @@ import PresetsScene from "../scenes/PresetsScene";
 import SettingsScene from "../scenes/SettingsScene";
 import NotificationContext from "../contexts/NotificationContext";
 import { getTranslation } from "../contexts/LocaleContext";
+import StatusScene from "./StatusScene";
 const electronSettings = window.require("electron-settings");
 const powerMonitor = window.require("electron").remote.powerMonitor;
 
@@ -174,6 +175,9 @@ class Scene extends React.Component<{}, RyzenControllerAppContextType> {
           <Route exact path="/cpu" render={() => <RyzenAdjScene filter="cpu" />} />
           <Route exact path="/gpu" render={() => <RyzenAdjScene filter="gpu" />} />
           <Route exact path="/power" render={() => <RyzenAdjScene filter="power" />} />
+          <Route exact path="/status">
+            <StatusScene />
+          </Route>
           <Route exact path="/presets">
             <PresetsScene />
           </Route>

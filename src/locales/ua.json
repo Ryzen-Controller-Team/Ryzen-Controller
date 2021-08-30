@@ -115,5 +115,16 @@
   "appContext.ryzenAdjPath.wrongPath": "Шлях до ryzenadj.exe є некоректним, будь ласка, змініть його в розділі 'Налаштування'",
   "ryzenAdjBottomBar.invalidPreset": "Неможливо застосувати некоректний пресет",
   "presetOnlineBtn.presetLoaded": "Пресет \"{presetName}\" завантажений",
-  "presetButtons.mustWaitForSignatureGen": "Ви повинні зачекати завершення генерації подпису ноутбука"
+  "presetButtons.mustWaitForSignatureGen": "Ви повинні зачекати завершення генерації подпису ноутбука",
+  "appContext.statusUpdateInterval.name": "Інтервал оновлення стану",
+  "appContext.statusUpdateInterval.shortDesc": "Визначте, як часто сторінка стану оновлюватиметься (у мілісекундах)",
+  "appContext.statusUpdateInterval.desc": "Значення за замовчуванням - 2000 мс. Мінімальне значення - 500 мс",
+  "sceneSelector.statusTitle": "Статус",
+  "statusScene.noData": "Немає даних для відображення",
+  "statusScene.thmValueCore": "Основна температура",
+  "statusScene.pptValueApu": "Споживана потужність пакета",
+  "statusScene.showRawData": "Показувати необроблені дані",
+  "statusScene.tableParameter": "Параметр",
+  "statusScene.tableValue": "Поточне значення",
+  "statusScene.tableMaxValue": "Макс. значення"
 }

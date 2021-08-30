@@ -115,5 +115,16 @@
   "ryzenAdjBottomBar.invalidPreset": "无法套用无效的预设",
   "settingForm.windowsBinFileType": "Windows可执行文件",
   "presetOnlineBtn.presetInvalidOrObsolete": "预设 {presetName} 无效或已过时",
-  "sysInfoCards.unableToGetSysInfo": "无法获取系统信息："
+  "sysInfoCards.unableToGetSysInfo": "无法获取系统信息：",
+  "appContext.statusUpdateInterval.name": "状态更新间隔",
+  "appContext.statusUpdateInterval.shortDesc": "定义状态页的更新频率（以毫秒计）。",
+  "appContext.statusUpdateInterval.desc": "默认值是2000ms。最小值是500ms",
+  "sceneSelector.statusTitle": "状况",
+  "statusScene.noData": "没有数据显示",
+  "statusScene.thmValueCore": "核心温度",
+  "statusScene.pptValueApu": "封装功耗",
+  "statusScene.showRawData": "显示原始数据",
+  "statusScene.tableParameter": "参数",
+  "statusScene.tableValue": "当前值",
+  "statusScene.tableMaxValue": "最大值"
 }

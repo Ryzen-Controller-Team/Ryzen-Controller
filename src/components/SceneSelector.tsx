@@ -6,6 +6,7 @@ import { getTranslation } from "../contexts/LocaleContext";
 const cpuTitleText = getTranslation("sceneSelector.cpuTitle", "CPU");
 const gpuTitleText = getTranslation("sceneSelector.gpuTitle", "GPU");
 const powerTitleText = getTranslation("sceneSelector.powerTitle", "Power");
+const statusTitleText = getTranslation("sceneSelector.statusTitle", "Status");
 const presetsTitleText = getTranslation("sceneSelector.presetsTitle", "Presets");
 const settingsTitleText = getTranslation("sceneSelector.settingsTitle", "Settings");
 const releasesTitleText = getTranslation("sceneSelector.releasesTitle", "Releases");
@@ -40,6 +41,7 @@ function SceneSelector() {
                       <Tabs tabName={cpuTitleText} tabLocation="/cpu" currentLocation={currentLocation} />
                       <Tabs tabName={gpuTitleText} tabLocation="/gpu" currentLocation={currentLocation} />
                       <Tabs tabName={powerTitleText} tabLocation="/power" currentLocation={currentLocation} />
+                      <Tabs tabName={statusTitleText} tabLocation="/status" currentLocation={currentLocation} />
                       <Tabs tabName={presetsTitleText} tabLocation="/presets" currentLocation={currentLocation} />
                       <Tabs tabName={settingsTitleText} tabLocation="/settings" currentLocation={currentLocation} />
                       <li>

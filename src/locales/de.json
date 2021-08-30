@@ -27,6 +27,7 @@
   "appContext.minimizeOnLaunch.name": "Minimieren",
   "appContext.ryzenAdjPath.name": "RyzenAdj Pfad",
   "sceneSelector.settingsTitle": "Einstellungen",
+  "sceneSelector.statusTitle": "Status",
   "sceneSelector.powerTitle": "Leistung",
   "ryzenAdj.slowTime.desc": "Dies definiert die Periode der konstanten Energiezufuhr zum Sockel während der Boostfreien Phase.",
   "ryzenAdj.slowTime.label": "Package Power Tracking (PPT) - Slow period (Langsame Phase)",
@@ -60,6 +61,9 @@
   "appContext.reApplyPeriodically.name": "Periodisch erneut anwenden",
   "ryzenAdj.tctlTemp.label": "Temperatur Limit (°C)",
   "appContext.reApplyPeriodically.shortDesc": "Erlaubt dir die RyzenAdj Einstellungen periodisch erneut anzuwenden (\"alle X Sekunden\").",
+  "appContext.statusUpdateInterval.name": "Status Update Interval",
+  "appContext.statusUpdateInterval.shortDesc": "Legt fest wie häufig die Status-Seite neue Daten abruft (in Millisekunden)",
+  "appContext.statusUpdateInterval.desc": "Der Standardwert ist 2000ms. Der Mindestwert ist 500ms",
   "PresetsScene.onlinePresetTitle": "Online Presets",
   "PresetsScene.localPresetTitle": "Lokale Presets",
   "PresetsScene.autoApplyTitle": "Presets unter bestimmten Bedingungen automatisch anwenden",
@@ -115,5 +119,12 @@
   "appContext.ryzenAdjPath.wrongPath": "Der Pfad zu ryzenadj.exe ist falsch. Bitte korrigiere diesen in den Tab für Einstellungen.",
   "ryzenAdjBottomBar.invalidPreset": "Kann ungültige Presets nicht anwenden",
   "presetOnlineBtn.presetLoaded": "Preset {presetName} wurde geladen",
-  "presetButtons.mustWaitForSignatureGen": "Du musst warten, bis die Laptop-Signatur generiert wurde"
+  "presetButtons.mustWaitForSignatureGen": "Du musst warten, bis die Laptop-Signatur generiert wurde",
+  "statusScene.noData": "Keine Daten verfügbar",
+  "statusScene.thmValueCore": "Core Temperatur",
+  "statusScene.pptValueApu": "Package Power",
+  "statusScene.showRawData": "Rohdaten anzeigen",
+  "statusScene.tableParameter": "Parameter",
+  "statusScene.tableValue": "Aktueller Wert",
+  "statusScene.tableMaxValue": "Max. Wert"
 }

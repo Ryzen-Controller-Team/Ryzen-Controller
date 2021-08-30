@@ -202,6 +202,36 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
       });
     },
   },
+  statusUpdateInterval: {
+    displayTitle: true,
+    name: getTranslation("appContext.statusUpdateInterval.name", "Status Update Interval"),
+    type: "range",
+    default: 2000,
+    short_description: getTranslation(
+      "appContext.statusUpdateInterval.shortDesc",
+      "Define how often the status page shall update (in milliseconds)"
+    ),
+    description: getTranslation(
+      "appContext.statusUpdateInterval.desc",
+      "The default value is 2000ms. The minimum value is 500ms"
+    ),
+    compatibility: {
+      linux: true,
+      win32: true,
+    },
+    apply(seconds) {
+      // @ts-ignore
+      let parsedSeconds: number = parseInt(seconds);
+      if (!isNumber(parsedSeconds)) {
+        return new Promise((resolve, reject) => {
+          reject("ERROR: Value must be of number type.");
+        });
+      }
+      return new Promise((resolve, reject) => {
+        resolve(true);
+      });
+    },
+  },
   ryzenAdjPath: {
     displayTitle: true,
     name: getTranslation("appContext.ryzenAdjPath.name", "RyzenAdj path"),
@@ -308,6 +338,7 @@ const defaultRyzenControllerAppContext: RyzenControllerAppContextType = {
     minimizeOnLaunch: false,
     minimizeToTray: false,
     reApplyPeriodically: false,
+    statusUpdateInterval: 2000,
     ryzenAdjPath: "",
     onLaptopPluggedIn: false,
     onLaptopPluggedOut: false,

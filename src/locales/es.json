@@ -116,5 +116,16 @@
   "PresetsScene.errorWhileSendingVote": "Error al enviar voto",
   "sysInfoCards.unableToGetSysInfo": "No se puede obtener información del sistema:",
   "presetButtons.mustWaitForSignatureGen": "Debe esperar a que se genere la firma de la computadora portátil",
-  "settingForm.windowsBinFileType": "Ejecutable de Windows"
+  "settingForm.windowsBinFileType": "Ejecutable de Windows",
+  "appContext.statusUpdateInterval.name": "Intervalo de actualización de estado",
+  "appContext.statusUpdateInterval.shortDesc": "Definir la frecuencia de actualización de la página de estado (en milisegundos)",
+  "appContext.statusUpdateInterval.desc": "El valor por defecto es de 2000ms. El valor mínimo es de 500ms",
+  "sceneSelector.statusTitle": "Estado",
+  "statusScene.noData": "no hay información para mostrar",
+  "statusScene.thmValueCore": "Temperatura del núcleo",
+  "statusScene.pptValueApu": "Consumo de energía del paquete",
+  "statusScene.showRawData": "Mostrar datos en bruto",
+  "statusScene.tableParameter": "Parámetro",
+  "statusScene.tableValue": "Valor actual",
+  "statusScene.tableMaxValue": "Valor máximo"
 }
