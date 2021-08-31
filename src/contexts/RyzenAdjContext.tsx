@@ -148,7 +148,7 @@ const RyzenAdjOptionDefinitions: Array<RyzenAdjOptionDefinition> = [
     label: getTranslation("ryzenAdj.slowTime.label", "Short Boost Duration "),
     tab: "cpu",
     min: 1,
-    max: 120,
+    max: 1000,
     step: 1,
     default: 60,
     ryzenadj_arg: "--slow-time=",
