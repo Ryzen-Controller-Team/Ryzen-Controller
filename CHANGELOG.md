@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.5.1
+2021-09-05
+
+### Fixes
+
+- Fix #172 Allow higher slow-time values. (58314fa8c836f52d5e60e9a9b59e271d79375c03)
+
 ## 2.5.0
 2021-08-30
 
