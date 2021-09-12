@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.5.2
+2021-09-12
+
+### Fixes
+
+- You can now set the temp. limit up to 105°C. (62158ddbf19075192e472676ace3068ac21ee46e)
+
 ## 2.5.1
 2021-09-05
 
