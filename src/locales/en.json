@@ -126,5 +126,7 @@
   "statusScene.showRawData": "Show raw data",
   "statusScene.tableParameter": "Parameter",
   "statusScene.tableValue": "Current value",
-  "statusScene.tableMaxValue": "Max. value"
+  "statusScene.tableMaxValue": "Max. value",
+  "statusScene.failed": "Failed to fetch data from ryzenadj. Please check your settings",
+  "statusScene.permissions": "Error accessing data. Make sure Ryzen Controller is running as Administrator"
 }

@@ -230,9 +230,9 @@ export const ryzenAdjProcess = function(parameters: Array<string>): Promise<stri
     console.log(`${executablePath} ${parameters.join(" ")}`);
 
     child(executablePath, parameters, function(err: string, data: Buffer) {
-      var output = data?.toString();
+      const output = data?.toString();
       if (err) {
-        rej(err);
+        rej({ error: err, output });
       } else if (output) {
         res(output);
       }

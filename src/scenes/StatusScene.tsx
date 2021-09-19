@@ -6,8 +6,19 @@ import LightModeContext from "../contexts/LightModeContext";
 import { appContextSettingsKey, RyzenControllerSettingsDefinitions } from "../contexts/RyzenControllerAppContext";
 const electronSettings = window.require("electron-settings");
 
+enum State {
+  Init,
+  Valid,
+  PermissionError,
+  GernericError,
+}
 const i18n = {
   noData: getTranslation("statusScene.noData", "No data to show"),
+  failed: getTranslation("statusScene.failed", "Failed to fetch data from ryzenadj. Please check your settings"),
+  permissions: getTranslation(
+    "statusScene.permissions",
+    "Error accessing data. Make sure Ryzen Controller is running as Administrator"
+  ),
   thmValueCore: getTranslation("statusScene.thmValueCore", "Core Temperature"),
   pptValueApu: getTranslation("statusScene.pptValueApu", "Package Power Consumption"),
   showRawData: getTranslation("statusScene.showRawData", "Show raw data"),
@@ -18,12 +29,25 @@ const i18n = {
 
 class PresetsScene extends React.Component {
   _isMounted = false;
+  _state = State.Init;
   data: { [key: string]: number } = {};
   allData = false;
   __constructor() {}
+  async loadData() {
+    try {
+      this.parseData(await ryzenAdjProcess(["-i"]));
+    } catch (e) {
+      console.warn(e.output);
+      if (e.output.includes("check permission")) {
+        this._state = State.PermissionError;
+      } else {
+        this._state = State.GernericError;
+      }
+    }
+  }
   async componentDidMount() {
     this._isMounted = true;
-    this.parseData(await ryzenAdjProcess(["-i"]));
+    this.loadData();
     let intervalDuration =
       electronSettings.get(appContextSettingsKey)?.settings.statusUpdateInterval ||
       RyzenControllerSettingsDefinitions["statusUpdateInterval"].default;
@@ -33,10 +57,15 @@ class PresetsScene extends React.Component {
         clearInterval(interval);
         return;
       }
-      this.parseData(await ryzenAdjProcess(["-i"]));
+      this.loadData();
     }, intervalDuration as number);
   }
   parseData(output: string) {
+    if (!output && this._state !== State.Valid) {
+      this._state = State.GernericError;
+      return;
+    }
+    console.warn(output);
     output
       .split("\n")
       .slice(2)
@@ -60,8 +89,14 @@ class PresetsScene extends React.Component {
   }
 
   render() {
+    if (this._state === State.GernericError) {
+      return <h2 className="uk-flex uk-flex-center uk-text-center">{i18n.failed}</h2>;
+    }
+    if (this._state === State.PermissionError) {
+      return <h2 className="uk-flex uk-flex-center uk-text-center">{i18n.permissions}</h2>;
+    }
     if (Object.keys(this.data).length === 0) {
-      return <h2 className="uk-flex uk-flex-center">{i18n.noData}</h2>;
+      return <h2 className="uk-flex uk-flex-center uk-text-center">{i18n.noData}</h2>;
     }
     return (
       <LightModeContext.Consumer>

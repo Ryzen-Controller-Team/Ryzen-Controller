@@ -126,5 +126,7 @@
   "statusScene.showRawData": "Rohdaten anzeigen",
   "statusScene.tableParameter": "Parameter",
   "statusScene.tableValue": "Aktueller Wert",
-  "statusScene.tableMaxValue": "Max. Wert"
+  "statusScene.tableMaxValue": "Max. Wert",
+  "statusScene.failed": "Fehler beim Laden der Daten von rjzenadj. Bitte prüfe die Einstellungen",
+  "statusScene.permissions": "Fehler beim Datenzugriff. Stelle sicher, dass Ryzen Controller als Administrator ausgeführt wird"
 }
