@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.5.3
+2021-09-19
+
+### Fixes
+
+- Better status scene, now displaying error messages. (06c9d0d7c65954d123fbd0a8e3faa6d5b4f985ff)
+
 ## 2.5.2
 2021-09-12
 
