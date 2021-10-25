@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.5.4
+2021-10-25
+
+### Fixes
+
+- #180 Change autostart method to VBS script. (8afdfac3f22826d8204c8d7d806af2d393293938)
+
 ## 2.5.3
 2021-09-19
 
