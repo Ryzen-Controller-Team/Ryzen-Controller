@@ -97,15 +97,24 @@ const RyzenControllerSettingsDefinitions: RyzenControllerSettingDefinitionList =
           });
 
           // Handle new auto launch system.
-          const path = `${window
+
+          // C:\git\ryzen-controller\dist\win-unpacked\resources\app.asar\..\app.asar.unpacked\
+          // workaround with vbs, since admin permissions exe is not suitable for autostart
+          let ryzenControllerPath = window
             .require("electron")
-            .remote.app.getAppPath()}.unpacked\\build\\bin\\auto-start-ryzen-controller.bat`;
+            .remote.app.getAppPath()
+            .split("\\");
+          delete ryzenControllerPath[ryzenControllerPath.length - 1];
+          ryzenControllerPath = ryzenControllerPath.join("\\");
+          const autostartVBS = ryzenControllerPath + "app.asar.unpacked\\build\\bin\\Ryzen Controller Autostart.vbs";
+
           try {
             window.require("electron").remote.app.setLoginItemSettings({
               openAtLogin: toBeEnabled,
-              path: path,
+              path: autostartVBS,
             });
           } catch (error) {
+            console.error(error);
             rej(error);
           }
           res(true);
