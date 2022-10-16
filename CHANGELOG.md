@@ -2,6 +2,13 @@
 
 <!--- next entry here -->
 
+## 2.6.0
+2022-10-16
+
+### Features
+
+- update RyzenAdj to version 0.11.1 (f8fb275f4ed2e3feaab23fb885fddd92ef9d506d)
+
 ## 2.5.4
 2021-10-25
 
